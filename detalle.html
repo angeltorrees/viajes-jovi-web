@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="icon type=image/png href=img/logo.png><title>Detalle del Paquete â€” VIAJES JOVI</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <!-- Anti-flash dark mode -->
+    <script>
+        (function(){var t=localStorage.getItem('jovi-theme');if(t==='dark'||(t===null&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.setAttribute('data-theme','dark');}})();
+    </script>
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,600;1,500;1,600&family=Jost:wght@500;600&family=Roboto&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <style>
+        /* Hero del paquete */
+        .detalle-hero {
+            position: relative;
+            height: 420px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .detalle-hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.45) 50%, rgba(0,0,0,0.15) 100%);
+        }
+        .detalle-hero-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2.5rem 2rem 2rem;
+        }
+        .detalle-badge {
+            display: inline-block;
+            background: #FF6B00;
+            color: #fff;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-style: italic;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 0.08em;
+            padding: 0.25rem 0.85rem;
+            border-radius: 999px;
+            margin-bottom: 0.6rem;
+        }
+        .detalle-titulo {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-style: italic;
+            font-weight: 700;
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: #fff;
+            text-transform: uppercase;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.6);
+            margin: 0;
+        }
+
+        /* Breadcrumb */
+        .detalle-breadcrumb {
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+            padding: 0.75rem 0;
+            font-size: 0.875rem;
+        }
+
+        /* SecciÃ³n genÃ©rica */
+        .detalle-section {
+            padding: 2.5rem 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .detalle-section:last-child {
+            border-bottom: none;
+        }
+        .detalle-section-title {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-style: italic;
+            font-weight: 700;
+            font-size: 1.6rem;
+            text-transform: uppercase;
+            color: #1a1a2e;
+            letter-spacing: 0.05em;
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .detalle-section-title i {
+            color: #FF6B00;
+            font-size: 1.3rem;
+        }
+
+        /* Precio box */
+        .precio-box {
+            background: linear-gradient(135deg, #FF6B00 0%, #e25f00 100%);
+            border-radius: 16px;
+            padding: 1.75rem 2rem;
+            color: #fff;
+            box-shadow: 0 12px 32px rgba(255,107,0,0.35);
+        }
+        .precio-label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+        .precio-amount {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-style: italic;
+            font-size: 2.8rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+        .precio-forma {
+            font-size: 0.9rem;
+            opacity: 0.85;
+        }
+        /* Segmentos en columna principal */
+        .info-segmentos-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+        .info-seg-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #fff7f2;
+            border: 1.5px solid #FF6B00;
+            border-radius: 10px;
+            padding: 0.65rem 1.1rem;
+            min-width: 130px;
+        }
+        .info-seg-item .seg-n {
+            font-size: 0.78rem;
+            color: #FF6B00;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-bottom: 0.2rem;
+        }
+        .info-seg-item .seg-p {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-style: italic;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1a1a2e;
+            line-height: 1;
+        }
+        [data-theme="dark"] .info-seg-item {
+            background: rgba(255,107,0,0.08);
+        }
+        [data-theme="dark"] .info-seg-item .seg-p { color: #fff; }
+
+        /* Vuelo card nuevo formato */
+        .vuelo-tramo {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--bs-light, #f8f9fa);
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+        [data-theme="dark"] .vuelo-tramo {
+            background: rgba(255,255,255,0.05);
+        }
+        .vuelo-tramo-punto { display: flex; flex-direction: column; gap: 0.15rem; }
+        .vuelo-tramo-punto.llegada { text-align: right; }
+        .vuelo-tramo-aero { font-weight: 600; font-size: 0.95rem; }
+        .vuelo-tramo-fh   { font-size: 0.82rem; color: #6b7280; }
+        .vuelo-tramo-flecha {
+            color: #FF6B00; font-size: 1.1rem;
+            display: flex; align-items: center;
+        }
+
+        .precio-tipo-label {
+            font-size: 0.78rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.6rem;
+        }
+        .precio-segmentos {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            margin-bottom: 0.4rem;
+        }
+        .precio-segmento {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255,255,255,0.12);
+            border-radius: 8px;
+            padding: 0.45rem 0.8rem;
+        }
+        .seg-nombre {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+        .seg-precio {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-style: italic;
+            font-size: 1.35rem;
+            font-weight: 700;
+        }
+        .precio-segmento.seg-first {
+            background: rgba(255,255,255,0.22);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        .precio-segmento.seg-first .seg-precio {
+            font-size: 1.7rem;
+        }
+        .precio-duracion {
+            font-size: 0.85rem;
+            background: rgba(255,255,255,0.2);
+            border-radius: 999px;
+            padding: 0.2rem 0.75rem;
+            display: inline-block;
+            margin-top: 0.5rem;
+        }
+
+        /* Fechas */
+        .fecha-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            border-left: 4px solid #FF6B00;
+        }
+        .fecha-card .fecha-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #6c757d;
+            font-weight: 600;
+        }
+        .fecha-card .fecha-valor {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-top: 0.2rem;
+        }
+
+        /* Itinerario */
+        .itinerario-item {
+            display: flex;
+            gap: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+        .itinerario-item:last-child {
+            margin-bottom: 0;
+        }
+        .itinerario-dia-badge {
+            flex-shrink: 0;
+            width: 52px;
+            height: 52px;
+            background: #FF6B00;
+            color: #fff;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-weight: 700;
+        }
+        .itinerario-dia-badge .dia-num {
+            font-size: 1.3rem;
+            line-height: 1;
+        }
+        .itinerario-dia-badge .dia-texto {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .itinerario-body {
+            flex: 1;
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+        }
+        .itinerario-body h6 {
+            font-weight: 700;
+            font-size: 1rem;
+            color: #1a1a2e;
+            margin-bottom: 0.35rem;
+        }
+        .itinerario-body p {
+            color: #555;
+            font-size: 0.9rem;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* Inclusiones */
+        .inclusion-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .inclusion-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            padding: 0.55rem 0;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.95rem;
+            color: #444;
+        }
+        .inclusion-list li:last-child {
+            border-bottom: none;
+        }
+        .inclusion-list li i {
+            color: #28a745;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        /* Vuelos */
+        .vuelo-card {
+            border: 1px solid #e9ecef;
+            border-radius: 14px;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1rem;
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+        .vuelo-card:last-child {
+            margin-bottom: 0;
+        }
+        .vuelo-tipo {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #FF6B00;
+            margin-bottom: 0.75rem;
+        }
+        .vuelo-ruta {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+        .vuelo-ciudad {
+            font-weight: 700;
+            font-size: 1rem;
+            color: #1a1a2e;
+        }
+        .vuelo-hora {
+            font-size: 0.85rem;
+            color: #6c757d;
+        }
+        .vuelo-flecha {
+            color: #FF6B00;
+            font-size: 1.1rem;
+        }
+        .vuelo-meta {
+            margin-top: 0.75rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 1.5rem;
+            font-size: 0.82rem;
+            color: #6c757d;
+        }
+        .vuelo-meta span i {
+            margin-right: 0.3rem;
+        }
+
+        /* Leyendas */
+        .leyenda-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .leyenda-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            padding: 0.45rem 0;
+            font-size: 0.82rem;
+            color: #6c757d;
+            border-bottom: 1px dashed #e9ecef;
+        }
+        .leyenda-list li:last-child {
+            border-bottom: none;
+        }
+        .leyenda-list li i {
+            color: #adb5bd;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        /* BotÃ³n CTA sticky */
+        .detalle-cta {
+            position: sticky;
+            top: 80px;
+        }
+        .btn-whatsapp {
+            background: #25D366;
+            color: #fff;
+            border: none;
+            width: 100%;
+            padding: 0.85rem;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            transition: background 0.2s, transform 0.1s;
+            box-shadow: 0 6px 18px rgba(37,211,102,0.35);
+        }
+        .btn-whatsapp:hover {
+            background: #1ebe5d;
+            color: #fff;
+            transform: translateY(-1px);
+        }
+
+        /* No encontrado */
+        #detalle-no-encontrado {
+            display: none;
+        }
+        #detalle-contenido {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Spinner -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <div class="container-fluid position-relative p-0">
+        <nav class="jovi-nav" id="joviNav">
+    <div class="jovi-nav-container">
+        <a href="index.html" class="jovi-brand">
+            <img src="img/logo.png" alt="Viajes Jovi">
+            <span class="jovi-brand-name">VIAJES JOVI</span>
+        </a>
+        <ul class="jovi-nav-links" id="joviLinks">
+            <li><a href="index.html" data-page="index">Inicio</a></li>
+            <li><a href="about.html" data-page="about">Nosotros</a></li>
+            <li><a href="services.html" data-page="services">Servicios</a></li>
+            <li><a href="packages.html" data-page="packages">Promociones</a></li>
+            <li><a href="blog.html" data-page="blog">Blog</a></li>
+            <li class="jovi-has-dropdown">
+                <button class="jovi-drop-trigger" type="button">
+                    Explorar <i class="fas fa-chevron-down jovi-drop-arrow"></i>
+                </button>
+                <div class="jovi-dropdown">
+                    <a href="destination.html" data-page="destination"><i class="fas fa-globe-americas"></i>Destinos</a>
+                    <a href="tour.html" data-page="tour"><i class="fas fa-fire"></i>MÃ¡s vendidos</a>
+                    <a href="booking.html" data-page="booking"><i class="fas fa-calculator"></i>Cotiza</a>
+                    <a href="gallery.html" data-page="gallery"><i class="fas fa-images"></i>GalerÃ­a</a>
+                    <a href="guides.html" data-page="guides"><i class="fas fa-user-tie"></i>Nuestros agentes</a>
+                    <a href="testimonial.html" data-page="testimonial"><i class="fas fa-star"></i>Testimonios</a>
+                </div>
+            </li>
+            <li><a href="contact.html" data-page="contact">Contacto</a></li>
+        </ul>
+        <div class="jovi-nav-end">
+            <button class="jovi-theme-toggle" id="themeToggle" aria-label="Cambiar tema" title="Modo oscuro">
+                <i class="fas fa-moon" id="themeIcon"></i>
+            </button>
+            <a href="https://wa.me/5214777920736" target="_blank" rel="noopener" class="jovi-wa-pill">
+                <i class="fab fa-whatsapp"></i><span>WhatsApp</span>
+            </a>
+            <button class="jovi-hamburger" id="joviHamburger" aria-label="Abrir menÃº" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </div>
+</nav>
+<div class="jovi-overlay" id="joviOverlay"></div>
+<aside class="jovi-drawer" id="joviDrawer" aria-hidden="true">
+    <div class="jovi-drawer-top">
+        <a href="index.html" class="jovi-brand">
+            <img src="img/logo.png" alt="Viajes Jovi">
+            <span class="jovi-brand-name">VIAJES JOVI</span>
+        </a>
+        <button class="jovi-drawer-close" id="joviDrawerClose" aria-label="Cerrar menÃº">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    <nav class="jovi-drawer-links">
+        <a href="index.html" data-page="index"><i class="fas fa-home"></i>Inicio</a>
+        <a href="about.html" data-page="about"><i class="fas fa-info-circle"></i>Nosotros</a>
+        <a href="services.html" data-page="services"><i class="fas fa-concierge-bell"></i>Servicios</a>
+        <a href="packages.html" data-page="packages"><i class="fas fa-tag"></i>Promociones</a>
+        <a href="blog.html" data-page="blog"><i class="fas fa-newspaper"></i>Blog</a>
+        <a href="destination.html" data-page="destination"><i class="fas fa-globe-americas"></i>Destinos</a>
+        <a href="tour.html" data-page="tour"><i class="fas fa-fire"></i>MÃ¡s vendidos</a>
+        <a href="booking.html" data-page="booking"><i class="fas fa-calculator"></i>Cotiza</a>
+        <a href="gallery.html" data-page="gallery"><i class="fas fa-images"></i>GalerÃ­a</a>
+        <a href="guides.html" data-page="guides"><i class="fas fa-user-tie"></i>Nuestros agentes</a>
+        <a href="testimonial.html" data-page="testimonial"><i class="fas fa-star"></i>Testimonios</a>
+        <a href="contact.html" data-page="contact"><i class="fas fa-envelope"></i>Contacto</a>
+    </nav>
+    <div class="jovi-drawer-bottom">
+        <a href="https://wa.me/5214777920736" target="_blank" rel="noopener" class="jovi-drawer-wa">
+            <i class="fab fa-whatsapp"></i> Cotizar por WhatsApp
+        </a>
+    </div>
+</aside>
+    </div>
+
+    <!-- Hero del paquete -->
+    <div id="detalle-hero" class="detalle-hero">
+        <div class="detalle-hero-overlay"></div>
+        <div class="detalle-hero-content">
+            <div class="container">
+                <span id="hero-destino" class="detalle-badge"></span>
+                <h1 id="hero-nombre" class="detalle-titulo"></h1>
+            </div>
+        </div>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="detalle-breadcrumb">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
+                    <li class="breadcrumb-item active" id="breadcrumb-nombre">Detalle del paquete</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Paquete no encontrado -->
+    <div id="detalle-no-encontrado" class="container py-5 text-center">
+        <i class="fas fa-exclamation-triangle fa-3x text-warning mb-3"></i>
+        <h3>Paquete no encontrado</h3>
+        <p class="text-muted mb-4">El paquete que buscas no existe o ya no estÃ¡ disponible.</p>
+        <a href="index.html" class="btn btn-primary rounded-pill px-4 py-2">Regresar al inicio</a>
+    </div>
+
+    <!-- Contenido principal -->
+    <div id="detalle-contenido" class="container py-5">
+        <div class="row g-5">
+
+            <!-- Columna izquierda: detalles -->
+            <div class="col-lg-8">
+
+                <!-- DESTINO + NOMBRE -->
+                <div class="detalle-section pt-0">
+                    <h2 class="detalle-section-title">
+                        <i class="fas fa-map-marker-alt"></i> Destino
+                    </h2>
+                    <p id="info-destino" class="fs-5 fw-semibold text-dark mb-1"></p>
+                    <p id="info-nombre" class="text-muted mb-0"></p>
+                </div>
+
+                <!-- FECHAS -->
+                <div class="detalle-section">
+                    <h2 class="detalle-section-title">
+                        <i class="fas fa-calendar-alt"></i> Fechas del viaje
+                    </h2>
+                    <div class="row g-3">
+                        <div class="col-sm-6">
+                            <div class="fecha-card">
+                                <div class="fecha-label">Fecha de salida</div>
+                                <div id="info-fecha-inicio" class="fecha-valor"></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="fecha-card">
+                                <div class="fecha-label">Fecha de regreso</div>
+                                <div id="info-fecha-fin" class="fecha-valor"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FORMA DE PRECIO + SEGMENTOS -->
+                <div class="detalle-section">
+                    <h2 class="detalle-section-title">
+                        <i class="fas fa-tag"></i> Precio
+                    </h2>
+                    <p id="info-tipo-precio" class="text-muted mb-3" style="font-size:0.9rem;"></p>
+                    <div id="info-segmentos-precio" class="info-segmentos-grid"></div>
+                </div>
+
+                <!-- ITINERARIO DE VIAJE -->
+                <div class="detalle-section">
+                    <h2 class="detalle-section-title">
+                        <i class="fas fa-route"></i> Itinerario de viaje
+                    </h2>
+                    <div id="info-itinerario"></div>
+                </div>
+
+                <!-- INCLUSIONES -->
+                <div class="detalle-section">
+                    <h2 class="detalle-section-title">
+                        <i class="fas fa-check-circle"></i> Â¿QuÃ© incluye?
+                    </h2>
+                    <ul id="info-inclusiones" class="inclusion-list"></ul>
+                </div>
+
+                <!-- ITINERARIO DE VUELO (condicional) -->
+                <div class="detalle-section" id="info-vuelo-section" style="display:none">
+                    <h2 class="detalle-section-title">
+                        <i class="fas fa-plane"></i> Itinerario de vuelo / transporte
+                    </h2>
+                    <div id="info-vuelos"></div>
+                </div>
+
+                <!-- LEYENDAS -->
+                <div class="detalle-section">
+                    <h2 class="detalle-section-title">
+                        <i class="fas fa-file-contract"></i> TÃ©rminos y condiciones
+                    </h2>
+                    <ul id="info-leyendas" class="leyenda-list"></ul>
+                </div>
+
+            </div>
+
+            <!-- Columna derecha: precio + CTA -->
+            <div class="col-lg-4">
+                <div class="detalle-cta">
+
+                    <!-- Precio -->
+                    <div class="precio-box mb-3">
+                        <div class="precio-label">Precio</div>
+                        <div id="cta-tipo-precio" class="precio-tipo-label"></div>
+                        <div id="cta-segmentos" class="precio-segmentos"></div>
+                        <span id="cta-duracion" class="precio-duracion"></span>
+                    </div>
+
+                    <!-- BotÃ³n WhatsApp -->
+                    <a id="cta-whatsapp" href="#" target="_blank" rel="noopener" class="btn-whatsapp mb-3">
+                        <i class="fab fa-whatsapp fa-lg"></i> Cotiza ahora por WhatsApp
+                    </a>
+
+                    <!-- Info rÃ¡pida -->
+                    <div class="card border-0 shadow-sm rounded-3">
+                        <div class="card-body p-3">
+                            <div class="d-flex align-items-center gap-2 mb-2">
+                                <i class="fas fa-map-marker-alt text-primary"></i>
+                                <span class="fw-semibold" style="font-size:0.9rem;">Destino</span>
+                            </div>
+                            <p id="cta-destino" class="text-muted mb-3" style="font-size:0.85rem;padding-left:1.5rem;"></p>
+
+                            <div class="d-flex align-items-center gap-2 mb-2">
+                                <i class="fas fa-calendar text-primary"></i>
+                                <span class="fw-semibold" style="font-size:0.9rem;">Salida</span>
+                            </div>
+                            <p id="cta-fecha-inicio" class="text-muted mb-3" style="font-size:0.85rem;padding-left:1.5rem;"></p>
+
+                            <div class="d-flex align-items-center gap-2 mb-2">
+                                <i class="fas fa-calendar-check text-primary"></i>
+                                <span class="fw-semibold" style="font-size:0.9rem;">Regreso</span>
+                            </div>
+                            <p id="cta-fecha-fin" class="text-muted mb-0" style="font-size:0.85rem;padding-left:1.5rem;"></p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="container-fluid footer py-5">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="footer-item d-flex flex-column">
+                        <h4 class="mb-4 text-white">ContÃ¡ctanos</h4>
+                        <a href="#"><i class="fas fa-home me-2"></i> Calle 123, Ciudad de MÃ©xico, MÃ©xico</a>
+                        <a href="#"><i class="fas fa-envelope me-2"></i> info@ejemplo.com</a>
+                        <a href="#"><i class="fas fa-phone me-2"></i> +52 55 1234 5678</a>
+                        <a href="#" class="mb-3"><i class="fas fa-print me-2"></i> +52 55 1234 5678</a>
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-share fa-2x text-white me-2"></i>
+                            <a class="btn-square btn btn-primary rounded-circle mx-1" href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn-square btn btn-primary rounded-circle mx-1" href="#"><i class="fab fa-twitter"></i></a>
+                            <a class="btn-square btn btn-primary rounded-circle mx-1" href="#"><i class="fab fa-instagram"></i></a>
+                            <a class="btn-square btn btn-primary rounded-circle mx-1" href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="footer-item d-flex flex-column">
+                        <h4 class="mb-4 text-white">Nuestra Empresa</h4>
+                        <a href="#"><i class="fas fa-angle-right me-2"></i> Acerca de Nosotros</a>
+                        <a href="#"><i class="fas fa-angle-right me-2"></i> Empleos</a>
+                        <a href="#"><i class="fas fa-angle-right me-2"></i> Blog</a>
+                        <a href="#"><i class="fas fa-angle-right me-2"></i> Prensa</a>
+                        <a href="#"><i class="fas fa-angle-right me-2"></i> Tarjetas de Regalo</a>
+                        <a href="#"><i class="fas fa-angle-right me-2"></i> Revista</a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="footer-item d-flex flex-column">
+                        <h4 class="mb-4 text-white">Soporte</h4>
+                        <a href="#"><i class="fas fa-angle-right me-2"></i> Contacto</a>
+                        <a href="#"><i class="fas fa-angle-right me-2"></i> Aviso Legal</a>
+                        <a href="#"><i class="fas fa-angle-right me-2"></i> PolÃ­tica de Privacidad</a>
+                        <a href="#"><i class="fas fa-angle-right me-2"></i> TÃ©rminos y Condiciones</a>
+                        <a href="#"><i class="fas fa-angle-right me-2"></i> Mapa del Sitio</a>
+                        <a href="#"><i class="fas fa-angle-right me-2"></i> PolÃ­tica de Cookies</a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="footer-item">
+                        <h4 class="text-white mb-3">Pagos</h4>
+                        <div class="footer-bank-card">
+                            <a href="#" class="text-white me-2"><i class="fab fa-cc-amex fa-2x"></i></a>
+                            <a href="#" class="text-white me-2"><i class="fab fa-cc-visa fa-2x"></i></a>
+                            <a href="#" class="text-white me-2"><i class="fas fa-credit-card fa-2x"></i></a>
+                            <a href="#" class="text-white me-2"><i class="fab fa-cc-mastercard fa-2x"></i></a>
+                            <a href="#" class="text-white me-2"><i class="fab fa-cc-paypal fa-2x"></i></a>
+                            <a href="#" class="text-white"><i class="fab fa-cc-discover fa-2x"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid copyright text-body py-4">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-md-6 text-center text-md-end mb-md-0">
+                    <i class="fas fa-copyright me-2"></i><a class="text-white" href="#">Angel Torres Flores</a>, All right reserved.
+                </div>
+                <div class="col-md-6 text-center text-md-start">
+                    DiseÃ±ado por Viajes Jovi
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="#" class="btn btn-primary btn-primary-outline-0 btn-md-square back-to-top"><i class="fa fa-arrow-up"></i></a>
+
+    <!-- JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/paquetes.js"></script>
+    <script src="js/nav.js"></script>
+    <script src="js/main.js"></script>
+
+    <script>
+    (function () {
+        function esc(str) {
+            var d = document.createElement('div');
+            d.textContent = str || '';
+            return d.innerHTML;
+        }
+
+        // Leer ?id= de la URL
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get('id');
+
+        const paquete = (typeof PAQUETES !== 'undefined')
+            ? PAQUETES.find(p => p.id === id)
+            : null;
+
+        if (!paquete) {
+            document.getElementById('detalle-no-encontrado').style.display = 'block';
+            document.title = 'Paquete no encontrado â€” VIAJES JOVI';
+            return;
+        }
+
+        document.getElementById('detalle-contenido').style.display = 'block';
+
+        // Formatear fecha legible
+        const fmtFecha = (iso) => {
+            const [y, m, d] = iso.split('-');
+            const meses = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+            return `${parseInt(d)} ${meses[parseInt(m)-1]} ${y}`;
+        };
+
+        // TÃ­tulo de la pÃ¡gina
+        document.title = paquete.nombre + ' â€” VIAJES JOVI';
+
+        // Hero
+        document.getElementById('detalle-hero').style.backgroundImage = `url('${paquete.imagen}')`;
+        document.getElementById('hero-destino').textContent = paquete.destino;
+        document.getElementById('hero-nombre').textContent = paquete.nombre;
+
+        // Breadcrumb
+        document.getElementById('breadcrumb-nombre').textContent = paquete.nombre;
+
+        // Info destino
+        document.getElementById('info-destino').textContent = paquete.destino;
+        document.getElementById('info-nombre').textContent = paquete.nombre;
+
+        // Fechas
+        document.getElementById('info-fecha-inicio').textContent = fmtFecha(paquete.fechaInicio);
+        document.getElementById('info-fecha-fin').textContent = fmtFecha(paquete.fechaFin);
+
+        // Forma de precio + segmentos (columna principal)
+        const tipoLabelMain = paquete.tipoPrecio === 'por-grupo'
+            ? 'Precio total por grupo (noches incluidas)'
+            : 'Precio por persona (noches incluidas)';
+        document.getElementById('info-tipo-precio').textContent = tipoLabelMain;
+
+        const segsMainEl = document.getElementById('info-segmentos-precio');
+        const segsMain = paquete.segmentosPrecio && paquete.segmentosPrecio.length
+            ? paquete.segmentosPrecio
+            : [{ nombre: paquete.formaPrecio || 'Por persona', precio: paquete.precio || '' }];
+        segsMain.forEach(seg => {
+            segsMainEl.innerHTML += `<div class="info-seg-item">
+                <span class="seg-n">${esc(seg.nombre)}</span>
+                <span class="seg-p">${esc(seg.precio)}</span>
+            </div>`;
+        });
+
+        // Itinerario de viaje (tÃ­tulo + descripciÃ³n, sin nÃºmero de dÃ­a)
+        const itinerarioEl = document.getElementById('info-itinerario');
+        (paquete.itinerario || []).forEach(item => {
+            itinerarioEl.innerHTML += `
+                <div class="itinerario-item">
+                    <div class="itinerario-body">
+                        <h6>${esc(item.titulo)}</h6>
+                        <p>${esc(item.descripcion)}</p>
+                    </div>
+                </div>`;
+        });
+
+        // Inclusiones
+        const inclusEl = document.getElementById('info-inclusiones');
+        (paquete.inclusiones || []).forEach(inc => {
+            inclusEl.innerHTML += `
+                <li>
+                    <i class="fas fa-check-circle"></i>
+                    <span>${esc(inc)}</span>
+                </li>`;
+        });
+
+        // Itinerario de vuelo (condicional)
+        if (paquete.mostrarVuelo !== false && paquete.itinerarioVuelo && paquete.itinerarioVuelo.length) {
+            document.getElementById('info-vuelo-section').style.display = '';
+            const vuelosEl = document.getElementById('info-vuelos');
+            paquete.itinerarioVuelo.forEach(v => {
+                // Soporte formato nuevo (aeropuertoSalida) y legado (origen/destino)
+                const aeroS = v.aeropuertoSalida || v.origen || '';
+                const fhS   = v.fechaHoraSalida  || ((v.fecha || '') + (v.horaSalida ? ' Â· ' + v.horaSalida : '')).trim();
+                const aeroL = v.aeropuertoLlegada || v.destino || '';
+                const fhL   = v.fechaHoraLlegada  || v.horaLlegada || '';
+                vuelosEl.innerHTML += `
+                    <div class="vuelo-tramo">
+                        <div class="vuelo-tramo-punto">
+                            <span class="vuelo-tramo-aero">${esc(aeroS)}</span>
+                            <span class="vuelo-tramo-fh">${esc(fhS)}</span>
+                        </div>
+                        <div class="vuelo-tramo-flecha"><i class="fas fa-arrow-right"></i></div>
+                        <div class="vuelo-tramo-punto llegada">
+                            <span class="vuelo-tramo-aero">${esc(aeroL)}</span>
+                            <span class="vuelo-tramo-fh">${esc(fhL)}</span>
+                        </div>
+                    </div>`;
+            });
+        }
+
+        // Leyendas
+        const leyendasEl = document.getElementById('info-leyendas');
+        paquete.leyendas.forEach(l => {
+            leyendasEl.innerHTML += `
+                <li>
+                    <i class="fas fa-info-circle"></i>
+                    <span>${esc(l)}</span>
+                </li>`;
+        });
+
+        // CTA lateral â€” precios con segmentos
+        const tipoLabel = paquete.tipoPrecio === 'por-grupo'
+            ? 'Precio total por grupo (noches incluidas)'
+            : 'Precio por persona (noches incluidas)';
+        document.getElementById('cta-tipo-precio').textContent = tipoLabel;
+
+        const segEl = document.getElementById('cta-segmentos');
+        const segs  = paquete.segmentosPrecio && paquete.segmentosPrecio.length
+            ? paquete.segmentosPrecio
+            : [{ nombre: paquete.formaPrecio || 'Por persona', precio: paquete.precio || '' }];
+        segs.forEach((seg, i) => {
+            segEl.innerHTML += `<div class="precio-segmento${i === 0 ? ' seg-first' : ''}">
+                <span class="seg-nombre">${esc(seg.nombre)}</span>
+                <span class="seg-precio">${esc(seg.precio)}</span>
+            </div>`;
+        });
+        document.getElementById('cta-duracion').textContent = paquete.duracion || '';
+        document.getElementById('cta-whatsapp').href = paquete.whatsapp;
+        document.getElementById('cta-destino').textContent = paquete.destino;
+        document.getElementById('cta-fecha-inicio').textContent = fmtFecha(paquete.fechaInicio);
+        document.getElementById('cta-fecha-fin').textContent = fmtFecha(paquete.fechaFin);
+    })();
+    </script>
+
+</body>
+</html>
+

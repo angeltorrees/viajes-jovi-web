@@ -1,0 +1,1664 @@
+<!DOCTYPE html>
+<html lang="es">
+
+    <head>
+        <meta charset="utf-8">
+        <title>VIAJES JOVI</title>
+        <!-- Anti-flash dark mode: aplica tema antes de renderizar -->
+        <script>
+            (function(){var t=localStorage.getItem('jovi-theme');if(t==='dark'||(t===null&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.setAttribute('data-theme','dark');}})();
+        </script>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="description" content="Viajes Jovi — Agencia de viajes con más de 30 años de experiencia. Paquetes nacionales e internacionales, vuelos, hoteles y tours personalizados al mejor precio.">
+        <meta name="keywords" content="viajes, agencia de viajes, paquetes turísticos, vuelos baratos, hoteles, tours, Cancún, Europa, Viajes Jovi">
+        <meta name="author" content="Viajes Jovi">
+        <meta property="og:title" content="Viajes Jovi — Tu próxima aventura comienza aquí">
+        <meta property="og:description" content="Paquetes de viaje nacionales e internacionales. Más de 30 años creando experiencias inolvidables.">
+        <meta property="og:type" content="website">
+        <link rel="icon" type="image/png" href="img/logo.png">
+        <link rel="preload" as="image" href="img/carousel-2.jpg">
+
+        <!-- Google Web Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,600;1,500;1,600&family=Jost:wght@500;600&family=Roboto&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"> 
+
+        <!-- Icon Font Stylesheet -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+        <!-- Libraries Stylesheet -->
+        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+        <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+
+        <!-- Customized Bootstrap Stylesheet -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Template Stylesheet -->
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+
+    <body>
+
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+<!-- Navbar & Hero Start -->
+        <div class="container-fluid position-relative p-0">
+            <nav class="jovi-nav" id="joviNav">
+    <div class="jovi-nav-container">
+        <a href="index.html" class="jovi-brand">
+            <img src="img/logo.png" alt="Viajes Jovi">
+            <span class="jovi-brand-name">VIAJES JOVI</span>
+        </a>
+        <ul class="jovi-nav-links" id="joviLinks">
+            <li><a href="index.html" data-page="index">Inicio</a></li>
+            <li><a href="about.html" data-page="about">Nosotros</a></li>
+            <li><a href="services.html" data-page="services">Servicios</a></li>
+            <li><a href="packages.html" data-page="packages">Promociones</a></li>
+            <li><a href="blog.html" data-page="blog">Blog</a></li>
+            <li class="jovi-has-dropdown">
+                <button class="jovi-drop-trigger" type="button">
+                    Explorar <i class="fas fa-chevron-down jovi-drop-arrow"></i>
+                </button>
+                <div class="jovi-dropdown">
+                    <a href="destination.html" data-page="destination"><i class="fas fa-globe-americas"></i>Destinos</a>
+                    <a href="tour.html" data-page="tour"><i class="fas fa-fire"></i>Más vendidos</a>
+                    <a href="booking.html" data-page="booking"><i class="fas fa-calculator"></i>Cotiza</a>
+                    <a href="gallery.html" data-page="gallery"><i class="fas fa-images"></i>Galería</a>
+                    <a href="guides.html" data-page="guides"><i class="fas fa-user-tie"></i>Nuestros agentes</a>
+                    <a href="testimonial.html" data-page="testimonial"><i class="fas fa-star"></i>Testimonios</a>
+                </div>
+            </li>
+            <li><a href="contact.html" data-page="contact">Contacto</a></li>
+        </ul>
+        <div class="jovi-nav-end">
+            <button class="jovi-theme-toggle" id="themeToggle" aria-label="Cambiar tema" title="Modo oscuro">
+                <i class="fas fa-moon" id="themeIcon"></i>
+            </button>
+            <a href="https://wa.me/5214777920736" target="_blank" rel="noopener" class="jovi-wa-pill">
+                <i class="fab fa-whatsapp"></i><span>WhatsApp</span>
+            </a>
+            <button class="jovi-hamburger" id="joviHamburger" aria-label="Abrir menú" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </div>
+</nav>
+<div class="jovi-overlay" id="joviOverlay"></div>
+<aside class="jovi-drawer" id="joviDrawer" aria-hidden="true">
+    <div class="jovi-drawer-top">
+        <a href="index.html" class="jovi-brand">
+            <img src="img/logo.png" alt="Viajes Jovi">
+            <span class="jovi-brand-name">VIAJES JOVI</span>
+        </a>
+        <button class="jovi-drawer-close" id="joviDrawerClose" aria-label="Cerrar menú">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    <nav class="jovi-drawer-links">
+        <a href="index.html" data-page="index"><i class="fas fa-home"></i>Inicio</a>
+        <a href="about.html" data-page="about"><i class="fas fa-info-circle"></i>Nosotros</a>
+        <a href="services.html" data-page="services"><i class="fas fa-concierge-bell"></i>Servicios</a>
+        <a href="packages.html" data-page="packages"><i class="fas fa-tag"></i>Promociones</a>
+        <a href="blog.html" data-page="blog"><i class="fas fa-newspaper"></i>Blog</a>
+        <a href="destination.html" data-page="destination"><i class="fas fa-globe-americas"></i>Destinos</a>
+        <a href="tour.html" data-page="tour"><i class="fas fa-fire"></i>Más vendidos</a>
+        <a href="booking.html" data-page="booking"><i class="fas fa-calculator"></i>Cotiza</a>
+        <a href="gallery.html" data-page="gallery"><i class="fas fa-images"></i>Galería</a>
+        <a href="guides.html" data-page="guides"><i class="fas fa-user-tie"></i>Nuestros agentes</a>
+        <a href="testimonial.html" data-page="testimonial"><i class="fas fa-star"></i>Testimonios</a>
+        <a href="contact.html" data-page="contact"><i class="fas fa-envelope"></i>Contacto</a>
+    </nav>
+    <div class="jovi-drawer-bottom">
+        <a href="https://wa.me/5214777920736" target="_blank" rel="noopener" class="jovi-drawer-wa">
+            <i class="fab fa-whatsapp"></i> Cotizar por WhatsApp
+        </a>
+    </div>
+</aside>
+            <!-- Navbar & Hero End -->
+             
+            <!-- Carousel Start -->
+            <div class="carousel-header">
+                <div id="carouselId" class="carousel slide carousel-fade" data-bs-touch="false">
+                    <ol class="carousel-indicators" id="carousel-indicators"></ol>
+                    <div class="carousel-inner" id="carousel-inner" role="listbox">
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon btn bg-primary" aria-hidden="false"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselId" data-bs-slide="next">
+                        <span class="carousel-control-next-icon btn bg-primary" aria-hidden="false"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+            <!-- Carousel End -->
+        </div>
+        <div class="container-fluid jovi-search-wrapper">
+            <div class="container">
+                <form class="jovi-search-form">
+                    <div class="row g-3 align-items-end">
+                        <div class="col-12 col-md-4 col-lg-3">
+                            <label class="form-label visually-hidden" for="jovi-destination">Destino</label>
+                            <input 
+                                type="text" 
+                                id="jovi-destination" 
+                                name="destination" 
+                                class="form-control"
+                                placeholder="¿A dónde quieres viajar?">
+                        </div>
+                        <div class="col-12 col-md-4 col-lg-2">
+                            <label class="form-label mb-1" for="jovi-checkin">Fecha de inicio de viaje</label>
+                            <input 
+                                type="text" 
+                                id="jovi-checkin" 
+                                name="checkin" 
+                                class="form-control jovi-date-input"
+                                placeholder="Selecciona fecha">
+                        </div>
+                        <div class="col-12 col-md-4 col-lg-2">
+                            <label class="form-label mb-1" for="jovi-checkout">Fecha de término de viaje</label>
+                            <input 
+                                type="text" 
+                                id="jovi-checkout" 
+                                name="checkout" 
+                                class="form-control jovi-date-input"
+                                placeholder="Selecciona fecha">
+                        </div>
+                        <div class="col-6 col-md-3 col-lg-2">
+                            <label class="form-label mb-1" for="jovi-adults">Adultos</label>
+                            <select id="jovi-adults" name="adults" class="form-select">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                            </select>
+                        </div>
+                        <div class="col-6 col-md-3 col-lg-1">
+                            <label class="form-label mb-1" for="jovi-children">Niños</label>
+                            <select id="jovi-children" name="children" class="form-select">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                            </select>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-2">
+                            <div class="d-grid h-100">
+                                <button type="button" class="btn jovi-search-btn w-100">
+                                    Reserva tu hotel
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
+
+        <!-- Cómo Funciona Start -->
+        <section class="jovi-steps-section py-5">
+            <div class="container py-4">
+                <div class="text-center mb-5 jovi-reveal">
+                    <h5 class="section-title px-3">Cómo Funciona</h5>
+                    <h1 class="mb-2">Tu viaje en <span class="jovi-gradient-text">3 simples pasos</span></h1>
+                    <p class="text-muted mx-auto" style="max-width:500px">Sin complicaciones. Tú eliges, nosotros nos encargamos del resto.</p>
+                </div>
+                <div class="jovi-steps-row jovi-reveal">
+                    <div class="jovi-step">
+                        <div class="jovi-step-num">1</div>
+                        <h5>Elige tu destino</h5>
+                        <p>Explora nuestros paquetes o cuéntanos tu viaje soñado.</p>
+                    </div>
+                    <div class="jovi-step">
+                        <div class="jovi-step-num">2</div>
+                        <h5>Cotiza por WhatsApp</h5>
+                        <p>Te respondemos en minutos con opciones a tu medida.</p>
+                    </div>
+                    <div class="jovi-step">
+                        <div class="jovi-step-num">3</div>
+                        <h5>¡Viaja y disfruta!</h5>
+                        <p>Nosotros coordinamos todo. Tú solo haz la maleta.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Cómo Funciona End -->
+
+        <!-- Escápate con Jovi Start -->
+        <section class="escape-section py-5" aria-labelledby="escape-title">
+            <div class="container">
+                <header class="text-center mb-4 jovi-reveal">
+                    <h2 id="escape-title" class="escape-title mb-2">Escápate con las mejores ofertas de Jovi</h2>
+                    <p class="escape-subtitle mb-0">Planes pensados para disfrutar en familia, sin complicaciones y al mejor precio.</p>
+                </header>
+
+                <div class="escape-carousel-wrapper">
+                    <button class="escape-arrow escape-arrow--prev" type="button" aria-label="Ver escapadas anteriores">
+                        <i class="bi bi-chevron-left"></i>
+                    </button>
+
+                    <div class="escape-carousel" id="escape-cards-container" data-escape-carousel>
+                    </div>
+                    <button class="escape-arrow escape-arrow--next" type="button" aria-label="Ver siguientes escapadas">
+                        <i class="bi bi-chevron-right"></i>
+                    </button>
+                </div>
+
+                <div class="escape-dots mt-3" role="tablist" aria-label="Indicadores de escapadas">
+                    <!-- JS generará los dots -->
+                </div>
+            </div>
+        </section>
+        <!-- Escápate con Jovi End -->
+
+                 <!-- Destination Start -->
+        <div class="container-fluid destination py-5">
+            <div class="container py-5">
+                <div class="mx-auto text-center mb-5 jovi-reveal" style="max-width: 900px;">
+                    <h5 class="section-title px-3">Destinos</h5>
+                    <h1 class="mb-0">Destinos Populares</h1>
+                </div>
+                <div class="tab-class text-center">
+                    <ul class="nav nav-pills d-inline-flex justify-content-center mb-5">
+                        <li class="nav-item">
+                            <a class="d-flex mx-3 py-2 border border-primary bg-light rounded-pill active" data-bs-toggle="pill" href="#tab-1">
+                                <span class="text-dark" style="width: 150px;">Todo</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="d-flex py-2 mx-3 border border-primary bg-light rounded-pill" data-bs-toggle="pill" href="#tab-2">
+                                <span class="text-dark" style="width: 150px;">USA</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="d-flex mx-3 py-2 border border-primary bg-light rounded-pill" data-bs-toggle="pill" href="#tab-3">
+                                <span class="text-dark" style="width: 150px;">Canada</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="d-flex mx-3 py-2 border border-primary bg-light rounded-pill" data-bs-toggle="pill" href="#tab-4">
+                                <span class="text-dark" style="width: 150px;">Europa</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="d-flex mx-3 py-2 border border-primary bg-light rounded-pill" data-bs-toggle="pill" href="#tab-5">
+                                <span class="text-dark" style="width: 150px;">Asia</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="d-flex mx-3 py-2 border border-primary bg-light rounded-pill" data-bs-toggle="pill" href="#tab-6">
+                                <span class="text-dark" style="width: 150px;">Latinoamerica</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="tab-1" class="tab-pane fade show p-0 active">
+                            <div class="row g-4">
+                                <div class="col-xl-8">
+                                    <div class="row g-4">
+                                        <div class="col-lg-6">
+                                            <div class="destination-img">
+                                                <img class="img-fluid rounded w-100" loading="lazy" src="img/destination-1.jpg" alt="Viajes Jovi">
+                                                <div class="destination-overlay p-4">
+                                                    <a href="#" class="btn btn-primary text-white rounded-pill border py-2 px-3">20 Photos</a>
+                                                    <h4 class="text-white mb-2 mt-3">New York City</h4>
+                                                    <a href="#" class="btn-hover text-white">Ver todo el lugar <i class="fa fa-arrow-right ms-2"></i></a>
+                                                </div>
+                                                <div class="search-icon">
+                                                    <a href="img/destination-1.jpg" data-lightbox="destination-1"><i class="fa fa-plus-square fa-1x btn btn-light btn-lg-square text-primary"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="destination-img">
+                                                <img class="img-fluid rounded w-100" loading="lazy" src="img/destination-2.jpg" alt="Viajes Jovi">
+                                                <div class="destination-overlay p-4">
+                                                    <a href="#" class="btn btn-primary text-white rounded-pill border py-2 px-3">20 Photos</a>
+                                                    <h4 class="text-white mb-2 mt-3">Las vegas</h4>
+                                                    <a href="#" class="btn-hover text-white">Ver todo el lugar <i class="fa fa-arrow-right ms-2"></i></a>
+                                                </div>
+                                                <div class="search-icon">
+                                                    <a href="img/destination-2.jpg" data-lightbox="destination-2"><i class="fa fa-plus-square fa-1x btn btn-light btn-lg-square text-primary"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="destination-img">
+                                                <img class="img-fluid rounded w-100" loading="lazy" src="img/destination-7.jpg" alt="Viajes Jovi">
+                                                <div class="destination-overlay p-4">
+                                                    <a href="#" class="btn btn-primary text-white rounded-pill border py-2 px-3">20 Photos</a>
+                                                    <h4 class="text-white mb-2 mt-3">Los angelas</h4>
+                                                    <a href="#" class="btn-hover text-white">Ver todo el lugar <i class="fa fa-arrow-right ms-2"></i></a>
+                                                </div>
+                                                <div class="search-icon">
+                                                    <a href="img/destination-7.jpg" data-lightbox="destination-7"><i class="fa fa-plus-square fa-1x btn btn-light btn-lg-square text-primary"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="destination-img">
+                                                <img class="img-fluid rounded w-100" loading="lazy" src="img/destination-8.jpg" alt="Viajes Jovi">
+                                                <div class="destination-overlay p-4">
+                                                    <a href="#" class="btn btn-primary text-white rounded-pill border py-2 px-3">20 Photos</a>
+                                                    <h4 class="text-white mb-2 mt-3">Los angelas</h4>
+                                                    <a href="#" class="btn-hover text-white">Ver todo el lugar <i class="fa fa-arrow-right ms-2"></i></a>
+                                                </div>
+                                                <div class="search-icon">
+                                                    <a href="img/destination-8.jpg" data-lightbox="destination-8"><i class="fa fa-plus-square fa-1x btn btn-light btn-lg-square text-primary"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4">
+                                    <div class="destination-img h-100">
+                                        <img class="img-fluid rounded w-100 h-100" loading="lazy" src="img/destination-9.jpg" style="object-fit: cover; min-height: 300px;" alt="Viajes Jovi">
+                                        <div class="destination-overlay p-4">
+                                            <a href="#" class="btn btn-primary text-white rounded-pill border py-2 px-3">20 Photos</a>
+                                            <h4 class="text-white mb-2 mt-3">San francisco</h4>
+                                            <a href="#" class="btn-hover text-white">Ver todo el lugar <i class="fa fa-arrow-right ms-2"></i></a>
+                                        </div>
+                                        <div class="search-icon">
+                                            <a href="img/destination-9.jpg" data-lightbox="destination-4"><i class="fa fa-plus-square fa-1x btn btn-light btn-lg-square text-primary"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="destination-img">
+                                        <img class="img-fluid rounded w-100" loading="lazy" src="img/destination-4.jpg" alt="Viajes Jovi">
+                                        <div class="destination-overlay p-4">
+                                            <a href="#" class="btn btn-primary text-white rounded-pill border py-2 px-3">20 Photos</a>
+                                            <h4 class="text-white mb-2 mt-3">Los angelas</h4>
+                                            <a href="#" class="btn-hover text-white">Ver todo el lugar <i class="fa fa-arrow-right ms-2"></i></a>
+                                        </div>
+                                        <div class="search-icon">
+                                            <a href="img/destination-4.jpg" data-lightbox="destination-4"><i class="fa fa-plus-square fa-1x btn btn-light btn-lg-square text-primary"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="destination-img">
+                                        <img class="img-fluid rounded w-100" loading="lazy" src="img/destination-5.jpg" alt="Viajes Jovi">
+                                        <div class="destination-overlay p-4">
+                                            <a href="#" class="btn btn-primary text-white rounded-pill border py-2 px-3">20 Photos</a>
+                                            <h4 class="text-white mb-2 mt-3">Los angelas</h4>
+                                            <a href="#" class="btn-hover text-white">Ver todo el lugar <i class="fa fa-arrow-right ms-2"></i></a>
+                                        </div>
+                                        <div class="search-icon">
+                                            <a href="img/destination-5.jpg" data-lightbox="destination-5"><i class="fa fa-plus-square fa-1x btn btn-light btn-lg-square text-primary"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="destination-img">
+                                        <img class="img-fluid rounded w-100" loading="lazy" src="img/destination-6.jpg" alt="Viajes Jovi">
+                                        <div class="destination-overlay p-4">
+                                            <a href="#" class="btn btn-primary text-white rounded-pill border py-2 px-3">20 Photos</a>
+                                            <h4 class="text-white mb-2 mt-3">Los angelas</h4>
+                                            <a href="#" class="btn-hover text-white">Ver todo el lugar <i class="fa fa-arrow-right ms-2"></i></a>
+                                        </div>
+                                        <div class="search-icon">
+                                            <a href="img/destination-6.jpg" data-lightbox="destination-6"><i class="fa fa-plus-square fa-1x btn btn-light btn-lg-square text-primary"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="tab-2" class="tab-pane fade show p-0">
+                            <div class="row g-4">
+                                <div class="col-lg-6">
+                                    <div class="destination-img">
+                                        <img class="img-fluid rounded w-100" loading="lazy" src="img/destination-5.jpg" alt="Viajes Jovi">
+                                        <div class="destination-overlay p-4">
+                                            <a href="#" class="btn btn-primary text-white rounded-pill border py-2 px-3">20 Photos</a>
+                                            <h4 class="text-white mb-2 mt-3">San francisco</h4>
+                                            <a href="#" class="btn-hover text-white">Ver todo el lugar <i class="fa fa-arrow-right ms-2"></i></a>
+                                        </div>
+                                        <div class="search-icon">
+                                            <a href="img/destination-5.jpg" data-lightbox="destination-5"><i class="fa fa-plus-square fa-1x btn btn-light btn-lg-square text-primary"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="destination-img">
+                                        <img class="img-fluid rounded w-100" loading="lazy" src="img/destination-6.jpg" alt="Viajes Jovi">
+                                        <div class="destination-overlay p-4">
+                                            <a href="#" class="btn btn-primary text-white rounded-pill border py-2 px-3">20 Photos</a>
+                                            <h4 class="text-white mb-2 mt-3">San francisco</h4>
+                                            <a href="#" class="btn-hover text-white">Ver todo el lugar <i class="fa fa-arrow-right ms-2"></i></a>
+                                        </div>
+                                        <div class="search-icon">
+                                            <a href="img/destination-6.jpg" data-lightbox="destination-6"><i class="fa fa-plus-square fa-1x btn btn-light btn-lg-square text-primary"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="tab-3" class="tab-pane fade show p-0">
+                            <div class="row g-4">
+                                <div class="col-lg-6">
+                                    <div class="destination-img">
+                                        <img class="img-fluid rounded w-100" loading="lazy" src="img/destination-5.jpg" alt="Viajes Jovi">
+                                        <div class="destination-overlay p-4">
+                                            <a href="#" class="btn btn-primary text-white rounded-pill border py-2 px-3">20 Photos</a>
+                                            <h4 class="text-white mb-2 mt-3">San francisco</h4>
+                                            <a href="#" class="btn-hover text-white">Ver todo el lugar <i class="fa fa-arrow-right ms-2"></i></a>
+                                        </div>
+                                        <div class="search-icon">
+                                            <a href="img/destination-5.jpg" data-lightbox="destination-5"><i class="fa fa-plus-square fa-1x btn btn-light btn-lg-square text-primary"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="destination-img">
+                                        <img class="img-fluid rounded w-100" loading="lazy" src="img/destination-6.jpg" alt="Viajes Jovi">
+                                        <div class="destination-overlay p-4">
+                                            <a href="#" class="btn btn-primary text-white rounded-pill border py-2 px-3">20 Photos</a>
+                                            <h4 class="text-white mb-2 mt-3">San francisco</h4>
+                                            <a href="#" class="btn-hover text-white">Ver todo el lugar <i class="fa fa-arrow-right ms-2"></i></a>
+                                        </div>
+                                        <div class="search-icon">
+                                            <a href="img/destination-6.jpg" data-lightbox="destination-6"><i class="fa fa-plus-square fa-1x btn btn-light btn-lg-square text-primary"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="tab-4" class="tab-pane fade show p-0">
+                            <div class="row g-4">
+                                <div class="col-lg-6">
+                                    <div class="destination-img">
+                                        <img class="img-fluid rounded w-100" loading="lazy" src="img/destination-5.jpg" alt="Viajes Jovi">
+                                        <div class="destination-overlay p-4">
+                                            <a href="#" class="btn btn-primary text-white rounded-pill border py-2 px-3">20 Photos</a>
+                                            <h4 class="text-white mb-2 mt-3">San francisco</h4>
+                                            <a href="#" class="btn-hover text-white">Ver todo el lugar <i class="fa fa-arrow-right ms-2"></i></a>
+                                        </div>
+                                        <div class="search-icon">
+                                            <a href="img/destination-5.jpg" data-lightbox="destination-5"><i class="fa fa-plus-square fa-1x btn btn-light btn-lg-square text-primary"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="destination-img">
+                                        <img class="img-fluid rounded w-100" loading="lazy" src="img/destination-6.jpg" alt="Viajes Jovi">
+                                        <div class="destination-overlay p-4">
+                                            <a href="#" class="btn btn-primary text-white rounded-pill border py-2 px-3">20 Photos</a>
+                                            <h4 class="text-white mb-2 mt-3">San francisco</h4>
+                                            <a href="#" class="btn-hover text-white">Ver todo el lugar <i class="fa fa-arrow-right ms-2"></i></a>
+                                        </div>
+                                        <div class="search-icon">
+                                            <a href="img/destination-6.jpg" data-lightbox="destination-6"><i class="fa fa-plus-square fa-1x btn btn-light btn-lg-square text-primary"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="tab-5" class="tab-pane fade show p-0">
+                            <div class="row g-4">
+                                <div class="col-lg-6">
+                                    <div class="destination-img">
+                                        <img class="img-fluid rounded w-100" loading="lazy" src="img/destination-5.jpg" alt="Viajes Jovi">
+                                        <div class="destination-overlay p-4">
+                                            <a href="#" class="btn btn-primary text-white rounded-pill border py-2 px-3">20 Photos</a>
+                                            <h4 class="text-white mb-2 mt-3">San francisco</h4>
+                                            <a href="#" class="btn-hover text-white">Ver todo el lugar <i class="fa fa-arrow-right ms-2"></i></a>
+                                        </div>
+                                        <div class="search-icon">
+                                            <a href="img/destination-5.jpg" data-lightbox="destination-5"><i class="fa fa-plus-square fa-1x btn btn-light btn-lg-square text-primary"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="destination-img">
+                                        <img class="img-fluid rounded w-100" loading="lazy" src="img/destination-6.jpg" alt="Viajes Jovi">
+                                        <div class="destination-overlay p-4">
+                                            <a href="#" class="btn btn-primary text-white rounded-pill border py-2 px-3">20 Photos</a>
+                                            <h4 class="text-white mb-2 mt-3">San francisco</h4>
+                                            <a href="#" class="btn-hover text-white">Ver todo el lugar <i class="fa fa-arrow-right ms-2"></i></a>
+                                        </div>
+                                        <div class="search-icon">
+                                            <a href="img/destination-6.jpg" data-lightbox="destination-6"><i class="fa fa-plus-square fa-1x btn btn-light btn-lg-square text-primary"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="tab-6" class="tab-pane fade show p-0">
+                            <div class="row g-4">
+                                <div class="col-lg-6">
+                                    <div class="destination-img">
+                                        <img class="img-fluid rounded w-100" loading="lazy" src="img/destination-5.jpg" alt="Viajes Jovi">
+                                        <div class="destination-overlay p-4">
+                                            <a href="#" class="btn btn-primary text-white rounded-pill border py-2 px-3">20 Photos</a>
+                                            <h4 class="text-white mb-2 mt-3">San francisco</h4>
+                                            <a href="#" class="btn-hover text-white">Ver todo el lugar <i class="fa fa-arrow-right ms-2"></i></a>
+                                        </div>
+                                        <div class="search-icon">
+                                            <a href="img/destination-5.jpg" data-lightbox="destination-5"><i class="fa fa-plus-square fa-1x btn btn-light btn-lg-square text-primary"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="destination-img">
+                                        <img class="img-fluid rounded w-100" loading="lazy" src="img/destination-6.jpg" alt="Viajes Jovi">
+                                        <div class="destination-overlay p-4">
+                                            <a href="#" class="btn btn-primary text-white rounded-pill border py-2 px-3">20 Photos</a>
+                                            <h4 class="text-white mb-2 mt-3">San francisco</h4>
+                                            <a href="#" class="btn-hover text-white">Ver todo el lugar <i class="fa fa-arrow-right ms-2"></i></a>
+                                        </div>
+                                        <div class="search-icon">
+                                            <a href="img/destination-6.jpg" data-lightbox="destination-6"><i class="fa fa-plus-square fa-1x btn btn-light btn-lg-square text-primary"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Destination End -->
+
+        <!-- About Start -->
+        <div class="container-fluid about py-5">
+            <div class="container py-5">
+                <div class="row g-5 align-items-center">
+                    <div class="col-lg-5 jovi-reveal-left">
+                        <div class="h-100" style="border: 50px solid; border-color: transparent #FF6B00 transparent #FF6B00;">
+                            <img loading="lazy" src="img/about-img.jpg" class="img-fluid w-100 h-100" alt="Sobre Viajes Jovi">
+                        </div>
+                    </div>
+                    <div class="col-lg-7 jovi-reveal-right" style="background: linear-gradient(rgba(255, 255, 255, .8), rgba(255, 255, 255, .8)), url(img/about-img-1.png);">
+                        <h5 class="section-about-title pe-3">Sobre Nosotros</h5>
+                        <h1 class="mb-4">Bienvenido a <span class="text-primary">VIAJES JOVI</span></h1>
+                        <p class="mb-4">Con más de 30 años de experiencia, Viajes Jovi se ha consolidado como una agencia líder en la industria turística. Ofrecemos servicios de calidad con una amplia red de oficinas ubicadas en diferentes puntos de la ciudad, siempre listos para ayudarte a planear el viaje de tus sueños.</p>
+                        <p class="mb-4">Nuestra reputación se respalda por cientos de recomendaciones de clientes satisfechos que han viajado con nosotros. En Viajes Jovi, te ofrecemos atención personalizada y opciones exclusivas para que cada experiencia sea única e inolvidable.</p>
+                        <div class="row gy-2 gx-4 mb-4">
+                            <div class="col-sm-6">
+                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Vuelos de Primera Clase</p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Hoteles Seleccionados a Mano</p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Alojamientos 5 Estrellas</p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Vehículos de Último Modelo</p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>150 Tours Exclusivos</p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Servicio 24/7</p>
+                            </div>
+                        </div>
+                        <a class="btn btn-primary rounded-pill py-3 px-5 mt-2" href="about.html">Leer Más</a>
+
+                        <div class="jovi-counter-row jovi-reveal">
+                            <div class="jovi-counter-item">
+                                <div class="jovi-counter-num" data-target="30">0</div>
+                                <div class="jovi-counter-label">Años de experiencia</div>
+                            </div>
+                            <div class="jovi-counter-item">
+                                <div class="jovi-counter-num" data-target="500">0</div>
+                                <div class="jovi-counter-label">Viajes realizados</div>
+                            </div>
+                            <div class="jovi-counter-item">
+                                <div class="jovi-counter-num" data-target="1200">0</div>
+                                <div class="jovi-counter-label">Clientes felices</div>
+                            </div>
+                            <div class="jovi-counter-item">
+                                <div class="jovi-counter-num" data-target="50">0</div>
+                                <div class="jovi-counter-label">Destinos</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- About End -->
+
+        <!-- Por Qué Jovi Start -->
+        <section class="jovi-why-section py-5">
+            <div class="container py-5">
+                <div class="text-center mb-5 jovi-reveal">
+                    <h5 style="color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.15em;font-size:0.85rem">¿Por qué elegirnos?</h5>
+                    <h2 style="color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:2.2rem">Lo que nos hace <span class="jovi-gradient-text">diferentes</span></h2>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-3 col-md-6 jovi-reveal">
+                        <div class="jovi-why-card">
+                            <div class="jovi-why-icon"><i class="fas fa-shield-alt"></i></div>
+                            <h4>Viaja seguro</h4>
+                            <p>Seguro de viaje incluido en todos nuestros paquetes. Tu tranquilidad es nuestra prioridad.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 jovi-reveal">
+                        <div class="jovi-why-card">
+                            <div class="jovi-why-icon"><i class="fas fa-hand-holding-usd"></i></div>
+                            <h4>Mejor precio</h4>
+                            <p>Negociamos directamente con proveedores para ofrecerte tarifas que no encontrarás en otro lado.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 jovi-reveal">
+                        <div class="jovi-why-card">
+                            <div class="jovi-why-icon"><i class="fas fa-headset"></i></div>
+                            <h4>Soporte 24/7</h4>
+                            <p>Asistencia en todo momento durante tu viaje. Un mensaje y estamos contigo.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 jovi-reveal">
+                        <div class="jovi-why-card">
+                            <div class="jovi-why-icon"><i class="fas fa-magic"></i></div>
+                            <h4>A tu medida</h4>
+                            <p>Cada viaje es único. Personalizamos cada detalle según tus gustos y presupuesto.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Por Qué Jovi End -->
+
+
+        <!-- Services Start -->
+        <div class="container-fluid bg-light service py-5">
+            <div class="container py-5">
+                <div class="mx-auto text-center mb-5 jovi-reveal" style="max-width: 900px;">
+                    <h5 class="section-title px-3">Servicios</h5>
+                    <h1 class="mb-0">Nuestros Servicios</h1>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-6 jovi-reveal-left">
+                        <div class="row g-4">
+                            <div class="col-12">
+                                <div class="service-content-inner d-flex align-items-center bg-white border border-primary rounded p-4 pe-0">
+                                    <div class="service-content text-end">
+                                        <h5 class="mb-4">Planificación de Itinerarios</h5>
+                                        <p class="mb-0">Creamos itinerarios personalizados que se ajustan a tus preferencias y necesidades, asegurando que cada viaje sea único e inolvidable.</p>
+                                    </div>
+                                    <div class="service-icon p-4">
+                                        <i class="fa fa-map fa-4x text-primary"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="service-content-inner d-flex align-items-center bg-white border border-primary rounded p-4 pe-0">
+                                    <div class="service-content text-end">
+                                        <h5 class="mb-4">Reservas en Restaurantes</h5>
+                                        <p class="mb-0">Accede a los mejores restaurantes locales en cada destino y disfruta de experiencias culinarias inolvidables con nuestras recomendaciones.</p>
+                                    </div>
+                                    <div class="service-icon p-4">
+                                        <i class="fa fa-utensils fa-4x text-primary"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="service-content-inner d-flex align-items-center bg-white border border-primary rounded p-4 pe-0">
+                                    <div class="service-content text-end">
+                                        <h5 class="mb-4">Servicios de Traductor</h5>
+                                        <p class="mb-0">Viaja sin preocupaciones gracias a nuestros servicios de traducción y asistencia lingüística en múltiples idiomas.</p>
+                                    </div>
+                                    <div class="service-icon p-4">
+                                        <i class="fa fa-language fa-4x text-primary"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="service-content-inner d-flex align-items-center bg-white border border-primary rounded p-4 pe-0">
+                                    <div class="service-content text-end">
+                                        <h5 class="mb-4">Paquetes Luna de Miel</h5>
+                                        <p class="mb-0">Ofrecemos paquetes exclusivos de luna de miel para parejas que buscan experiencias románticas en destinos de ensueño.</p>
+                                    </div>
+                                    <div class="service-icon p-4">
+                                        <i class="fa fa-heart fa-4x text-primary"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 jovi-reveal-right">
+                        <div class="row g-4">
+                            <div class="col-12">
+                                <div class="service-content-inner d-flex align-items-center bg-white border border-primary rounded p-4 ps-0">
+                                    <div class="service-icon p-4">
+                                        <i class="fa fa-passport fa-4x text-primary"></i>
+                                    </div>
+                                    <div class="service-content">
+                                        <h5 class="mb-4">Gestión de Visados</h5>
+                                        <p class="mb-0">Asesoría y gestión completa de visados para diferentes destinos, asegurando que tu viaje sea libre de complicaciones.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="service-content-inner d-flex align-items-center bg-white border border-primary rounded p-4 ps-0">
+                                    <div class="service-icon p-4">
+                                        <i class="fa fa-umbrella fa-4x text-primary"></i>
+                                    </div>
+                                    <div class="service-content">
+                                        <h5 class="mb-4">Asistencia de Viaje</h5>
+                                        <p class="mb-0">Servicio de asistencia las 24 horas para cualquier situación o emergencia que pueda surgir durante tu viaje.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="service-content-inner d-flex align-items-center bg-white border border-primary rounded p-4 ps-0">
+                                    <div class="service-icon p-4">
+                                        <i class="fa fa-camera fa-4x text-primary"></i>
+                                    </div>
+                                    <div class="service-content">
+                                        <h5 class="mb-4">Tours Fotográficos</h5>
+                                        <p class="mb-0">Captura cada momento con nuestros tours fotográficos guiados por expertos en los destinos más pintorescos.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="service-content-inner d-flex align-items-center bg-white border border-primary rounded p-4 ps-0">
+                                    <div class="service-icon p-4">
+                                        <i class="fa fa-hiking fa-4x text-primary"></i>
+                                    </div>
+                                    <div class="service-content">
+                                        <h5 class="mb-4">Aventuras al Aire Libre</h5>
+                                        <p class="mb-0">Descubre actividades al aire libre como senderismo, ciclismo y mucho más, con la seguridad y comodidad que te ofrece Jovi.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="text-center">
+                            <a class="btn btn-primary rounded-pill py-3 px-5 mt-2" href="services.html">Conoce Más Servicios</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Services End -->
+
+
+
+
+        <!-- Explore Tour Start -->
+        <div class="container-fluid ExploreTour py-5">
+            <div class="container py-5">
+                <div class="mx-auto text-center mb-5" style="max-width: 900px;">
+                    <h5 class="section-title px-3">Explore Tour</h5>
+                    <h1 class="mb-4">The World</h1>
+                    <p class="mb-0"> Explora el mundo con Viajes Jovi. Descubre la magia de los destinos nacionales y vive la emoción de cruzar fronteras hacia aventuras internacionales. Cada viaje es una oportunidad para crear recuerdos inolvidables, ya sea en tu país o en tierras lejanas.
+                    </p>
+                </div>
+                <div class="tab-class text-center">
+                    <ul class="nav nav-pills d-inline-flex justify-content-center mb-5">
+                        <li class="nav-item">
+                            <a class="d-flex mx-3 py-2 border border-primary bg-light rounded-pill active" data-bs-toggle="pill" href="#NationalTab-1">
+                                <span class="text-dark" style="width: 250px;">Tours Nacionales</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="d-flex py-2 mx-3 border border-primary bg-light rounded-pill" data-bs-toggle="pill" href="#InternationalTab-2">
+                                <span class="text-dark" style="width: 250px;">Tour Internacionales</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="NationalTab-1" class="tab-pane fade show p-0 active">
+                            <div class="row g-4" id="explore-nacionales-container"></div>
+                        </div>
+                        <div id="InternationalTab-2" class="tab-pane fade show p-0">
+                            <div class="InternationalTour-carousel owl-carousel" id="explore-internacionales-container"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Explore Tour Start -->
+
+                <!-- Paquetes Inicio -->
+        <div class="container-fluid packages py-5">
+            <div class="container py-5">
+                <div class="mx-auto text-center mb-5" style="max-width: 900px;">
+                    <h5 class="section-title px-3">Paquetes</h5>
+                    <h1 class="mb-0">Paquetes Asombrosos</h1>
+                </div>
+                <div class="packages-carousel owl-carousel" id="paquetes-asombrosos-container"></div>
+            </div>
+        </div>
+        <!-- Paquetes Fin -->
+
+
+        <!-- Gallery Start -->
+        <div class="container-fluid gallery py-5 my-5">
+            <div class="mx-auto text-center mb-5" style="max-width: 900px;">
+                <h5 class="section-title px-3">Nuestra Galería</h5>
+                <h1 class="mb-4">Galería turistica y viajera.</h1>
+                <p class="mb-0">Explora nuestra galería con los mejores momentos de nuestros viajes. Desde paisajes deslumbrantes hasta actividades emocionantes, encuentra inspiración para tu próxima aventura.
+                </p>
+            </div>
+            <div class="tab-class text-center">
+                <ul class="nav nav-pills d-inline-flex justify-content-center mb-5">
+                    <li class="nav-item">
+                        <a class="d-flex mx-3 py-2 border border-primary bg-light rounded-pill active" data-bs-toggle="pill" href="#GalleryTab-1">
+                            <span class="text-dark" style="width: 150px;">All</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="d-flex py-2 mx-3 border border-primary bg-light rounded-pill" data-bs-toggle="pill" href="#GalleryTab-2">
+                            <span class="text-dark" style="width: 150px;">World tour</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="d-flex mx-3 py-2 border border-primary bg-light rounded-pill" data-bs-toggle="pill" href="#GalleryTab-3">
+                            <span class="text-dark" style="width: 150px;">Ocean Tour</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="d-flex mx-3 py-2 border border-primary bg-light rounded-pill" data-bs-toggle="pill" href="#GalleryTab-4">
+                            <span class="text-dark" style="width: 150px;">Summer Tour</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="d-flex mx-3 py-2 border border-primary bg-light rounded-pill" data-bs-toggle="pill" href="#GalleryTab-5">
+                            <span class="text-dark" style="width: 150px;">Sport Tour</span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div id="GalleryTab-1" class="tab-pane fade show p-0 active">
+                        <div class="row g-2">
+                            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
+                                <div class="gallery-item h-100">
+                                    <img loading="lazy" src="img/gallery-1.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
+                                    <div class="gallery-content">
+                                        <div class="gallery-info">
+                                            <h5 class="text-white text-uppercase mb-2">World Tour</h5>
+                                            <a href="#" class="btn-hover text-white">Ver todo el lugar <i class="fa fa-arrow-right ms-2"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="gallery-plus-icon">
+                                        <a href="img/gallery-1.jpg" data-lightbox="gallery-1" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                <div class="gallery-item h-100">
+                                    <img loading="lazy" src="img/gallery-2.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
+                                    <div class="gallery-content">
+                                        <div class="gallery-info">
+                                            <h5 class="text-white text-uppercase mb-2">World Tour</h5>
+                                            <a href="#" class="btn-hover text-white">Ver todo el lugar <i class="fa fa-arrow-right ms-2"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="gallery-plus-icon">
+                                        <a href="img/gallery-2.jpg" data-lightbox="gallery-2" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
+                                <div class="gallery-item h-100">
+                                    <img loading="lazy" src="img/gallery-3.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
+                                    <div class="gallery-content">
+                                        <div class="gallery-info">
+                                            <h5 class="text-white text-uppercase mb-2">World Tour</h5>
+                                            <a href="#" class="btn-hover text-white">Ver todo el lugar <i class="fa fa-arrow-right ms-2"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="gallery-plus-icon">
+                                        <a href="img/gallery-3.jpg" data-lightbox="gallery-3" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                <div class="gallery-item h-100">
+                                    <img loading="lazy" src="img/gallery-4.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
+                                    <div class="gallery-content">
+                                        <div class="gallery-info">
+                                            <h5 class="text-white text-uppercase mb-2">World Tour</h5>
+                                            <a href="#" class="btn-hover text-white">Ver todo el lugar <i class="fa fa-arrow-right ms-2"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="gallery-plus-icon">
+                                        <a href="img/gallery-4.jpg" data-lightbox="gallery-4" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
+                                <div class="gallery-item h-100">
+                                    <img loading="lazy" src="img/gallery-5.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
+                                    <div class="gallery-content">
+                                        <div class="gallery-info">
+                                            <h5 class="text-white text-uppercase mb-2">World Tour</h5>
+                                            <a href="#" class="btn-hover text-white">Ver todo el lugar <i class="fa fa-arrow-right ms-2"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="gallery-plus-icon">
+                                        <a href="img/gallery-5.jpg" data-lightbox="gallery-5" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
+                                <div class="gallery-item h-100">
+                                    <img loading="lazy" src="img/gallery-6.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
+                                    <div class="gallery-content">
+                                        <div class="gallery-info">
+                                            <h5 class="text-white text-uppercase mb-2">World Tour</h5>
+                                            <a href="#" class="btn-hover text-white">Ver todo el lugar <i class="fa fa-arrow-right ms-2"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="gallery-plus-icon">
+                                        <a href="img/gallery-6.jpg" data-lightbox="gallery-6" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-3 col-xl-3">
+                                <div class="gallery-item h-100">
+                                    <img loading="lazy" src="img/gallery-7.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
+                                    <div class="gallery-content">
+                                        <div class="gallery-info">
+                                            <h5 class="text-white text-uppercase mb-2">World Tour</h5>
+                                            <a href="#" class="btn-hover text-white">Ver todo el lugar <i class="fa fa-arrow-right ms-2"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="gallery-plus-icon">
+                                        <a href="img/gallery-7.jpg" data-lightbox="gallery-7" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-3 col-xl-2">
+                                <div class="gallery-item h-100">
+                                    <img loading="lazy" src="img/gallery-8.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
+                                    <div class="gallery-content">
+                                        <div class="gallery-info">
+                                            <h5 class="text-white text-uppercase mb-2">World Tour</h5>
+                                            <a href="#" class="btn-hover text-white">Ver todo el lugar <i class="fa fa-arrow-right ms-2"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="gallery-plus-icon">
+                                        <a href="img/gallery-8.jpg" data-lightbox="gallery-8" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-3 col-xl-3">
+                                <div class="gallery-item h-100">
+                                    <img loading="lazy" src="img/gallery-9.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
+                                    <div class="gallery-content">
+                                        <div class="gallery-info">
+                                            <h5 class="text-white text-uppercase mb-2">World Tour</h5>
+                                            <a href="#" class="btn-hover text-white">Ver todo el lugar <i class="fa fa-arrow-right ms-2"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="gallery-plus-icon">
+                                        <a href="img/gallery-9.jpg" data-lightbox="gallery-9" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-3 col-xl-2">
+                                <div class="gallery-item h-100">
+                                    <img loading="lazy" src="img/gallery-10.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
+                                    <div class="gallery-content">
+                                        <div class="gallery-info">
+                                            <h5 class="text-white text-uppercase mb-2">World Tour</h5>
+                                            <a href="#" class="btn-hover text-white">Ver todo el lugar <i class="fa fa-arrow-right ms-2"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="gallery-plus-icon">
+                                        <a href="img/gallery-10.jpg" data-lightbox="gallery-10" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="GalleryTab-2" class="tab-pane fade show p-0">
+                        <div class="row g-2">
+                            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                <div class="gallery-item h-100">
+                                    <img loading="lazy" src="img/gallery-2.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
+                                    <div class="gallery-content">
+                                        <div class="gallery-info">
+                                            <h5 class="text-white text-uppercase mb-2">World Tour</h5>
+                                            <a href="#" class="btn-hover text-white">Ver todo el lugar <i class="fa fa-arrow-right ms-2"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="gallery-plus-icon">
+                                        <a href="img/gallery-2.jpg" data-lightbox="gallery-2" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
+                                <div class="gallery-item h-100">
+                                    <img loading="lazy" src="img/gallery-3.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
+                                    <div class="gallery-content">
+                                        <div class="gallery-info">
+                                            <h5 class="text-white text-uppercase mb-2">World Tour</h5>
+                                            <a href="#" class="btn-hover text-white">Ver todo el lugar <i class="fa fa-arrow-right ms-2"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="gallery-plus-icon">
+                                        <a href="img/gallery-3.jpg" data-lightbox="gallery-3" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="GalleryTab-3" class="tab-pane fade show p-0">
+                        <div class="row g-2">
+                            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                <div class="gallery-item h-100">
+                                    <img loading="lazy" src="img/gallery-2.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
+                                    <div class="gallery-content">
+                                        <div class="gallery-info">
+                                            <h5 class="text-white text-uppercase mb-2">World Tour</h5>
+                                            <a href="#" class="btn-hover text-white">Ver todo el lugar <i class="fa fa-arrow-right ms-2"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="gallery-plus-icon">
+                                        <a href="img/gallery-2.jpg" data-lightbox="gallery-2" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
+                                <div class="gallery-item h-100">
+                                    <img loading="lazy" src="img/gallery-3.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
+                                    <div class="gallery-content">
+                                        <div class="gallery-info">
+                                            <h5 class="text-white text-uppercase mb-2">World Tour</h5>
+                                            <a href="#" class="btn-hover text-white">Ver todo el lugar <i class="fa fa-arrow-right ms-2"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="gallery-plus-icon">
+                                        <a href="img/gallery-3.jpg" data-lightbox="gallery-3" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="GalleryTab-4" class="tab-pane fade show p-0">
+                        <div class="row g-2">
+                            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                <div class="gallery-item h-100">
+                                    <img loading="lazy" src="img/gallery-2.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
+                                    <div class="gallery-content">
+                                        <div class="gallery-info">
+                                            <h5 class="text-white text-uppercase mb-2">World Tour</h5>
+                                            <a href="#" class="btn-hover text-white">Ver todo el lugar <i class="fa fa-arrow-right ms-2"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="gallery-plus-icon">
+                                        <a href="img/gallery-2.jpg" data-lightbox="gallery-2" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
+                                <div class="gallery-item h-100">
+                                    <img loading="lazy" src="img/gallery-3.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
+                                    <div class="gallery-content">
+                                        <div class="gallery-info">
+                                            <h5 class="text-white text-uppercase mb-2">World Tour</h5>
+                                            <a href="#" class="btn-hover text-white">Ver todo el lugar <i class="fa fa-arrow-right ms-2"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="gallery-plus-icon">
+                                        <a href="img/gallery-3.jpg" data-lightbox="gallery-3" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="GalleryTab-5" class="tab-pane fade show p-0">
+                        <div class="row g-2">
+                            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                <div class="gallery-item h-100">
+                                    <img loading="lazy" src="img/gallery-2.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
+                                    <div class="gallery-content">
+                                        <div class="gallery-info">
+                                            <h5 class="text-white text-uppercase mb-2">World Tour</h5>
+                                            <a href="#" class="btn-hover text-white">Ver todo el lugar <i class="fa fa-arrow-right ms-2"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="gallery-plus-icon">
+                                        <a href="img/gallery-2.jpg" data-lightbox="gallery-2" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
+                                <div class="gallery-item h-100">
+                                    <img loading="lazy" src="img/gallery-3.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
+                                    <div class="gallery-content">
+                                        <div class="gallery-info">
+                                            <h5 class="text-white text-uppercase mb-2">World Tour</h5>
+                                            <a href="#" class="btn-hover text-white">Ver todo el lugar <i class="fa fa-arrow-right ms-2"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="gallery-plus-icon">
+                                        <a href="img/gallery-3.jpg" data-lightbox="gallery-3" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Gallery End -->
+
+            <!-- Requisición de Cotización Inicio -->
+        <div class="container-fluid booking py-5">
+            <div class="container py-5">
+                <div class="row g-5 align-items-center">
+                    <div class="col-lg-6">
+                        <h5 class="section-booking-title pe-3">Cotización</h5>
+                        <h1 class="text-white mb-4">Solicitud de Cotización en Línea</h1>
+                        <p class="text-white mb-4">Completa el formulario para solicitar una cotización personalizada. Nuestro equipo se pondrá en contacto contigo para ofrecerte las mejores opciones de acuerdo a tus necesidades.</p>
+                        <p class="text-white mb-4">Nos especializamos en crear experiencias de viaje a medida. Permítenos ayudarte a planear tu próxima aventura.</p>
+                    </div>
+                    <div class="col-lg-6">
+                        <h1 class="text-white mb-3">Solicita una Cotización</h1>
+                        <form>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control bg-white border-0" id="nombre" placeholder="Tu Nombre" required>
+                                        <label for="nombre">Tu Nombre</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="email" class="form-control bg-white border-0" id="correo" placeholder="Tu Correo Electrónico" required>
+                                        <label for="correo">Tu Correo Electrónico</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="tel" class="form-control bg-white border-0" id="telefono" placeholder="Tu Teléfono" required>
+                                        <label for="telefono">Tu Teléfono</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <select class="form-select bg-white border-0" id="tipoServicio" required>
+                                            <option value="" disabled selected>Selecciona un Servicio</option>
+                                            <option value="1">Viaje Nacional</option>
+                                            <option value="2">Viaje Internacional</option>
+                                            <option value="3">Paquete Personalizado</option>
+                                        </select>
+                                        <label for="tipoServicio">Tipo de Servicio</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="date" class="form-control bg-white border-0" id="fecha" placeholder="Fecha de Viaje" required>
+                                        <label for="fecha">Fecha de Viaje</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="number" class="form-control bg-white border-0" id="personas" placeholder="Número de Personas" required>
+                                        <label for="personas">Número de Personas</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <textarea class="form-control bg-white border-0" placeholder="Especificaciones Adicionales" id="detalles" style="height: 100px"></textarea>
+                                        <label for="detalles">Especificaciones Adicionales</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <button class="btn btn-primary text-white w-100 py-3" type="submit">Enviar Solicitud</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Requisición de Cotización Fin -->
+
+
+        <!-- Travel Guide Start -->
+        <div class="container-fluid guide py-5">
+            <div class="container py-5">
+                <div class="mx-auto text-center mb-5" style="max-width: 900px;">
+                    <h5 class="section-title px-3">Agentes de viajes</h5>
+                    <h1 class="mb-0">Conoce a tus agentes</h1>
+                </div>
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-3">
+                        <div class="guide-item">
+                            <div class="guide-img">
+                                <div class="guide-img-efects">
+                                    <img loading="lazy" src="img/guide-1.jpg" class="img-fluid w-100 rounded-top" alt="Image">
+                                </div>
+                                <div class="guide-icon rounded-pill p-2">
+                                    <a class="btn btn-square btn-primary rounded-circle mx-1" href="#"><i class="fab fa-facebook-f"></i></a>
+                                    <a class="btn btn-square btn-primary rounded-circle mx-1" href="#"><i class="fab fa-twitter"></i></a>
+                                    <a class="btn btn-square btn-primary rounded-circle mx-1" href="#"><i class="fab fa-instagram"></i></a>
+                                    <a class="btn btn-square btn-primary rounded-circle mx-1" href="#"><i class="fab fa-linkedin-in"></i></a>
+                                </div>
+                            </div>
+                            <div class="guide-title text-center rounded-bottom p-4">
+                                <div class="guide-title-inner">
+                                    <h4 class="mt-3">Nombre completo</h4>
+                                    <p class="mb-0">Puesto</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="guide-item">
+                            <div class="guide-img">
+                                <div class="guide-img-efects">
+                                    <img loading="lazy" src="img/guide-2.jpg" class="img-fluid w-100 rounded-top" alt="Image">
+                                </div>
+                                <div class="guide-icon rounded-pill p-2">
+                                    <a class="btn btn-square btn-primary rounded-circle mx-1" href="#"><i class="fab fa-facebook-f"></i></a>
+                                    <a class="btn btn-square btn-primary rounded-circle mx-1" href="#"><i class="fab fa-twitter"></i></a>
+                                    <a class="btn btn-square btn-primary rounded-circle mx-1" href="#"><i class="fab fa-instagram"></i></a>
+                                    <a class="btn btn-square btn-primary rounded-circle mx-1" href="#"><i class="fab fa-linkedin-in"></i></a>
+                                </div>
+                            </div>
+                            <div class="guide-title text-center rounded-bottom p-4">
+                                <div class="guide-title-inner">
+                                    <h4 class="mt-3">Nombre Completo</h4>
+                                    <p class="mb-0">Puesto</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="guide-item">
+                            <div class="guide-img">
+                                <div class="guide-img-efects">
+                                    <img loading="lazy" src="img/guide-3.jpg" class="img-fluid w-100 rounded-top" alt="Image">
+                                </div>
+                                <div class="guide-icon rounded-pill p-2">
+                                    <a class="btn btn-square btn-primary rounded-circle mx-1" href="#"><i class="fab fa-facebook-f"></i></a>
+                                    <a class="btn btn-square btn-primary rounded-circle mx-1" href="#"><i class="fab fa-twitter"></i></a>
+                                    <a class="btn btn-square btn-primary rounded-circle mx-1" href="#"><i class="fab fa-instagram"></i></a>
+                                    <a class="btn btn-square btn-primary rounded-circle mx-1" href="#"><i class="fab fa-linkedin-in"></i></a>
+                                </div>
+                            </div>
+                            <div class="guide-title text-center rounded-bottom p-4">
+                                <div class="guide-title-inner">
+                                    <h4 class="mt-3">Nombre Completo</h4>
+                                    <p class="mb-0">Puesto</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="guide-item">
+                            <div class="guide-img">
+                                <div class="guide-img-efects">
+                                    <img loading="lazy" src="img/guide-4.jpg" class="img-fluid w-100 rounded-top" alt="Image">
+                                </div>
+                                <div class="guide-icon rounded-pill p-2">
+                                    <a class="btn btn-square btn-primary rounded-circle mx-1" href="#"><i class="fab fa-facebook-f"></i></a>
+                                    <a class="btn btn-square btn-primary rounded-circle mx-1" href="#"><i class="fab fa-twitter"></i></a>
+                                    <a class="btn btn-square btn-primary rounded-circle mx-1" href="#"><i class="fab fa-instagram"></i></a>
+                                    <a class="btn btn-square btn-primary rounded-circle mx-1" href="#"><i class="fab fa-linkedin-in"></i></a>
+                                </div>
+                            </div>
+                            <div class="guide-title text-center rounded-bottom p-4">
+                                <div class="guide-title-inner">
+                                    <h4 class="mt-3">Nombre Completo</h4>
+                                    <p class="mb-0">Puesto</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Travel Guide End -->
+
+                <!-- Blog Inicio -->
+        <div class="container-fluid blog py-5">
+            <div class="container py-5">
+                <div class="mx-auto text-center mb-5" style="max-width: 900px;">
+                    <h5 class="section-title px-3">Nuestro Blog</h5>
+                    <h1 class="mb-4">Blogs Populares de Viajes</h1>
+                    <p class="mb-0">Explora nuestros artículos llenos de inspiración, consejos y experiencias de viaje. Descubre destinos fascinantes y aprende cómo hacer que tu próxima aventura sea inolvidable.</p>
+                </div>
+                <div class="row g-4 justify-content-center">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="blog-item">
+                            <div class="blog-img">
+                                <div class="blog-img-inner">
+                                    <img class="img-fluid w-100 rounded-top" loading="lazy" src="img/blog-1.jpg" alt="Imagen">
+                                    <div class="blog-icon">
+                                        <a href="#" class="my-auto"><i class="fas fa-link fa-2x text-white"></i></a>
+                                    </div>
+                                </div>
+                                <div class="blog-info d-flex align-items-center border border-start-0 border-end-0">
+                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-calendar-alt text-primary me-2"></i>28 Ene 2050</small>
+                                    <a href="#" class="btn-hover flex-fill text-center text-white border-end py-2"><i class="fa fa-thumbs-up text-primary me-2"></i>1.7K</a>
+                                    <a href="#" class="btn-hover flex-fill text-center text-white py-2"><i class="fa fa-comments text-primary me-2"></i>1K</a>
+                                </div>
+                            </div>
+                            <div class="blog-content border border-top-0 rounded-bottom p-4">
+                                <p class="mb-3">Publicado por: Royal Hamblin</p>
+                                <a href="#" class="h4">Aventura de Viaje</a>
+                                <p class="my-3">Explora las maravillas de la naturaleza y disfruta de experiencias únicas en este emocionante recorrido.</p>
+                                <a href="#" class="btn btn-primary rounded-pill py-2 px-4">Leer Más</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="blog-item">
+                            <div class="blog-img">
+                                <div class="blog-img-inner">
+                                    <img class="img-fluid w-100 rounded-top" loading="lazy" src="img/blog-2.jpg" alt="Imagen">
+                                    <div class="blog-icon">
+                                        <a href="#" class="my-auto"><i class="fas fa-link fa-2x text-white"></i></a>
+                                    </div>
+                                </div>
+                                <div class="blog-info d-flex align-items-center border border-start-0 border-end-0">
+                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-calendar-alt text-primary me-2"></i>15 Feb 2050</small>
+                                    <a href="#" class="btn-hover flex-fill text-center text-white border-end py-2"><i class="fa fa-thumbs-up text-primary me-2"></i>1.2K</a>
+                                    <a href="#" class="btn-hover flex-fill text-center text-white py-2"><i class="fa fa-comments text-primary me-2"></i>800</a>
+                                </div>
+                            </div>
+                            <div class="blog-content border border-top-0 rounded-bottom p-4">
+                                <p class="mb-3">Publicado por: Clara Moreno</p>
+                                <a href="#" class="h4">Explorando Ciudades Históricas</a>
+                                <p class="my-3">Descubre los secretos y la belleza de las ciudades con más historia del mundo en este recorrido.</p>
+                                <a href="#" class="btn btn-primary rounded-pill py-2 px-4">Leer Más</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="blog-item">
+                            <div class="blog-img">
+                                <div class="blog-img-inner">
+                                    <img class="img-fluid w-100 rounded-top" loading="lazy" src="img/blog-3.jpg" alt="Imagen">
+                                    <div class="blog-icon">
+                                        <a href="#" class="my-auto"><i class="fas fa-link fa-2x text-white"></i></a>
+                                    </div>
+                                </div>
+                                <div class="blog-info d-flex align-items-center border border-start-0 border-end-0">
+                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-calendar-alt text-primary me-2"></i>10 Mar 2050</small>
+                                    <a href="#" class="btn-hover flex-fill text-center text-white border-end py-2"><i class="fa fa-thumbs-up text-primary me-2"></i>2K</a>
+                                    <a href="#" class="btn-hover flex-fill text-center text-white py-2"><i class="fa fa-comments text-primary me-2"></i>1.5K</a>
+                                </div>
+                            </div>
+                            <div class="blog-content border border-top-0 rounded-bottom p-4">
+                                <p class="mb-3">Publicado por: Mario Gutiérrez</p>
+                                <a href="#" class="h4">Viaje Gastronómico</a>
+                                <p class="my-3">Una aventura culinaria en la que descubrirás sabores y tradiciones de todo el mundo.</p>
+                                <a href="#" class="btn btn-primary rounded-pill py-2 px-4">Leer Más</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Blog Fin -->
+
+        <!-- Testimonios Modern Start -->
+        <section class="jovi-testimonial-modern py-5">
+            <div class="container py-5">
+                <div class="mx-auto text-center mb-5 jovi-reveal" style="max-width: 900px;">
+                    <h5 class="section-title px-3">Testimonios</h5>
+                    <h1 class="mb-2">¡Lo Que Dicen Nuestros <span class="jovi-gradient-text">Clientes</span>!</h1>
+                    <p class="text-muted">Cientos de viajeros felices nos respaldan</p>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-4 col-md-6 jovi-reveal">
+                        <div class="jovi-testi-card">
+                            <span class="jovi-testi-quote">“</span>
+                            <div class="jovi-testi-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            <p class="jovi-testi-text">¡Una experiencia increíble! El viaje fue perfectamente organizado y nos sentimos cuidados en todo momento.</p>
+                            <div class="jovi-testi-author">
+                                <img loading="lazy" src="img/testimonial-1.jpg" alt="Ana López" class="jovi-testi-avatar">
+                                <div><p class="jovi-testi-name">Ana López</p><p class="jovi-testi-location">Ciudad de México</p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 jovi-reveal">
+                        <div class="jovi-testi-card">
+                            <span class="jovi-testi-quote">“</span>
+                            <div class="jovi-testi-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            <p class="jovi-testi-text">El servicio fue excepcional y las recomendaciones hicieron que nuestro viaje fuera inolvidable.</p>
+                            <div class="jovi-testi-author">
+                                <img loading="lazy" src="img/testimonial-2.jpg" alt="Carlos Martínez" class="jovi-testi-avatar">
+                                <div><p class="jovi-testi-name">Carlos Martínez</p><p class="jovi-testi-location">Buenos Aires, Argentina</p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 jovi-reveal">
+                        <div class="jovi-testi-card">
+                            <span class="jovi-testi-quote">“</span>
+                            <div class="jovi-testi-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            <p class="jovi-testi-text">¡La atención al detalle y la hospitalidad fueron inmejorables! No puedo esperar para mi próximo viaje.</p>
+                            <div class="jovi-testi-author">
+                                <img loading="lazy" src="img/testimonial-3.jpg" alt="Laura Gómez" class="jovi-testi-avatar">
+                                <div><p class="jovi-testi-name">Laura Gómez</p><p class="jovi-testi-location">Lima, Perú</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Testimonios Modern End -->
+
+            <!-- Testimonios Modern Start -->
+        <section class="jovi-testimonial-modern py-5">
+            <div class="container py-5">
+                <div class="mx-auto text-center mb-5 jovi-reveal" style="max-width: 900px;">
+                    <h5 class="section-title px-3">Testimonios</h5>
+                    <h1 class="mb-2">¡Lo Que Dicen Nuestros <span class="jovi-gradient-text">Clientes</span>!</h1>
+                    <p class="text-muted">Cientos de viajeros felices nos respaldan</p>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-4 col-md-6 jovi-reveal">
+                        <div class="jovi-testi-card">
+                            <span class="jovi-testi-quote">“</span>
+                            <div class="jovi-testi-stars">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                            <p class="jovi-testi-text">¡Una experiencia increíble! El viaje fue perfectamente organizado y nos sentimos cuidados en todo momento. Definitivamente recomendados.</p>
+                            <div class="jovi-testi-author">
+                                <img loading="lazy" src="img/testimonial-1.jpg" alt="Ana López" class="jovi-testi-avatar">
+                                <div>
+                                    <p class="jovi-testi-name">Ana López</p>
+                                    <p class="jovi-testi-location">Ciudad de México, México</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 jovi-reveal">
+                        <div class="jovi-testi-card">
+                            <span class="jovi-testi-quote">“</span>
+                            <div class="jovi-testi-stars">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                            <p class="jovi-testi-text">El servicio fue excepcional y las recomendaciones hicieron que nuestro viaje fuera inolvidable. Muchas gracias al equipo.</p>
+                            <div class="jovi-testi-author">
+                                <img loading="lazy" src="img/testimonial-2.jpg" alt="Carlos Martínez" class="jovi-testi-avatar">
+                                <div>
+                                    <p class="jovi-testi-name">Carlos Martínez</p>
+                                    <p class="jovi-testi-location">Buenos Aires, Argentina</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 jovi-reveal">
+                        <div class="jovi-testi-card">
+                            <span class="jovi-testi-quote">“</span>
+                            <div class="jovi-testi-stars">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                            <p class="jovi-testi-text">No puedo esperar para planear mi próximo viaje con ellos. ¡La atención al detalle y la hospitalidad fueron inmejorables!</p>
+                            <div class="jovi-testi-author">
+                                <img loading="lazy" src="img/testimonial-3.jpg" alt="Laura Gómez" class="jovi-testi-avatar">
+                                <div>
+                                    <p class="jovi-testi-name">Laura Gómez</p>
+                                    <p class="jovi-testi-location">Lima, Perú</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Testimonios Modern End -->
+
+
+        <footer class="jovi-footer-modern py-5">
+            <div class="container py-4">
+                <div class="row g-5">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="jovi-footer-brand"><img src="img/logo.png" alt="Viajes Jovi"><span>VIAJES JOVI</span></div>
+                        <p class="jovi-footer-desc">Con m&aacute;s de 30 a&ntilde;os creando experiencias de viaje inolvidables. Tu pr&oacute;xima aventura comienza aqu&iacute;.</p>
+                        <div class="jovi-footer-social">
+                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6">
+                        <h6 class="jovi-footer-title">Empresa</h6>
+                        <ul class="jovi-footer-links">
+                            <li><a href="about.html"><i class="fas fa-chevron-right"></i> Nosotros</a></li>
+                            <li><a href="services.html"><i class="fas fa-chevron-right"></i> Servicios</a></li>
+                            <li><a href="packages.html"><i class="fas fa-chevron-right"></i> Promociones</a></li>
+                            <li><a href="blog.html"><i class="fas fa-chevron-right"></i> Blog</a></li>
+                            <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contacto</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-2 col-md-6">
+                        <h6 class="jovi-footer-title">Soporte</h6>
+                        <ul class="jovi-footer-links">
+                            <li><a href="#"><i class="fas fa-chevron-right"></i> Privacidad</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right"></i> T&eacute;rminos</a></li>
+                            <li><a href="gallery.html"><i class="fas fa-chevron-right"></i> Galer&iacute;a</a></li>
+                            <li><a href="booking.html"><i class="fas fa-chevron-right"></i> Cotiza</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <h6 class="jovi-footer-title">Newsletter</h6>
+                        <div class="jovi-footer-newsletter">
+                            <p>Recibe ofertas exclusivas directo en tu correo.</p>
+                            <div class="jovi-footer-nl-form">
+                                <input type="email" placeholder="Tu correo" id="footer-email">
+                                <button type="button" id="footer-subscribe-btn">Enviar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="jovi-footer-bottom">
+                    <p><i class="fas fa-copyright"></i> 2025 <a href="#">Viajes Jovi</a>. Todos los derechos reservados.</p>
+                    <div class="jovi-footer-payments">
+                        <i class="fab fa-cc-visa"></i>
+                        <i class="fab fa-cc-mastercard"></i>
+                        <i class="fab fa-cc-amex"></i>
+                        <i class="fab fa-cc-paypal"></i>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Copyright End -->
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-primary btn-primary-outline-0 btn-md-square back-to-top"><i class="fa fa-arrow-up"></i></a>   
+
+        
+        <!-- JavaScript Libraries -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="lib/easing/easing.min.js"></script>
+        <script src="lib/waypoints/waypoints.min.js"></script>
+        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="lib/lightbox/js/lightbox.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+        
+        <!-- Template Javascript -->
+        <script src="js/paquetes.js"></script>
+        <script src="js/render-index.js"></script>
+        <script src="js/nav.js"></script>
+        <script src="js/main.js"></script>
+
+        <script>
+        // Buscador hero → WhatsApp
+        (function () {
+            var btn = document.querySelector('.jovi-search-btn');
+            if (!btn) return;
+            btn.addEventListener('click', function () {
+                var dest = document.getElementById('jovi-destination').value.trim();
+                var ci   = document.getElementById('jovi-checkin').value.trim();
+                var co   = document.getElementById('jovi-checkout').value.trim();
+                var ad   = document.getElementById('jovi-adults').value;
+                var ch   = document.getElementById('jovi-children').value;
+                var msg  = 'Hola! Me interesa reservar';
+                if (dest) msg += ' en ' + dest;
+                if (ci && co) msg += ' del ' + ci + ' al ' + co;
+                msg += '. Adultos: ' + ad + ', Niños: ' + ch;
+                window.open('https://wa.me/5214777920736?text=' + encodeURIComponent(msg), '_blank');
+            });
+        })();
+
+        // Formulario cotización → WhatsApp
+        (function () {
+            var form = document.querySelector('.booking form');
+            if (!form) return;
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                var nombre = document.getElementById('nombre').value.trim();
+                var correo = document.getElementById('correo').value.trim();
+                var tel    = document.getElementById('telefono').value.trim();
+                var tipo   = document.getElementById('tipoServicio');
+                var tipoTxt = tipo.options[tipo.selectedIndex] ? tipo.options[tipo.selectedIndex].text : '';
+                var fecha  = document.getElementById('fecha').value;
+                var personas = document.getElementById('personas').value;
+                var detalles = document.getElementById('detalles').value.trim();
+                if (!nombre || !correo || !tel) {
+                    alert('Por favor completa al menos tu nombre, correo y teléfono.');
+                    return;
+                }
+                var msg = 'Solicitud de cotización:\n'
+                    + 'Nombre: ' + nombre + '\n'
+                    + 'Correo: ' + correo + '\n'
+                    + 'Tel: ' + tel + '\n'
+                    + 'Servicio: ' + tipoTxt + '\n'
+                    + 'Fecha: ' + fecha + '\n'
+                    + 'Personas: ' + personas + '\n'
+                    + (detalles ? 'Detalles: ' + detalles : '');
+                window.open('https://wa.me/5214777920736?text=' + encodeURIComponent(msg), '_blank');
+            });
+        })();
+
+        // Suscripción → feedback
+        (function () {
+            var subBtn = document.querySelector('.subscribe .btn-primary');
+            if (!subBtn) return;
+            subBtn.addEventListener('click', function () {
+                var input = document.querySelector('.subscribe input[type="email"]');
+                if (!input || !input.value.trim() || !input.value.includes('@')) {
+                    alert('Por favor ingresa un correo electrónico válido.');
+                    return;
+                }
+                alert('¡Gracias por suscribirte! Pronto recibirás nuestras novedades.');
+                input.value = '';
+            });
+        })();
+        </script>
+    </body>
+
+</html>

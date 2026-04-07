@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="img/logo.png">
+    <title>Panel Admin — Viajes Jovi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,600;1,500;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <style>
+        /* Flatpickr theme override */
+        .flatpickr-calendar { font-family: 'Inter', sans-serif; border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.18); border: 1.5px solid #e2e5ea; }
+        .flatpickr-day.selected, .flatpickr-day.selected:hover { background: #FF6B00; border-color: #FF6B00; }
+        .flatpickr-day.inRange { background: rgba(255,107,0,0.12); border-color: transparent; box-shadow: none; }
+        .flatpickr-day:hover { background: rgba(255,107,0,0.1); }
+        .flatpickr-months .flatpickr-month { background: #1a1a2e; border-radius: 10px 10px 0 0; }
+        .flatpickr-current-month, .flatpickr-monthDropdown-months, .flatpickr-current-month .cur-year { color: #fff; }
+        .flatpickr-weekday { color: #FF6B00; font-weight: 700; }
+        .flatpickr-prev-month, .flatpickr-next-month { color: #fff !important; fill: #fff !important; }
+        .flatpickr-prev-month:hover svg, .flatpickr-next-month:hover svg { fill: #FF6B00 !important; }
+        .numInputWrapper span.arrowUp::after { border-bottom-color: #fff; }
+        .numInputWrapper span.arrowDown::after { border-top-color: #fff; }
+    </style>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --orange:   #FF6B00;
+            --orange2:  #e25f00;
+            --dark:     #1a1a2e;
+            --dark2:    #12122a;
+            --surface:  #ffffff;
+            --surface2: #f4f5f7;
+            --border:   #e2e5ea;
+            --text:     #1a1a2e;
+            --muted:    #6b7280;
+            --green:    #25D366;
+            --red:      #ef4444;
+            --required: #dc2626;
+            --radius:   10px;
+        }
+
+        body { font-family: 'Inter', sans-serif; font-size: 14px; background: var(--surface2); color: var(--text); min-height: 100vh; }
+
+        /* ── LOGIN ─────────────────────────────────────────────── */
+        #login-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--dark2) 0%, #2d1654 100%);
+        }
+        .login-card {
+            background: var(--surface);
+            border-radius: 18px;
+            padding: 2.5rem 2rem;
+            width: 340px;
+            text-align: center;
+            box-shadow: 0 24px 60px rgba(0,0,0,0.35);
+        }
+        .login-card img { height: 64px; margin-bottom: 1rem; }
+        .login-card h1 { font-family: 'Barlow Condensed', sans-serif; font-size: 1.6rem; font-weight: 700; color: var(--dark); margin-bottom: 0.25rem; }
+        .login-card p  { color: var(--muted); font-size: 0.85rem; margin-bottom: 1.5rem; }
+        .login-card input {
+            width: 100%; padding: 0.7rem 1rem;
+            border: 1.5px solid var(--border); border-radius: var(--radius);
+            font-size: 1rem; margin-bottom: 0.75rem; outline: none;
+            transition: border-color 0.2s;
+        }
+        .login-card input:focus { border-color: var(--orange); }
+        .btn-login {
+            width: 100%; padding: 0.75rem; background: var(--orange); color: #fff;
+            border: none; border-radius: var(--radius); font-size: 1rem; font-weight: 600;
+            cursor: pointer; transition: background 0.2s;
+        }
+        .btn-login:hover { background: var(--orange2); }
+        .login-error { color: var(--red); font-size: 0.82rem; margin-top: 0.5rem; display: none; }
+
+        /* ── ADMIN SHELL ───────────────────────────────────────── */
+        #admin-panel { display: none; min-height: 100vh; }
+
+        .admin-header {
+            position: sticky; top: 0; z-index: 100;
+            background: var(--dark);
+            padding: 0 1.5rem;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+        }
+        .admin-brand {
+            display: flex; align-items: center; gap: 0.6rem;
+            color: #fff; font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.2rem; font-weight: 700; letter-spacing: 0.04em;
+        }
+        .admin-brand img { height: 34px; }
+        .admin-tag {
+            background: var(--orange); color: #fff; font-size: 0.62rem;
+            font-weight: 700; padding: 0.18rem 0.5rem; border-radius: 20px;
+            letter-spacing: 0.06em;
+        }
+        .admin-actions { display: flex; align-items: center; gap: 0.5rem; }
+        .admin-actions a { color: rgba(255,255,255,0.65); font-size: 0.8rem; text-decoration: none; margin-right: 0.4rem; }
+        .admin-actions a:hover { color: #fff; }
+
+        .btn-hdr {
+            padding: 0.38rem 0.85rem; border-radius: 8px; border: none; cursor: pointer;
+            font-size: 0.8rem; font-weight: 600; font-family: 'Inter', sans-serif;
+            display: inline-flex; align-items: center; gap: 0.35rem;
+            transition: background 0.18s, transform 0.15s;
+        }
+        .btn-hdr:hover { transform: translateY(-1px); }
+        .btn-hdr.ghost  { background: rgba(255,255,255,0.1); color: #fff; }
+        .btn-hdr.ghost:hover { background: rgba(255,255,255,0.2); }
+        .btn-hdr.primary{ background: var(--orange); color: #fff; }
+        .btn-hdr.primary:hover { background: var(--orange2); }
+        .btn-hdr.danger { background: rgba(239,68,68,0.15); color: #fca5a5; }
+        .btn-hdr.danger:hover { background: rgba(239,68,68,0.28); }
+        .btn-hdr.exit   { background: transparent; color: rgba(255,255,255,0.5); }
+        .btn-hdr.exit:hover { color: #fff; }
+
+        /* ── SAVE BAR ──────────────────────────────────────────── */
+        .save-bar {
+            display: none; align-items: center; justify-content: space-between;
+            background: linear-gradient(90deg, #0f766e, #0d9488);
+            color: #fff; padding: 0.55rem 1.5rem; font-size: 0.84rem; font-weight: 500;
+        }
+        .save-bar.visible { display: flex; }
+        .save-bar button {
+            background: #fff; color: #0f766e; border: none; border-radius: 6px;
+            padding: 0.3rem 0.85rem; font-weight: 700; cursor: pointer; font-size: 0.82rem;
+        }
+
+        /* ── TABS ──────────────────────────────────────────────── */
+        .admin-tabs-bar {
+            background: var(--surface);
+            border-bottom: 2px solid var(--border);
+            display: flex; padding: 0 1.5rem;
+        }
+        .tab-btn {
+            padding: 0.85rem 1.4rem; border: none; background: none; cursor: pointer;
+            font-size: 0.9rem; font-weight: 600; color: var(--muted);
+            border-bottom: 3px solid transparent; margin-bottom: -2px;
+            transition: color 0.2s, border-color 0.2s;
+            display: flex; align-items: center; gap: 0.4rem;
+        }
+        .tab-btn.active { color: var(--orange); border-bottom-color: var(--orange); }
+
+        /* ── CONTENT ───────────────────────────────────────────── */
+        .admin-content { padding: 1.5rem; max-width: 1100px; margin: 0 auto; }
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; }
+
+        /* ── PACKAGE ACCORDION CARD ────────────────────────────── */
+        .pkg-card {
+            background: var(--surface);
+            border: 1.5px solid var(--border);
+            border-radius: 14px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: box-shadow 0.2s;
+        }
+        .pkg-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+
+        .pkg-card-header {
+            display: flex; align-items: center; gap: 0.9rem;
+            padding: 0.9rem 1.2rem; cursor: pointer; user-select: none;
+        }
+        .pkg-thumb {
+            width: 60px; height: 44px; border-radius: 8px;
+            object-fit: cover; flex-shrink: 0; border: 1px solid var(--border);
+            background: var(--surface2);
+        }
+        .pkg-meta { flex: 1; min-width: 0; }
+        .pkg-meta h3 {
+            font-size: 0.95rem; font-weight: 600; margin-bottom: 0.1rem;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+        .pkg-meta small { font-size: 0.75rem; color: var(--muted); }
+        .pkg-id-badge {
+            background: var(--orange); color: #fff; font-size: 0.68rem;
+            font-weight: 700; padding: 0.18rem 0.55rem; border-radius: 20px;
+            flex-shrink: 0;
+        }
+        .pkg-toggle { color: var(--muted); transition: transform 0.25s; flex-shrink: 0; }
+        .pkg-card.is-open .pkg-toggle { transform: rotate(180deg); }
+
+        .pkg-body {
+            display: none; padding: 0 1.2rem 1.4rem;
+            border-top: 1px solid var(--border);
+        }
+        .pkg-card.is-open .pkg-body { display: block; }
+
+        /* ── FORM ──────────────────────────────────────────────── */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 0.85rem;
+            margin-top: 1rem;
+        }
+        .form-group { display: flex; flex-direction: column; gap: 0.3rem; }
+        .form-group.full { grid-column: 1 / -1; }
+
+        .form-group label {
+            font-size: 0.73rem; font-weight: 700;
+            color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em;
+            display: flex; align-items: center; gap: 0.25rem;
+        }
+        .req-star { color: var(--required); font-size: 0.85rem; line-height: 1; }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            border: 1.5px solid var(--border); border-radius: 8px;
+            padding: 0.52rem 0.8rem; font-size: 0.88rem;
+            font-family: 'Inter', sans-serif; outline: none;
+            background: var(--surface); color: var(--text);
+            transition: border-color 0.2s; width: 100%;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus { border-color: var(--orange); }
+        .form-group input.is-invalid,
+        .form-group textarea.is-invalid { border-color: var(--red); background: #fff5f5; }
+        .form-group textarea { resize: vertical; min-height: 64px; }
+
+        /* Imagen con preview */
+        .img-row { display: flex; align-items: center; gap: 0.7rem; }
+        .img-preview {
+            width: 72px; height: 50px; border-radius: 8px;
+            object-fit: cover; border: 1px solid var(--border);
+            background: var(--surface2); flex-shrink: 0;
+        }
+        .img-row input { flex: 1; }
+
+        /* ── SECTION LABELS ────────────────────────────────────── */
+        .section-label {
+            font-size: 0.75rem; font-weight: 700; color: var(--dark);
+            text-transform: uppercase; letter-spacing: 0.06em;
+            margin: 1.3rem 0 0.6rem;
+            display: flex; align-items: center; gap: 0.5rem;
+        }
+        .section-label i { color: var(--orange); font-size: 0.85rem; }
+        .section-label::after { content:''; flex:1; height:1px; background: var(--border); }
+        .section-label .req-label {
+            font-size: 0.68rem; background: rgba(220,38,38,0.1);
+            color: var(--required); padding: 0.1rem 0.45rem;
+            border-radius: 20px; font-weight: 700; text-transform: uppercase;
+        }
+
+        .section-hint {
+            font-size: 0.78rem; color: var(--muted); margin-bottom: 0.5rem;
+            background: var(--surface2); border-left: 3px solid var(--orange);
+            padding: 0.45rem 0.75rem; border-radius: 0 6px 6px 0;
+        }
+
+        /* ── TIPO PRECIO SELECT ────────────────────────────────── */
+        .tipo-precio-group { margin-bottom: 0.75rem; }
+        .tipo-precio-group label {
+            font-size: 0.73rem; font-weight: 700;
+            color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em;
+            display: flex; align-items: center; gap: 0.25rem; margin-bottom: 0.3rem;
+        }
+        .tipo-precio-group select {
+            border: 1.5px solid var(--border); border-radius: 8px;
+            padding: 0.52rem 0.8rem; font-size: 0.88rem;
+            font-family: 'Inter', sans-serif; outline: none;
+            background: var(--surface); color: var(--text);
+            transition: border-color 0.2s; width: 100%;
+            max-width: 480px;
+        }
+        .tipo-precio-group select:focus { border-color: var(--orange); }
+
+        /* ── DYNAMIC LIST (segmentos, inclusiones, leyendas) ───── */
+        .list-editor { display: flex; flex-direction: column; gap: 0.45rem; }
+
+        .list-item {
+            display: flex; gap: 0.45rem; align-items: flex-start;
+            background: var(--surface2); border-radius: 8px; padding: 0.6rem 0.7rem;
+        }
+        .list-item-fields { flex:1; display: flex; flex-direction: column; gap: 0.35rem; }
+        .list-item-fields input,
+        .list-item-fields textarea {
+            border: 1px solid var(--border); border-radius: 6px;
+            padding: 0.4rem 0.65rem; font-size: 0.84rem;
+            font-family: 'Inter', sans-serif; outline: none;
+            background: var(--surface); color: var(--text); width: 100%;
+        }
+        .list-item-fields input:focus,
+        .list-item-fields textarea:focus { border-color: var(--orange); }
+        .list-item-fields textarea { min-height: 50px; resize: vertical; }
+
+        /* Segmento de precio: two columns */
+        .seg-row { display: flex; gap: 0.4rem; }
+        .seg-row input:first-child { flex: 1.4; }
+        .seg-row input:last-child  { flex: 1; }
+
+        .btn-remove {
+            padding: 0.3rem 0.5rem; background: rgba(239,68,68,0.1);
+            color: var(--red); border: none; border-radius: 6px;
+            cursor: pointer; font-size: 0.78rem; flex-shrink: 0;
+            transition: background 0.15s;
+        }
+        .btn-remove:hover { background: rgba(239,68,68,0.22); }
+
+        .btn-add {
+            width: 100%; padding: 0.42rem 0.9rem;
+            background: rgba(255,107,0,0.07);
+            color: var(--orange); border: 1.5px dashed var(--orange);
+            border-radius: 8px; cursor: pointer; font-size: 0.8rem;
+            font-weight: 600; font-family: 'Inter', sans-serif;
+            display: flex; align-items: center; justify-content: center; gap: 0.35rem;
+            transition: background 0.15s; margin-top: 0.35rem;
+        }
+        .btn-add:hover { background: rgba(255,107,0,0.14); }
+
+        /* Date picker wrapper */
+        .date-wrap { position: relative; }
+        .date-wrap .fpick { padding-right: 2.2rem; cursor: pointer; caret-color: transparent; }
+        .date-wrap::after {
+            content: '\f073';
+            font-family: 'Font Awesome 5 Free'; font-weight: 900;
+            position: absolute; right: 0.7rem; top: 50%; transform: translateY(-50%);
+            color: var(--orange); pointer-events: none; font-size: 0.82rem;
+        }
+
+        /* iOS Toggle switch */
+        .toggle-switch {
+            position: relative; display: inline-block;
+            width: 44px; height: 24px; flex-shrink: 0;
+        }
+        .toggle-switch input { opacity: 0; width: 0; height: 0; }
+        .toggle-slider {
+            position: absolute; cursor: pointer; inset: 0;
+            background: #d1d5db; border-radius: 24px; transition: 0.22s;
+        }
+        .toggle-slider::before {
+            content: ''; position: absolute;
+            width: 18px; height: 18px; left: 3px; bottom: 3px;
+            background: #fff; border-radius: 50%; transition: 0.22s;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.22);
+        }
+        .toggle-switch input:checked + .toggle-slider { background: var(--orange); }
+        .toggle-switch input:checked + .toggle-slider::before { transform: translateX(20px); }
+
+        /* Toggle row */
+        .toggle-row {
+            display: flex; align-items: center; gap: 0.85rem;
+            background: var(--surface2); border: 1px solid var(--border);
+            border-radius: 10px; padding: 0.65rem 1rem; margin-bottom: 0.6rem;
+            cursor: pointer; user-select: none; transition: background 0.15s;
+        }
+        .toggle-row:hover { background: #ecedf0; }
+        .toggle-row-text { font-size: 0.84rem; font-weight: 500; flex: 1; }
+        .vuelo-hidden { display: none; }
+
+        /* Card status dot */
+        .pkg-status {
+            width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0;
+            background: #22c55e; transition: background 0.2s;
+        }
+        .pkg-status.warn { background: #f59e0b; }
+        .pkg-status.err  { background: var(--red); }
+
+        /* Empty list state */
+        .list-empty {
+            text-align: center; padding: 0.9rem 1rem; color: var(--muted);
+            font-size: 0.8rem; border: 1.5px dashed var(--border);
+            border-radius: 8px; margin-bottom: 0.1rem;
+        }
+        .list-empty i { display: block; font-size: 1.3rem; margin-bottom: 0.3rem; color: #d1d5db; }
+
+        /* Date range preview chip */
+        .date-range-chip {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            font-size: 0.77rem; color: var(--muted); background: var(--surface2);
+            border: 1px solid var(--border); border-radius: 20px;
+            padding: 0.2rem 0.65rem; margin-top: 0.3rem;
+        }
+        .date-range-chip i { color: var(--orange); font-size: 0.75rem; }
+
+        /* WhatsApp config bar */
+        .config-bar {
+            background: #f0fdf4; border-bottom: 1.5px solid #bbf7d0;
+            padding: 0.6rem 1.5rem;
+            display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;
+        }
+        .config-bar label {
+            font-size: 0.78rem; font-weight: 700; color: #166534;
+            text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap;
+        }
+        .config-bar input[type="tel"] {
+            border: 1.5px solid #86efac; border-radius: 8px;
+            padding: 0.38rem 0.75rem; font-size: 0.88rem;
+            font-family: 'Inter', sans-serif; outline: none;
+            background: #fff; color: var(--text); width: 200px;
+            transition: border-color 0.2s;
+        }
+        .config-bar input[type="tel"]:focus { border-color: #16a34a; }
+        .config-hint { font-size: 0.75rem; color: #15803d; }
+        .wa-preview-chip {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            font-size: 0.75rem; color: #166534;
+            background: #dcfce7; border: 1px solid #86efac;
+            border-radius: 20px; padding: 0.22rem 0.7rem;
+            margin-top: 0.35rem; text-decoration: none;
+            transition: background 0.15s;
+        }
+        .wa-preview-chip:hover { background: #bbf7d0; }
+        .wa-preview-chip i { color: #16a34a; }
+
+        /* Image upload button */
+        .img-upload-btn {
+            padding: 0.38rem 0.75rem; background: var(--surface2);
+            border: 1.5px solid var(--border); border-radius: 7px;
+            font-size: 0.78rem; font-weight: 600; cursor: pointer;
+            color: var(--muted); transition: all 0.15s; white-space: nowrap;
+            display: inline-flex; align-items: center; gap: 0.35rem;
+        }
+        .img-upload-btn:hover { border-color: var(--orange); color: var(--orange); }
+
+        /* Leyenda section highlight */
+        .leyenda-section .list-item {
+            background: #fff9f5;
+            border: 1px solid rgba(255,107,0,0.2);
+        }
+        .leyenda-section .list-item-fields input {
+            background: #fff;
+        }
+
+        /* ── TOAST ─────────────────────────────────────────────── */
+        .jovi-toast {
+            position: fixed; bottom: 1.75rem; right: 1.75rem; z-index: 9999;
+            background: var(--dark); color: #fff;
+            padding: 0.7rem 1.2rem; border-radius: 10px;
+            font-size: 0.86rem; font-weight: 500;
+            box-shadow: 0 8px 28px rgba(0,0,0,0.28);
+            display: flex; align-items: center; gap: 0.5rem;
+            transform: translateY(20px); opacity: 0;
+            transition: transform 0.28s ease, opacity 0.28s ease;
+            max-width: 340px;
+        }
+        .jovi-toast.show { transform: translateY(0); opacity: 1; }
+        .jovi-toast.ok  { border-left: 4px solid #22c55e; }
+        .jovi-toast.err { border-left: 4px solid var(--red); max-width: 520px; }
+
+        /* Validation error highlight pulse */
+        .form-group input.is-invalid,
+        .form-group textarea.is-invalid {
+            border-color: var(--red); background: #fff5f5;
+            animation: shake 0.4s ease;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-4px); }
+            75% { transform: translateX(4px); }
+        }
+
+        @media (max-width: 620px) {
+            .admin-header { padding: 0 0.9rem; gap: 0.5rem; }
+            .btn-hdr span { display: none; }
+            .form-grid { grid-template-columns: 1fr; }
+            .seg-row { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ── LOGIN ────────────────────────────────────────────────────────────────── -->
+<div id="login-screen">
+    <div class="login-card">
+        <img src="img/logo.png" alt="Viajes Jovi">
+        <h1>Panel de Administración</h1>
+        <p>Ingresa tu contraseña para continuar</p>
+        <input type="password" id="admin-pass" placeholder="Contraseña" autocomplete="current-password">
+        <button class="btn-login" id="login-btn">
+            <i class="fas fa-sign-in-alt"></i> Entrar
+        </button>
+        <p class="login-error" id="login-error">Contraseña incorrecta. Intenta de nuevo.</p>
+    </div>
+</div>
+
+<!-- ── ADMIN PANEL ───────────────────────────────────────────────────────────── -->
+<div id="admin-panel">
+
+    <header class="admin-header">
+        <div class="admin-brand">
+            <img src="img/logo.png" alt="Viajes Jovi">
+            VIAJES JOVI
+            <span class="admin-tag">ADMIN</span>
+        </div>
+        <div class="admin-actions">
+            <a href="index.html" target="_blank">
+                <i class="fas fa-external-link-alt"></i> Ver sitio
+            </a>
+            <button class="btn-hdr primary" id="btn-save-all">
+                <i class="fas fa-save"></i> <span>Guardar</span>
+            </button>
+            <button class="btn-hdr ghost" id="btn-export">
+                <i class="fas fa-download"></i> <span>Exportar</span>
+            </button>
+            <button class="btn-hdr ghost" id="btn-import">
+                <i class="fas fa-upload"></i> <span>Importar</span>
+            </button>
+            <button class="btn-hdr danger" id="btn-reset">
+                <i class="fas fa-undo"></i> <span>Restaurar</span>
+            </button>
+            <button class="btn-hdr exit" id="btn-logout" title="Cerrar sesión">
+                <i class="fas fa-sign-out-alt"></i>
+            </button>
+        </div>
+    </header>
+
+    <div class="save-bar" id="save-bar">
+        <span>
+            <i class="fas fa-circle" style="color:#fbbf24;font-size:0.55rem;margin-right:0.4rem;"></i>
+            Tienes cambios sin guardar
+        </span>
+        <button id="btn-save-bar">Guardar ahora</button>
+    </div>
+
+    <div class="admin-tabs-bar">
+        <button class="tab-btn active" data-tab="carousel">
+            <i class="fas fa-images"></i> Carrusel principal (5)
+        </button>
+        <button class="tab-btn" data-tab="escapadas">
+            <i class="fas fa-sun"></i> Escápate con Jovi (5)
+        </button>
+        <button class="tab-btn" data-tab="explore">
+            <i class="fas fa-globe-americas"></i> Explore Tour
+        </button>
+        <button class="tab-btn" data-tab="paquetes-asombrosos">
+            <i class="fas fa-suitcase"></i> Paquetes Asombrosos (4)
+        </button>
+    </div>
+
+    <div class="config-bar">
+        <i class="fab fa-whatsapp" style="color:#16a34a;font-size:1.15rem"></i>
+        <label for="wa-phone">Número de WhatsApp:</label>
+        <input type="tel" id="wa-phone" placeholder="ej: 5214777920736" maxlength="20">
+        <span class="config-hint"><i class="fas fa-info-circle"></i> Solo dígitos, sin +. El link de cada paquete se genera automáticamente con el nombre del paquete.</span>
+    </div>
+
+    <div class="admin-content">
+        <div class="tab-panel active" id="tab-carousel"></div>
+        <div class="tab-panel"        id="tab-escapadas"></div>
+        <div class="tab-panel"        id="tab-explore"></div>
+        <div class="tab-panel"        id="tab-paquetes-asombrosos"></div>
+    </div>
+</div>
+
+<!-- Import file input (hidden) -->
+<input type="file" id="import-file" accept=".json" style="display:none">
+
+<!-- Toast -->
+<div class="jovi-toast" id="toast"></div>
+
+<script src="js/paquetes.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
+<script>flatpickr.localize(flatpickr.l10ns.es);</script>
+<script>
+(function () {
+    'use strict';
+
+    // ── CONFIG ────────────────────────────────────────────────────────────────
+    var PASS_KEY    = 'jovi-admin-auth';
+    var DATA_KEY    = 'jovi-paquetes-admin';
+    var EXPLORE_KEY = 'jovi-explore-admin';
+    var PA_KEY      = 'jovi-paquetes-asombrosos-admin';
+    var CONFIG_KEY  = 'jovi-admin-config';
+    // Hash SHA-256 de la contraseña (jovi2026)
+    var PASS_HASH = '1d15f6b40d8340c10241704d6020e4f962de2aabea71c136ae7465dd2de87910';
+    var unsaved = false;
+
+    async function sha256(str) {
+        var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+        return Array.from(new Uint8Array(buf)).map(function(b){return b.toString(16).padStart(2,'0');}).join('');
+    }
+
+    // ── WHATSAPP HELPERS ──────────────────────────────────────────────────────
+    function getWaPhone() {
+        try {
+            var cfg = JSON.parse(localStorage.getItem(CONFIG_KEY) || '{}');
+            return (cfg.waPhone || '5214777920736').replace(/\D/g, '');
+        } catch (e) { return '5214777920736'; }
+    }
+
+    function buildWaUrl(nombre, phone) {
+        var num = (phone || getWaPhone()).replace(/\D/g, '');
+        var msg = encodeURIComponent('Hola! Me interesa conocer más del paquete ' + (nombre || ''));
+        return 'https://wa.me/' + num + '?text=' + msg;
+    }
+
+    // ── TIPO PRECIO OPTIONS ───────────────────────────────────────────────────
+    var TIPO_OPCIONES = [
+        { value: 'por-persona', label: 'Precio total por número de noches y por persona' },
+        { value: 'por-grupo',   label: 'Precio total por número de noches y por total de personas' }
+    ];
+
+    // ── LOGIN ─────────────────────────────────────────────────────────────────
+    document.getElementById('login-btn').addEventListener('click', doLogin);
+    document.getElementById('admin-pass').addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') doLogin();
+    });
+
+    async function doLogin() {
+        var val = document.getElementById('admin-pass').value;
+        var hash = await sha256(val);
+        if (hash === PASS_HASH) {
+            localStorage.setItem(PASS_KEY, '1');
+            document.getElementById('login-error').style.display = 'none';
+            showPanel();
+        } else {
+            document.getElementById('login-error').style.display = 'block';
+        }
+    }
+
+    document.getElementById('btn-logout').addEventListener('click', function () {
+        localStorage.removeItem(PASS_KEY);
+        location.reload();
+    });
+
+    // ── INIT PANEL ────────────────────────────────────────────────────────────
+    var panelReady = false;
+    function showPanel() {
+        if (panelReady) return;
+        panelReady = true;
+        document.getElementById('login-screen').style.display = 'none';
+        document.getElementById('admin-panel').style.display = 'block';
+
+        // Load saved phone number
+        var waInput = document.getElementById('wa-phone');
+        if (waInput) {
+            waInput.value = getWaPhone();
+            waInput.addEventListener('input', function () {
+                var phone = waInput.value.replace(/\D/g, '');
+                // Save to config
+                localStorage.setItem(CONFIG_KEY, JSON.stringify({ waPhone: phone }));
+                // Update all wa-chip links live
+                document.querySelectorAll('[id^="wa-chip-"]').forEach(function (chip) {
+                    var gi = chip.id.replace('wa-chip-', '');
+                    var nombreEl = document.querySelector('[data-field="nombre"][data-gi="' + gi + '"]');
+                    var nombre = nombreEl ? nombreEl.value : '';
+                    chip.href = buildWaUrl(nombre, phone);
+                });
+                markUnsaved();
+            });
+        }
+
+        try {
+            buildTab('tab-carousel', window.PAQUETES.slice(0, 5), 0);
+            buildTab('tab-escapadas', window.PAQUETES.slice(5, 10), 5);
+            buildTabExplore(window.EXPLORE_DATA || window.EXPLORE_DEFAULT);
+            buildTabPA(window.PAQUETES_ASOMBROSOS || window.PAQUETES_ASOMBROSOS_DEFAULT);
+        } catch (err) {
+            console.error('[Admin] Error al construir panel, limpiando datos:', err);
+            localStorage.removeItem(DATA_KEY);
+            localStorage.removeItem(EXPLORE_KEY);
+            localStorage.removeItem(PA_KEY);
+            panelReady = false;
+            location.reload();
+        }
+    }
+
+    // ── TABS ──────────────────────────────────────────────────────────────────
+    document.querySelectorAll('.tab-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            document.querySelectorAll('.tab-btn').forEach(function (b) { b.classList.remove('active'); });
+            document.querySelectorAll('.tab-panel').forEach(function (p) { p.classList.remove('active'); });
+            btn.classList.add('active');
+            document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+        });
+    });
+
+    // ── OFERTA COLOR OPTIONS ──────────────────────────────────────────────────
+    var OFERTA_COLOR_OPTIONS = [
+        { value: '',           label: 'Sin oferta' },
+        { value: 'bg-success', label: 'Verde (bg-success)' },
+        { value: 'bg-info',    label: 'Azul (bg-info)' },
+        { value: 'bg-warning', label: 'Amarillo (bg-warning)' },
+        { value: 'bg-danger',  label: 'Rojo (bg-danger)' }
+    ];
+
+    function fgOfertaColor(val, gi) {
+        var opts = OFERTA_COLOR_OPTIONS.map(function (o) {
+            return '<option value="' + x(o.value) + '"' + (val === o.value ? ' selected' : '') + '>' + o.label + '</option>';
+        }).join('');
+        return '<div class="form-group">' +
+            '<label>Color de oferta</label>' +
+            '<select data-gi="' + gi + '" data-field="ofertaColor">' + opts + '</select>' +
+            '</div>';
+    }
+
+    // ── EXPLORE TOUR CARD BUILDERS ────────────────────────────────────────────
+    function buildFormExploreNacional(item, gi) {
+        var h = '';
+        h += '<div class="form-grid">';
+        h += fg('titulo', 'Título', item.titulo || '', gi, false, true);
+        h += fg('link',   'Link',   item.link   || '', gi);
+        h += fg('oferta', 'Texto oferta (ej: 15% Off)', item.oferta || '', gi);
+        h += fgOfertaColor(item.ofertaColor || '', gi);
+        h += '</div>';
+        h += '<div class="form-grid" style="margin-top:0.85rem">';
+        h += '<div class="form-group full">';
+        h += '<label>Imagen (ruta o URL)</label>';
+        h += '<div class="img-row">';
+        h += '<img class="img-preview" src="' + x(item.imagen) + '" alt="">';
+        h += '<input type="text" data-gi="' + gi + '" data-field="imagen" value="' + x(item.imagen) + '" placeholder="img/explore-tour-1.jpg" style="flex:1">';
+        h += '<label class="img-upload-btn" title="Cargar imagen desde archivo"><i class="fas fa-folder-open"></i> Archivo<input type="file" accept="image/*" class="img-file-input" style="display:none"></label>';
+        h += '</div></div>';
+        h += '</div>';
+        return h;
+    }
+
+    function buildFormExploreInternacional(item, gi) {
+        var h = '';
+        h += '<div class="form-grid">';
+        h += fg('titulo',   'Título (país/ciudad)',            item.titulo   || '', gi, false, true);
+        h += fg('ciudades', 'Ciudades (ej: 8 Cities)',          item.ciudades || '', gi);
+        h += fg('lugares',  'Lugares (ej: 143+ Tour Places)',   item.lugares  || '', gi);
+        h += fg('link',     'Link',                            item.link     || '', gi);
+        h += fg('oferta',   'Texto oferta (ej: 30% Off)',       item.oferta   || '', gi);
+        h += fgOfertaColor(item.ofertaColor || '', gi);
+        h += '</div>';
+        h += '<div class="form-grid" style="margin-top:0.85rem">';
+        h += '<div class="form-group full">';
+        h += '<label>Imagen (ruta o URL)</label>';
+        h += '<div class="img-row">';
+        h += '<img class="img-preview" src="' + x(item.imagen) + '" alt="">';
+        h += '<input type="text" data-gi="' + gi + '" data-field="imagen" value="' + x(item.imagen) + '" placeholder="img/explore-tour-1.jpg" style="flex:1">';
+        h += '<label class="img-upload-btn" title="Cargar imagen desde archivo"><i class="fas fa-folder-open"></i> Archivo<input type="file" accept="image/*" class="img-file-input" style="display:none"></label>';
+        h += '</div></div>';
+        h += '</div>';
+        return h;
+    }
+
+    function buildFormPaqueteAsombroso(item, gi) {
+        var h = '';
+        h += '<div class="form-grid">';
+        h += fg('titulo',    'Título',                    item.titulo    || '', gi, false, true);
+        h += fg('subtitulo', 'Subtítulo',                 item.subtitulo || '', gi);
+        h += fg('destino',   'Destino',                   item.destino   || '', gi);
+        h += fg('dias',      'Días (ej: 3 días)',          item.dias      || '', gi);
+        h += fg('personas',  'Personas (ej: 2 Personas)', item.personas  || '', gi);
+        h += fg('precio',    'Precio (ej: $349.00)',       item.precio    || '', gi, false, true);
+        h += '</div>';
+        h += '<div class="form-grid">';
+        h += '<div class="form-group full">';
+        h += '<label>Descripción</label>';
+        h += '<textarea data-gi="' + gi + '" data-field="descripcion" rows="3" placeholder="Descripción del paquete…">' + x(item.descripcion || '') + '</textarea>';
+        h += '</div>';
+        h += '</div>';
+        h += '<div class="form-grid">';
+        h += fg('linkLeerMas',  'Link "Leer Más"',       item.linkLeerMas  || '#', gi);
+        h += fg('linkReservar', 'Link "Reservar Ahora"', item.linkReservar || '#', gi);
+        h += '</div>';
+        h += '<div class="form-grid" style="margin-top:0.85rem">';
+        h += '<div class="form-group full">';
+        h += '<label>Imagen (ruta o URL)</label>';
+        h += '<div class="img-row">';
+        h += '<img class="img-preview" src="' + x(item.imagen) + '" alt="">';
+        h += '<input type="text" data-gi="' + gi + '" data-field="imagen" value="' + x(item.imagen) + '" placeholder="img/packages-1.jpg" style="flex:1">';
+        h += '<label class="img-upload-btn" title="Cargar imagen desde archivo"><i class="fas fa-folder-open"></i> Archivo<input type="file" accept="image/*" class="img-file-input" style="display:none"></label>';
+        h += '</div></div>';
+        h += '</div>';
+        return h;
+    }
+
+    function wireExploreBody(body, header) {
+        var imgInput = body.querySelector('[data-field="imagen"]');
+        var thumb    = header.querySelector('.pkg-thumb');
+        var preview  = body.querySelector('.img-preview');
+        if (imgInput) {
+            imgInput.addEventListener('input', function () {
+                if (thumb)   thumb.src   = imgInput.value;
+                if (preview) preview.src = imgInput.value;
+            });
+        }
+        var fileInput = body.querySelector('.img-file-input');
+        if (fileInput) {
+            fileInput.addEventListener('change', function () {
+                var file = fileInput.files[0];
+                if (!file) return;
+                var reader = new FileReader();
+                reader.onload = function (ev) {
+                    var src = ev.target.result;
+                    if (imgInput) imgInput.value = src;
+                    if (thumb)   thumb.src = src;
+                    if (preview) preview.src = src;
+                    markUnsaved();
+                };
+                reader.readAsDataURL(file);
+                fileInput.value = '';
+            });
+        }
+        body.addEventListener('input',  function () { markUnsaved(); });
+        body.addEventListener('change', function () { markUnsaved(); });
+    }
+
+    function buildExploreCard(item, gi, formFn) {
+        var card = document.createElement('div');
+        card.className = 'pkg-card';
+        card.dataset.index = gi;
+
+        var header = document.createElement('div');
+        header.className = 'pkg-card-header';
+        header.innerHTML =
+            '<img class="pkg-thumb" src="' + x(item.imagen) + '" alt="">' +
+            '<div class="pkg-meta">' +
+            '  <h3 class="hdr-nombre">' + x(item.titulo) + '</h3>' +
+            '  <small class="hdr-meta">' + x(item.id || '') + '</small>' +
+            '</div>' +
+            '<div class="pkg-status' + (item.titulo ? '' : ' err') + '"></div>' +
+            '<span class="pkg-id-badge">' + x((item.id || '').toUpperCase()) + '</span>' +
+            '<i class="fas fa-chevron-down pkg-toggle"></i>';
+
+        var body = document.createElement('div');
+        body.className = 'pkg-body';
+        body.innerHTML = formFn(item, gi);
+
+        header.addEventListener('click', function () { card.classList.toggle('is-open'); });
+        card.appendChild(header);
+        card.appendChild(body);
+        wireExploreBody(body, header);
+        return card;
+    }
+
+    function buildPACard(item, gi) {
+        var card = document.createElement('div');
+        card.className = 'pkg-card';
+        card.dataset.index = gi;
+
+        var header = document.createElement('div');
+        header.className = 'pkg-card-header';
+        header.innerHTML =
+            '<img class="pkg-thumb" src="' + x(item.imagen) + '" alt="">' +
+            '<div class="pkg-meta">' +
+            '  <h3 class="hdr-nombre">' + x(item.titulo) + '</h3>' +
+            '  <small class="hdr-meta">' + x(item.destino || '') + ' &nbsp;·&nbsp; ' + x(item.precio || '') + '</small>' +
+            '</div>' +
+            '<div class="pkg-status' + ((item.titulo && item.precio) ? '' : ' err') + '"></div>' +
+            '<span class="pkg-id-badge">' + x((item.id || '').toUpperCase()) + '</span>' +
+            '<i class="fas fa-chevron-down pkg-toggle"></i>';
+
+        var body = document.createElement('div');
+        body.className = 'pkg-body';
+        body.innerHTML = buildFormPaqueteAsombroso(item, gi);
+
+        header.addEventListener('click', function () { card.classList.toggle('is-open'); });
+        card.appendChild(header);
+        card.appendChild(body);
+        wireExploreBody(body, header);
+        return card;
+    }
+
+    function buildTabExplore(data) {
+        var container = document.getElementById('tab-explore');
+        container.innerHTML = '';
+
+        var nacSection = document.createElement('div');
+        nacSection.innerHTML = '<div class="section-label" style="margin-bottom:1rem"><i class="fas fa-flag"></i> Tours Nacionales (6)</div>';
+        (data.nacionales || []).forEach(function (item, i) {
+            var card = buildExploreCard(item, i, buildFormExploreNacional);
+            card.dataset.section = 'nacionales';
+            nacSection.appendChild(card);
+        });
+        container.appendChild(nacSection);
+
+        var intSection = document.createElement('div');
+        intSection.innerHTML = '<div class="section-label" style="margin:1.5rem 0 1rem"><i class="fas fa-globe"></i> Tours Internacionales (5)</div>';
+        (data.internacionales || []).forEach(function (item, i) {
+            var card = buildExploreCard(item, i, buildFormExploreInternacional);
+            card.dataset.section = 'internacionales';
+            intSection.appendChild(card);
+        });
+        container.appendChild(intSection);
+    }
+
+    function buildTabPA(items) {
+        var container = document.getElementById('tab-paquetes-asombrosos');
+        container.innerHTML = '';
+        (items || []).forEach(function (item, i) {
+            container.appendChild(buildPACard(item, i));
+        });
+    }
+
+    // ── BUILD ACCORDION ───────────────────────────────────────────────────────
+    function buildTab(containerId, items, offset) {
+        var container = document.getElementById(containerId);
+        container.innerHTML = '';
+        items.forEach(function (pkg, i) {
+            container.appendChild(buildCard(pkg, offset + i));
+        });
+    }
+
+    function buildCard(pkg, gi) {
+        var card = document.createElement('div');
+        card.className = 'pkg-card';
+        card.dataset.index = gi;
+
+        // ── Header
+        var header = document.createElement('div');
+        header.className = 'pkg-card-header';
+        var statusClass = (pkg.nombre && pkg.fechaInicio && pkg.fechaFin) ? '' : ' err';
+        header.innerHTML =
+            '<img class="pkg-thumb" src="' + x(pkg.imagen) + '" alt="">' +
+            '<div class="pkg-meta">' +
+            '  <h3 class="hdr-nombre">' + x(pkg.nombre) + '</h3>' +
+            '  <small class="hdr-meta">' + x(pkg.destino || '') + ' &nbsp;·&nbsp; ' + getFirstPrecio(pkg) + '</small>' +
+            '</div>' +
+            '<div class="pkg-status' + statusClass + '" title="' + (statusClass ? 'Faltan campos obligatorios' : 'Campos completos') + '"></div>' +
+            '<span class="pkg-id-badge">' + x(pkg.id.toUpperCase()) + '</span>' +
+            '<i class="fas fa-chevron-down pkg-toggle"></i>';
+
+        // ── Body
+        var body = document.createElement('div');
+        body.className = 'pkg-body';
+        body.innerHTML = buildForm(pkg, gi);
+
+        header.addEventListener('click', function () { card.classList.toggle('is-open'); });
+        card.appendChild(header);
+        card.appendChild(body);
+
+        wireBody(body, header, gi);
+        return card;
+    }
+
+    // ── FORM BUILDER ──────────────────────────────────────────────────────────
+    function buildForm(pkg, gi) {
+        var h = '';
+
+        /* ── CAMPOS FORZOSOS ── */
+        h += '<div class="form-grid">';
+        h += fg('nombre',     'Nombre del paquete', pkg.nombre,     gi, true, true);
+        h += fgDate('fechaInicio','Fecha de inicio',  pkg.fechaInicio, gi, true);
+        h += fgDate('fechaFin',   'Fecha de término', pkg.fechaFin,   gi, true);
+        h += fg('destino',    'Destino',             pkg.destino || '', gi);
+        h += fg('duracion',   'Duración',            pkg.duracion || '', gi);
+        h += '</div>';
+        /* Date range chip + WhatsApp preview */
+        h += '<div style="display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;margin-top:0.4rem">';
+        h += '<div id="date-chip-' + gi + '" class="date-range-chip"' + (pkg.fechaInicio && pkg.fechaFin ? '' : ' style="display:none"') + '>' +
+             '<i class="fas fa-calendar-check"></i>' +
+             '<span class="chip-start">' + x(formatDate(pkg.fechaInicio)) + '</span>' +
+             '<i class="fas fa-arrow-right" style="font-size:0.65rem"></i>' +
+             '<span class="chip-end">' + x(formatDate(pkg.fechaFin)) + '</span>' +
+             '</div>';
+        var waUrl = buildWaUrl(pkg.nombre || '', getWaPhone());
+        h += '<a href="' + x(waUrl) + '" target="_blank" id="wa-chip-' + gi + '" class="wa-preview-chip"' + (pkg.nombre ? '' : ' style="display:none"') + '>' +
+             '<i class="fab fa-whatsapp"></i> Ver link WhatsApp</a>';
+        h += '</div>';
+
+        /* Imagen */
+        h += '<div class="form-grid" style="margin-top:0.85rem">';
+        h += '<div class="form-group full">';
+        h += '<label>Imagen (ruta o URL)</label>';
+        h += '<div class="img-row">';
+        h += '<img class="img-preview" src="' + x(pkg.imagen) + '" alt="">';
+        h += '<input type="text" data-gi="' + gi + '" data-field="imagen" value="' + x(pkg.imagen) + '" placeholder="img/carousel-1.jpg" style="flex:1">';
+        h += '<label class="img-upload-btn" title="Cargar imagen desde archivo"><i class="fas fa-folder-open"></i> Archivo<input type="file" accept="image/*" class="img-file-input" style="display:none"></label>';
+        h += '</div></div>';
+        h += '</div>';
+
+        /* ── PRECIOS ── */
+        h += '<div class="section-label"><i class="fas fa-tag"></i> Precios <span class="req-label">obligatorio</span></div>';
+        h += '<div class="section-hint"><i class="fas fa-info-circle"></i> Selecciona la forma de precio y agrega uno o más segmentos. Cada segmento tiene un <strong>nombre de personas</strong> (ej: 1 persona, 2-3 personas) y su <strong>precio</strong> correspondiente.</div>';
+
+        /* Tipo precio */
+        h += '<div class="tipo-precio-group">';
+        h += '<label><span class="req-star">*</span> Forma de precio</label>';
+        h += '<select data-gi="' + gi + '" data-field="tipoPrecio">';
+        TIPO_OPCIONES.forEach(function (op) {
+            h += '<option value="' + op.value + '"' +
+                ((pkg.tipoPrecio || 'por-persona') === op.value ? ' selected' : '') +
+                '>' + op.label + '</option>';
+        });
+        h += '</select>';
+        h += '</div>';
+
+        /* Segmentos */
+        h += '<div class="list-editor" data-list="segmentosPrecio">';
+        var segs = pkg.segmentosPrecio && pkg.segmentosPrecio.length
+            ? pkg.segmentosPrecio
+            : [{ nombre: '', precio: '' }];
+        segs.forEach(function (seg) { h += itemSegmento(seg); });
+        h += '</div>';
+        h += btnAdd('segmentosPrecio', '<i class="fas fa-plus"></i> Agregar segmento de precio');
+
+        /* ── ITINERARIO DE VIAJE ── */
+        h += '<div class="section-label"><i class="fas fa-route"></i> Itinerario de viaje</div>';
+        h += '<div class="list-editor" data-list="itinerario">';
+        if ((pkg.itinerario || []).length === 0) {
+            h += emptyState('fas fa-map-signs', 'Sin entradas aún. Agrega la primera actividad del día.');
+        } else {
+            (pkg.itinerario || []).forEach(function (item) { h += itemItinerario(item); });
+        }
+        h += '</div>';
+        h += btnAdd('itinerario', '<i class="fas fa-plus"></i> Agregar entrada');
+
+        /* ── INCLUSIONES ── */
+        h += '<div class="section-label"><i class="fas fa-check-circle"></i> Inclusiones</div>';
+        h += '<div class="section-hint"><i class="fas fa-info-circle"></i> Agrega todas las inclusiones del paquete. Puedes escribir libremente y agregar las que necesites.</div>';
+        h += '<div class="list-editor" data-list="inclusiones">';
+        if ((pkg.inclusiones || []).length === 0) {
+            h += emptyState('fas fa-list', 'Sin inclusiones. Agrega lo que viene incluido en el paquete.');
+        } else {
+            (pkg.inclusiones || []).forEach(function (inc) { h += itemTexto(inc); });
+        }
+        h += '</div>';
+        h += btnAdd('inclusiones', '<i class="fas fa-plus"></i> Agregar inclusión');
+
+        /* ── ITINERARIO DE VUELO (con toggle) ── */
+        var mostrar = (pkg.mostrarVuelo !== false);
+        h += '<div class="section-label"><i class="fas fa-plane"></i> Itinerario de vuelo / transporte</div>';
+        h += '<label class="toggle-row">' +
+             '<label class="toggle-switch" onclick="event.stopPropagation()">' +
+             '<input type="checkbox" data-field="mostrarVuelo"' + (mostrar ? ' checked' : '') + '>' +
+             '<span class="toggle-slider"></span>' +
+             '</label>' +
+             '<span class="toggle-row-text">Mostrar itinerario de vuelo / transporte en la página del paquete</span>' +
+             '</label>';
+        h += '<div class="list-editor' + (mostrar ? '' : ' vuelo-hidden') + '" data-list="vuelos" id="vuelos-list-' + gi + '">';
+        if ((pkg.itinerarioVuelo || []).length === 0) {
+            h += emptyState('fas fa-plane-departure', 'Sin tramos aún. Agrega los vuelos o traslados.');
+        } else {
+            (pkg.itinerarioVuelo || []).forEach(function (v) { h += itemVuelo(v); });
+        }
+        h += '</div>';
+        h += '<div id="vuelos-add-' + gi + '"' + (mostrar ? '' : ' style="display:none"') + '>';
+        h += btnAdd('vuelos', '<i class="fas fa-plus"></i> Agregar tramo');
+        h += '</div>';
+
+        /* ── LEYENDA (OBLIGATORIA) ── */
+        h += '<div class="section-label"><i class="fas fa-file-contract"></i> Leyenda <span class="req-label">obligatoria</span></div>';
+        h += '<div class="section-hint" style="border-color:var(--required);"><i class="fas fa-exclamation-circle"></i> Siempre debe haber al menos una leyenda. Aparece al final de la página de detalles.</div>';
+        h += '<div class="list-editor leyenda-section" data-list="leyendas">';
+        var leyendas = pkg.leyendas && pkg.leyendas.length ? pkg.leyendas : [''];
+        leyendas.forEach(function (l) { h += itemTexto(l); });
+        h += '</div>';
+        h += btnAdd('leyendas', '<i class="fas fa-plus"></i> Agregar leyenda');
+
+        return h;
+    }
+
+    /* ── FIELD HELPERS ── */
+    function fg(field, label, val, gi, full, required) {
+        return '<div class="form-group' + (full ? ' full' : '') + '">' +
+            '<label>' +
+            (required ? '<span class="req-star">*</span> ' : '') +
+            label + '</label>' +
+            '<input type="text" data-gi="' + gi + '" data-field="' + field + '" value="' + x(val || '') + '">' +
+            '</div>';
+    }
+
+    function fgDate(field, label, val, gi, required) {
+        return '<div class="form-group">' +
+            '<label>' + (required ? '<span class="req-star">*</span> ' : '') + label + '</label>' +
+            '<div class="date-wrap">' +
+            '<input type="text" class="fpick" data-gi="' + gi + '" data-field="' + field + '"' +
+            ' value="' + x(val || '') + '" placeholder="Selecciona una fecha…" readonly>' +
+            '</div>' +
+            '</div>';
+    }
+
+    function btnAdd(listName, label) {
+        return '<button class="btn-add" data-add="' + listName + '">' + label + '</button>';
+    }
+
+    function emptyState(icon, text) {
+        return '<div class="list-empty"><i class="' + icon + '"></i>' + text + '</div>';
+    }
+
+    function formatDate(iso) {
+        var MESES = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+        if (!iso) return '';
+        var p = iso.split('-');
+        if (p.length < 3) return iso;
+        return parseInt(p[2], 10) + ' ' + (MESES[parseInt(p[1],10) - 1] || '') + ' ' + p[0];
+    }
+
+    /* ── LIST ITEM TEMPLATES ── */
+    function itemSegmento(seg) {
+        return '<div class="list-item">' +
+            '<div class="list-item-fields">' +
+            '  <div class="seg-row">' +
+            '    <input type="text" data-subfield="nombre" value="' + x(seg ? seg.nombre : '') + '" placeholder="Número de personas (ej: 1 persona, 2-3 personas…)">' +
+            '    <input type="text" data-subfield="precio" value="' + x(seg ? seg.precio : '') + '" placeholder="Precio (ej: $9,999 MXN)">' +
+            '  </div>' +
+            '</div>' +
+            '<button class="btn-remove" title="Eliminar"><i class="fas fa-trash-alt"></i></button>' +
+            '</div>';
+    }
+
+    function itemTexto(val) {
+        return '<div class="list-item">' +
+            '<div class="list-item-fields">' +
+            '  <input type="text" data-subfield="value" value="' + x(val || '') + '" placeholder="Escribe aquí…">' +
+            '</div>' +
+            '<button class="btn-remove" title="Eliminar"><i class="fas fa-trash-alt"></i></button>' +
+            '</div>';
+    }
+
+    function itemItinerario(item) {
+        var i = item || {};
+        return '<div class="list-item">' +
+            '<div class="list-item-fields">' +
+            '  <input type="text" data-subfield="titulo" value="' + x(i.titulo) + '" placeholder="Título">' +
+            '  <textarea data-subfield="descripcion" placeholder="Descripción">' + x(i.descripcion) + '</textarea>' +
+            '</div>' +
+            '<button class="btn-remove" title="Eliminar"><i class="fas fa-trash-alt"></i></button>' +
+            '</div>';
+    }
+
+    function itemVuelo(v) {
+        v = v || {};
+        // Soporte para formato nuevo (aeropuertoSalida) y formato heredado (origen/destino)
+        var aeroS = v.aeropuertoSalida || v.origen || '';
+        var fhS   = v.fechaHoraSalida  || ((v.fecha || '') + (v.horaSalida ? ' ' + v.horaSalida : '')).trim();
+        var aeroL = v.aeropuertoLlegada || v.destino || '';
+        var fhL   = v.fechaHoraLlegada || v.horaLlegada || '';
+        var innerHtml =
+            '<div style="display:grid;grid-template-columns:1fr 1fr;gap:0.4rem">' +
+            '  <input type="text" data-subfield="aeropuertoSalida"  value="' + x(aeroS) + '" placeholder="Aeropuerto de salida (ej: AICM · Ciudad de México)">' +
+            '  <input type="text" data-subfield="fechaHoraSalida"   value="' + x(fhS)   + '" placeholder="Fecha y hora de salida (ej: 10 Jul 2025 · 06:30)">' +
+            '  <input type="text" data-subfield="aeropuertoLlegada" value="' + x(aeroL) + '" placeholder="Aeropuerto de llegada (ej: Cancún · CUN)">' +
+            '  <input type="text" data-subfield="fechaHoraLlegada"  value="' + x(fhL)   + '" placeholder="Fecha y hora de llegada (ej: 10 Jul 2025 · 08:15)">' +
+            '</div>';
+        return '<div class="list-item">' +
+            '<div class="list-item-fields">' + innerHtml + '</div>' +
+            '<button class="btn-remove" title="Eliminar"><i class="fas fa-trash-alt"></i></button>' +
+            '</div>';
+    }
+
+    // ── WIRE BODY EVENTS ─────────────────────────────────────────────────────
+    function wireBody(body, header, gi) {
+        // ── Image live preview (url input)
+        var imgInput = body.querySelector('[data-field="imagen"]');
+        var thumb    = header.querySelector('.pkg-thumb');
+        var preview  = body.querySelector('.img-preview');
+        if (imgInput) {
+            imgInput.addEventListener('input', function () {
+                var src = imgInput.value;
+                if (thumb)   thumb.src   = src;
+                if (preview) preview.src = src;
+            });
+        }
+
+        // ── Image upload from file
+        var fileInput = body.querySelector('.img-file-input');
+        if (fileInput) {
+            fileInput.addEventListener('change', function () {
+                var file = fileInput.files[0];
+                if (!file) return;
+                var reader = new FileReader();
+                reader.onload = function (ev) {
+                    var src = ev.target.result;
+                    if (imgInput) { imgInput.value = src; }
+                    if (thumb)   thumb.src   = src;
+                    if (preview) preview.src = src;
+                    markUnsaved();
+                };
+                reader.readAsDataURL(file);
+                fileInput.value = '';
+            });
+        }
+
+        // ── Nombre live sync to header + WhatsApp chip
+        var nombreInput = body.querySelector('[data-field="nombre"]');
+        if (nombreInput) {
+            nombreInput.addEventListener('input', function () {
+                var hdrNombre = header.querySelector('.hdr-nombre');
+                if (hdrNombre) hdrNombre.textContent = nombreInput.value;
+                updateCardStatus(header, body);
+                // Update wa chip
+                var waChip = document.getElementById('wa-chip-' + gi);
+                if (waChip) {
+                    var url = buildWaUrl(nombreInput.value, getWaPhone());
+                    waChip.href = url;
+                    waChip.style.display = nombreInput.value.trim() ? '' : 'none';
+                }
+            });
+        }
+
+        // ── Flatpickr date pickers
+        var fpStart = body.querySelector('[data-field="fechaInicio"]');
+        var fpEnd   = body.querySelector('[data-field="fechaFin"]');
+        var chip    = document.getElementById('date-chip-' + gi);
+
+        function updateChip() {
+            if (!chip) return;
+            var s = fpStart ? fpStart.value : '';
+            var e = fpEnd   ? fpEnd.value   : '';
+            if (s && e) {
+                chip.style.display = '';
+                var chipStart = chip.querySelector('.chip-start');
+                var chipEnd   = chip.querySelector('.chip-end');
+                if (chipStart) chipStart.textContent = formatDate(s);
+                if (chipEnd)   chipEnd.textContent   = formatDate(e);
+            } else {
+                chip.style.display = 'none';
+            }
+            updateCardStatus(header, body);
+        }
+
+        if (typeof flatpickr !== 'undefined') {
+            var fpStartInst = flatpickr(fpStart, {
+                locale: 'es',
+                dateFormat: 'Y-m-d',
+                allowInput: false,
+                disableMobile: false,
+                onChange: function (dates) {
+                    if (dates[0] && fpEndInst) fpEndInst.set('minDate', dates[0]);
+                    updateChip();
+                    markUnsaved();
+                }
+            });
+            var fpEndInst = flatpickr(fpEnd, {
+                locale: 'es',
+                dateFormat: 'Y-m-d',
+                allowInput: false,
+                disableMobile: false,
+                onChange: function () {
+                    updateChip();
+                    markUnsaved();
+                }
+            });
+            // Set initial minDate if start already has a value
+            if (fpStart && fpStart.value) fpEndInst.set('minDate', fpStart.value);
+        }
+
+        // ── Toggle mostrarVuelo
+        var toggleVuelo = body.querySelector('[data-field="mostrarVuelo"]');
+        if (toggleVuelo) {
+            toggleVuelo.addEventListener('change', function () {
+                var vueloList = body.querySelector('[data-list="vuelos"]');
+                var vueloAdd  = body.querySelector('[data-add="vuelos"]') ?
+                    body.querySelector('[data-add="vuelos"]').closest('div[id^="vuelos-add"]') : null;
+                if (vueloList) vueloList.style.display = toggleVuelo.checked ? '' : 'none';
+                if (vueloAdd)  vueloAdd.style.display  = toggleVuelo.checked ? '' : 'none';
+                markUnsaved();
+            });
+        }
+
+        // ── Mark unsaved on any change
+        body.addEventListener('input', function () { markUnsaved(); });
+
+        // ── Add-item buttons
+        body.querySelectorAll('.btn-add').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var listName = btn.dataset.add;
+                var listEl   = body.querySelector('[data-list="' + listName + '"]');
+                if (!listEl) return;
+                // Remove empty state placeholder if present
+                var empty = listEl.querySelector('.list-empty');
+                if (empty) empty.remove();
+                var item = createItem(listName);
+                listEl.appendChild(item);
+                // Focus first input in new item
+                var firstInput = item.querySelector('input, textarea');
+                if (firstInput) setTimeout(function () { firstInput.focus(); }, 50);
+                markUnsaved();
+            });
+        });
+
+        // ── Wire existing remove buttons
+        wireRemoves(body);
+    }
+
+    function updateCardStatus(header, body) {
+        var dot = header.querySelector('.pkg-status');
+        if (!dot) return;
+        var nombre = body.querySelector('[data-field="nombre"]');
+        var fi     = body.querySelector('[data-field="fechaInicio"]');
+        var ff     = body.querySelector('[data-field="fechaFin"]');
+        var ok = (nombre && nombre.value.trim()) &&
+                 (fi && fi.value.trim()) &&
+                 (ff && ff.value.trim());
+        dot.className = 'pkg-status' + (ok ? '' : ' err');
+        dot.title = ok ? 'Campos completos' : 'Faltan campos obligatorios';
+    }
+
+    function wireRemoves(container) {
+        container.querySelectorAll('.btn-remove').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                btn.closest('.list-item').remove();
+                markUnsaved();
+            });
+        });
+    }
+
+    function createItem(listName) {
+        var html;
+        if (listName === 'segmentosPrecio') html = itemSegmento(null);
+        else if (listName === 'itinerario') html = itemItinerario(null);
+        else if (listName === 'vuelos')     html = itemVuelo(null);
+        else                                html = itemTexto('');
+
+        var wrap = document.createElement('div');
+        wrap.innerHTML = html;
+        var item = wrap.firstChild;
+        item.querySelector('.btn-remove').addEventListener('click', function () {
+            item.remove();
+            markUnsaved();
+        });
+        return item;
+    }
+
+    // ── COLLECT EXPLORE + PA ──────────────────────────────────────────────────
+    function collectExplore() {
+        var base   = window.EXPLORE_DATA || window.EXPLORE_DEFAULT || { nacionales: [], internacionales: [] };
+        var nacDef = JSON.parse(JSON.stringify(base.nacionales || []));
+        var intDef = JSON.parse(JSON.stringify(base.internacionales || []));
+
+        document.querySelectorAll('#tab-explore .pkg-card[data-section="nacionales"]').forEach(function (card) {
+            var gi   = parseInt(card.dataset.index);
+            var body = card.querySelector('.pkg-body');
+            if (!body || isNaN(gi) || !nacDef[gi]) return;
+            body.querySelectorAll('[data-field]').forEach(function (el) {
+                nacDef[gi][el.dataset.field] = el.value;
+            });
+        });
+
+        document.querySelectorAll('#tab-explore .pkg-card[data-section="internacionales"]').forEach(function (card) {
+            var gi   = parseInt(card.dataset.index);
+            var body = card.querySelector('.pkg-body');
+            if (!body || isNaN(gi) || !intDef[gi]) return;
+            body.querySelectorAll('[data-field]').forEach(function (el) {
+                intDef[gi][el.dataset.field] = el.value;
+            });
+        });
+
+        return { nacionales: nacDef, internacionales: intDef };
+    }
+
+    function collectPaquetesAsombrosos() {
+        var data = JSON.parse(JSON.stringify(window.PAQUETES_ASOMBROSOS || window.PAQUETES_ASOMBROSOS_DEFAULT || []));
+        document.querySelectorAll('#tab-paquetes-asombrosos .pkg-card').forEach(function (card) {
+            var gi   = parseInt(card.dataset.index);
+            var body = card.querySelector('.pkg-body');
+            if (!body || isNaN(gi) || !data[gi]) return;
+            body.querySelectorAll('[data-field]').forEach(function (el) {
+                data[gi][el.dataset.field] = el.value;
+            });
+        });
+        return data;
+    }
+
+    // ── COLLECT DATA ─────────────────────────────────────────────────────────
+    function collectAll() {
+        // Start from a deep copy of defaults so we preserve all fields
+        var data = JSON.parse(JSON.stringify(window.PAQUETES_DEFAULT));
+
+        // Only collect from carousel and escapadas tabs to avoid mixing with Explore/PA cards
+        var carouselCards = document.querySelectorAll('#tab-carousel .pkg-card, #tab-escapadas .pkg-card');
+        carouselCards.forEach(function (card) {
+            var gi   = parseInt(card.dataset.index);
+            var body = card.querySelector('.pkg-body');
+            if (!body || isNaN(gi)) return;
+
+            var pkg = data[gi];
+            if (!pkg) return;
+
+            // Simple fields (exclude checkboxes — handled separately)
+            body.querySelectorAll('[data-field]:not([type="checkbox"])').forEach(function (el) {
+                pkg[el.dataset.field] = el.value.trim();
+            });
+
+            // Auto-generate WhatsApp URL from nombre + global phone
+            pkg.whatsapp = buildWaUrl(pkg.nombre || '', getWaPhone());
+
+            // tipoPrecio
+            var tipoEl = body.querySelector('[data-field="tipoPrecio"]');
+            if (tipoEl) pkg.tipoPrecio = tipoEl.value;
+
+            // segmentosPrecio
+            pkg.segmentosPrecio = [];
+            body.querySelectorAll('[data-list="segmentosPrecio"] .list-item').forEach(function (item) {
+                var nombre = item.querySelector('[data-subfield="nombre"]').value.trim();
+                var precio = item.querySelector('[data-subfield="precio"]').value.trim();
+                if (nombre || precio) pkg.segmentosPrecio.push({ nombre: nombre, precio: precio });
+            });
+            // Keep backward-compat precio field = first segment
+            if (pkg.segmentosPrecio.length) {
+                pkg.precio      = pkg.segmentosPrecio[0].precio;
+                pkg.formaPrecio = pkg.tipoPrecio === 'por-grupo'
+                    ? 'Precio por grupo (noches incluidas)'
+                    : 'Por persona (noches incluidas)';
+            }
+
+            // inclusiones
+            pkg.inclusiones = [];
+            body.querySelectorAll('[data-list="inclusiones"] .list-item').forEach(function (item) {
+                var v = item.querySelector('[data-subfield="value"]').value.trim();
+                if (v) pkg.inclusiones.push(v);
+            });
+
+            // itinerario
+            pkg.itinerario = [];
+            body.querySelectorAll('[data-list="itinerario"] .list-item').forEach(function (item) {
+                var titulo      = item.querySelector('[data-subfield="titulo"]').value.trim();
+                var descripcion = item.querySelector('[data-subfield="descripcion"]').value.trim();
+                if (titulo || descripcion) {
+                    pkg.itinerario.push({ titulo: titulo, descripcion: descripcion });
+                }
+            });
+
+            // mostrarVuelo toggle
+            var toggleVuelo = body.querySelector('[data-field="mostrarVuelo"]');
+            pkg.mostrarVuelo = toggleVuelo ? toggleVuelo.checked : true;
+
+            // vuelos (formato nuevo)
+            pkg.itinerarioVuelo = [];
+            var vueloFields = ['aeropuertoSalida','fechaHoraSalida','aeropuertoLlegada','fechaHoraLlegada'];
+            body.querySelectorAll('[data-list="vuelos"] .list-item').forEach(function (item) {
+                var obj = {};
+                vueloFields.forEach(function (f) {
+                    obj[f] = item.querySelector('[data-subfield="' + f + '"]').value.trim();
+                });
+                pkg.itinerarioVuelo.push(obj);
+            });
+
+            // leyendas
+            pkg.leyendas = [];
+            body.querySelectorAll('[data-list="leyendas"] .list-item').forEach(function (item) {
+                var v = item.querySelector('[data-subfield="value"]').value.trim();
+                if (v) pkg.leyendas.push(v);
+            });
+        });
+
+        return data;
+    }
+
+    // ── VALIDATE ─────────────────────────────────────────────────────────────
+    function validate(data) {
+        var errors = [];
+        var campoLabels = { nombre: 'Nombre del paquete', fechaInicio: 'Fecha de inicio', fechaFin: 'Fecha de término' };
+
+        // Clear all previous invalid highlights
+        document.querySelectorAll('.pkg-body input.is-invalid, .pkg-body textarea.is-invalid').forEach(function (el) {
+            el.classList.remove('is-invalid');
+        });
+
+        data.forEach(function (pkg, i) {
+            var pkgName = pkg.nombre ? ('"' + pkg.nombre + '"') : ('Paquete ' + (pkg.id || (i + 1)));
+            Object.keys(campoLabels).forEach(function (campo) {
+                if (!pkg[campo] || !pkg[campo].trim()) {
+                    errors.push(pkgName + ': falta ' + campoLabels[campo]);
+                    // Highlight the specific field
+                    var el = document.querySelector('#tab-carousel [data-field="' + campo + '"][data-gi="' + i + '"], #tab-escapadas [data-field="' + campo + '"][data-gi="' + i + '"]');
+                    if (el) el.classList.add('is-invalid');
+                }
+            });
+            if (!pkg.segmentosPrecio || !pkg.segmentosPrecio.length) {
+                errors.push(pkgName + ': falta al menos un segmento de precio');
+            }
+            if (!pkg.leyendas || !pkg.leyendas.length) {
+                errors.push(pkgName + ': falta la leyenda (obligatoria)');
+            }
+        });
+
+        return errors;
+    }
+
+    // ── SAVE ─────────────────────────────────────────────────────────────────
+    function saveAll() {
+        var data   = collectAll();
+        var errors = validate(data);
+        if (errors.length) {
+            // Build detailed error message (show up to 3 errors)
+            var maxShow = 3;
+            var msg = errors.slice(0, maxShow).join(' · ');
+            if (errors.length > maxShow) msg += ' … y ' + (errors.length - maxShow) + ' error(es) más';
+            showToast(msg, 'err');
+
+            // Open first card with errors, switch to its tab, and scroll to it
+            var firstInvalid = document.querySelector('#tab-carousel .pkg-body input.is-invalid, #tab-escapadas .pkg-body input.is-invalid');
+            if (firstInvalid) {
+                var card = firstInvalid.closest('.pkg-card');
+                var panel = firstInvalid.closest('.tab-panel');
+                if (panel && !panel.classList.contains('active')) {
+                    // Switch to the correct tab
+                    var tabId = panel.id.replace('tab-', '');
+                    document.querySelectorAll('.tab-btn').forEach(function (b) { b.classList.remove('active'); });
+                    document.querySelectorAll('.tab-panel').forEach(function (p) { p.classList.remove('active'); });
+                    var targetBtn = document.querySelector('.tab-btn[data-tab="' + tabId + '"]');
+                    if (targetBtn) targetBtn.classList.add('active');
+                    panel.classList.add('active');
+                }
+                if (card) card.classList.add('is-open');
+                // Also open any other cards with errors
+                document.querySelectorAll('.pkg-body input.is-invalid').forEach(function (el) {
+                    el.closest('.pkg-card').classList.add('is-open');
+                });
+                setTimeout(function () { firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 150);
+            }
+            return;
+        }
+        localStorage.setItem(DATA_KEY, JSON.stringify(data));
+        localStorage.setItem('jovi-data-version', String(window.JOVI_DATA_VERSION || 2));
+        window.PAQUETES = data;
+
+        var exploreData = collectExplore();
+        localStorage.setItem(EXPLORE_KEY, JSON.stringify(exploreData));
+        window.EXPLORE_DATA = exploreData;
+
+        var paData = collectPaquetesAsombrosos();
+        localStorage.setItem(PA_KEY, JSON.stringify(paData));
+        window.PAQUETES_ASOMBROSOS = paData;
+
+        markSaved();
+        showToast('¡Cambios guardados correctamente!', 'ok');
+    }
+
+    // ── UNSAVED STATE ─────────────────────────────────────────────────────────
+    function markUnsaved() {
+        unsaved = true;
+        document.getElementById('save-bar').classList.add('visible');
+    }
+    function markSaved() {
+        unsaved = false;
+        document.getElementById('save-bar').classList.remove('visible');
+    }
+
+    // ── HEADER BUTTONS + GLOBAL LISTENERS ─────────────────────────────────────
+    document.getElementById('btn-save-all').addEventListener('click', saveAll);
+    document.getElementById('btn-save-bar').addEventListener('click', saveAll);
+
+    document.getElementById('btn-export').addEventListener('click', function () {
+        var data = collectAll();
+        var blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+        var a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'paquetes-jovi-' + new Date().toISOString().slice(0, 10) + '.json';
+        a.click();
+        showToast('JSON exportado', 'ok');
+    });
+
+    document.getElementById('btn-import').addEventListener('click', function () {
+        document.getElementById('import-file').click();
+    });
+    document.getElementById('import-file').addEventListener('change', function (e) {
+        var file = e.target.files[0];
+        if (!file) return;
+        var reader = new FileReader();
+        reader.onload = function (ev) {
+            try {
+                var data = JSON.parse(ev.target.result);
+                if (!Array.isArray(data) || data.length < 10) throw new Error('Formato inválido');
+                localStorage.setItem(DATA_KEY, JSON.stringify(data));
+                localStorage.setItem('jovi-data-version', String(window.JOVI_DATA_VERSION || 2));
+                window.PAQUETES = data;
+                showToast('Importación exitosa — recargando…', 'ok');
+                setTimeout(function () { location.reload(); }, 1100);
+            } catch (err) {
+                showToast('Error: el archivo no tiene el formato correcto', 'err');
+            }
+        };
+        reader.readAsText(file);
+        e.target.value = '';
+    });
+
+    document.getElementById('btn-reset').addEventListener('click', function () {
+        if (!confirm('¿Restaurar todos los paquetes a los valores predeterminados? Esta acción no se puede deshacer.')) return;
+        localStorage.removeItem(DATA_KEY);
+        localStorage.removeItem(EXPLORE_KEY);
+        localStorage.removeItem(PA_KEY);
+        window.PAQUETES = window.PAQUETES_DEFAULT;
+        showToast('Valores restaurados — recargando…', 'ok');
+        setTimeout(function () { location.reload(); }, 1000);
+    });
+
+    window.addEventListener('beforeunload', function (e) {
+        if (unsaved) { e.preventDefault(); e.returnValue = ''; }
+    });
+
+    // ── AUTO-LOGIN (must be AFTER all listeners are registered) ───────────────
+    if (localStorage.getItem(PASS_KEY)) {
+        showPanel();
+    }
+
+    // ── TOAST ─────────────────────────────────────────────────────────────────
+    var toastTimer;
+    function showToast(msg, type) {
+        var el = document.getElementById('toast');
+        el.innerHTML = '<i class="fas fa-' + (type === 'ok' ? 'check-circle' : 'exclamation-circle') + '"></i> ' + msg;
+        el.className = 'jovi-toast ' + (type || '') + ' show';
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(function () { el.classList.remove('show'); }, type === 'err' ? 7000 : 3500);
+    }
+
+    // ── HELPERS ───────────────────────────────────────────────────────────────
+    function x(str) {
+        return String(str || '')
+            .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+    function getFirstPrecio(pkg) {
+        if (pkg.segmentosPrecio && pkg.segmentosPrecio.length) return pkg.segmentosPrecio[0].precio || '';
+        return pkg.precio || '';
+    }
+
+})();
+</script>
+</body>
+</html>
