@@ -3808,3 +3808,297 @@ html {
 .jovi-footer-payments i:hover {
     color: rgba(255,255,255,0.7);
 }
+
+
+/* ═══════════════════════════════════════════════════════
+   RESPONSIVE FIXES — New sections
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Why Jovi glassmorphism cards ─────────────────────── */
+@media (max-width: 767.98px) {
+    .jovi-why-section {
+        padding: 3rem 0 !important;
+    }
+    .jovi-why-card {
+        padding: 1.5rem 1.2rem;
+    }
+    .jovi-why-icon {
+        width: 56px;
+        height: 56px;
+        font-size: 1.3rem;
+        border-radius: 14px;
+    }
+    .jovi-why-card h4 {
+        font-size: 1.05rem;
+    }
+    .jovi-why-card p {
+        font-size: 0.82rem;
+    }
+    .jovi-why-section::before,
+    .jovi-why-section::after {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+/* ── Modern testimonials ──────────────────────────────── */
+@media (max-width: 767.98px) {
+    .jovi-testi-card {
+        padding: 1.5rem;
+    }
+    .jovi-testi-quote {
+        font-size: 3rem;
+        top: 0.5rem;
+        right: 1rem;
+    }
+    .jovi-testi-text {
+        font-size: 0.85rem;
+    }
+    .jovi-testi-avatar {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/* ── Modern footer ────────────────────────────────────── */
+@media (max-width: 767.98px) {
+    .jovi-footer-modern {
+        padding: 2.5rem 0 !important;
+    }
+    .jovi-footer-desc {
+        max-width: 100%;
+    }
+    .jovi-footer-nl-form {
+        flex-direction: column;
+    }
+    .jovi-footer-nl-form button {
+        width: 100%;
+    }
+    .jovi-footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.75rem;
+    }
+    .jovi-footer-payments {
+        justify-content: center;
+    }
+}
+@media (max-width: 575.98px) {
+    .jovi-footer-social {
+        justify-content: center;
+    }
+    .jovi-footer-brand {
+        justify-content: center;
+    }
+    .jovi-footer-modern .col-lg-4:first-child {
+        text-align: center;
+    }
+    .jovi-footer-desc {
+        margin: 0 auto;
+    }
+}
+
+/* ── Counters ─────────────────────────────────────────── */
+@media (max-width: 575.98px) {
+    .jovi-counter-row {
+        gap: 0.75rem;
+    }
+    .jovi-counter-item {
+        min-width: 70px;
+        padding: 0.75rem 0.3rem;
+    }
+    .jovi-counter-num {
+        font-size: 1.6rem;
+    }
+    .jovi-counter-label {
+        font-size: 0.68rem;
+    }
+}
+
+/* ── Gradient text sizing ─────────────────────────────── */
+@media (max-width: 575.98px) {
+    .jovi-why-section h2 {
+        font-size: 1.6rem !important;
+    }
+}
+
+/* ── Fix inline width on pill tabs ────────────────────── */
+@media (max-width: 767.98px) {
+    .nav-pills .nav-link span[style*="width: 150px"],
+    .nav-pills .nav-link span[style*="width: 250px"] {
+        width: auto !important;
+        min-width: 0 !important;
+    }
+}
+
+/* ── Booking form on small screens ────────────────────── */
+@media (max-width: 575.98px) {
+    .booking .col-lg-6:first-child {
+        text-align: center;
+    }
+    .booking h1 {
+        font-size: 1.5rem !important;
+    }
+    .section-booking-title {
+        font-size: 0.85rem;
+    }
+}
+
+/* ── Guide cards on small screens ─────────────────────── */
+@media (max-width: 575.98px) {
+    .guide .guide-item .guide-img .guide-icon {
+        transform: translate(-50%, -50%) scale(0.85);
+    }
+}
+
+/* ── Blog cards on small screens ──────────────────────── */
+@media (max-width: 575.98px) {
+    .blog .blog-content h4,
+    .blog .blog-content .h4 {
+        font-size: 1.1rem;
+    }
+}
+
+/* ── Explore Tour tabs overflow fix ───────────────────── */
+@media (max-width: 575.98px) {
+    .ExploreTour .nav-pills {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        justify-content: flex-start !important;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+    .ExploreTour .nav-pills::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+/* ── Packages carousel arrows on mobile ───────────────── */
+@media (max-width: 575.98px) {
+    .packages .packages-carousel .owl-nav .owl-prev,
+    .packages .packages-carousel .owl-nav .owl-next {
+        padding: 3px 18px;
+        top: -40px;
+    }
+}
+
+/* ── Fix hero content overlap on very small screens ───── */
+@media (max-width: 380px) {
+    .jovi-hero-title {
+        font-size: 1.8rem !important;
+    }
+    .jovi-price-box {
+        padding: 0.75rem 1rem !important;
+    }
+    .jovi-price-amount {
+        font-size: 1.2rem !important;
+    }
+    .jovi-btn-primary,
+    .jovi-btn-secondary {
+        padding: 0.6rem 1.4rem !important;
+        font-size: 0.82rem !important;
+    }
+}
+
+/* ── Steps section on very small screens ──────────────── */
+@media (max-width: 380px) {
+    .jovi-step-num {
+        width: 55px;
+        height: 55px;
+        font-size: 1.4rem;
+    }
+    .jovi-step h5 {
+        font-size: 1rem;
+    }
+    .jovi-step p {
+        font-size: 0.78rem;
+    }
+}
+
+/* ── Ensure no horizontal overflow anywhere ───────────── */
+html, body {
+    overflow-x: hidden;
+}
+.container-fluid {
+    overflow-x: hidden;
+}
+
+
+/* ── Detalle.html: vuelo tramo grid responsive ────────── */
+@media (max-width: 575.98px) {
+    .vuelo-tramo {
+        grid-template-columns: 1fr !important;
+        text-align: center;
+        gap: 0.4rem !important;
+    }
+    .vuelo-tramo-punto.llegada {
+        text-align: center !important;
+    }
+    .vuelo-tramo-flecha {
+        justify-content: center;
+    }
+    .vuelo-tramo-flecha i {
+        transform: rotate(90deg);
+    }
+    .info-segmentos-grid {
+        flex-direction: column;
+    }
+    .info-seg-item {
+        min-width: 0;
+        width: 100%;
+    }
+    .precio-box {
+        padding: 1.25rem 1rem !important;
+    }
+    .precio-segmento {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.2rem;
+    }
+}
+
+/* ── Search form: labels visible on mobile ────────────── */
+@media (max-width: 575.98px) {
+    .jovi-search-form .form-label {
+        font-size: 0.78rem;
+    }
+    .jovi-search-btn {
+        font-size: 0.8rem;
+        padding: 0.7rem 1rem;
+    }
+}
+
+/* ── Nav container: prevent text overflow ─────────────── */
+@media (max-width: 380px) {
+    .jovi-brand-name {
+        font-size: 0.9rem !important;
+    }
+    .jovi-nav-container {
+        gap: 0.5rem !important;
+    }
+}
+
+/* ── Escape section: title sizing ─────────────────────── */
+@media (max-width: 575.98px) {
+    .escape-title {
+        font-size: 1.5rem !important;
+    }
+    .escape-subtitle {
+        font-size: 0.82rem;
+    }
+}
+
+/* ── About section: image border fix on tablet ────────── */
+@media (min-width: 576px) and (max-width: 991.98px) {
+    .about .col-lg-5 {
+        max-width: 80%;
+        margin: 0 auto;
+    }
+}
+
+/* ── Gallery: min-height fix on mobile ────────────────── */
+@media (max-width: 575.98px) {
+    .gallery .gallery-item img {
+        min-height: 200px !important;
+    }
+}
