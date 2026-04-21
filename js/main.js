@@ -216,3 +216,32 @@ document.addEventListener('DOMContentLoaded', function () {
     }, { threshold: 0.3 });
     observer.observe(counters[0].closest('.jovi-counter-row') || counters[0]);
 });
+
+
+// ── Clickable cards: destinations → destination.html, blogs → blog.html ──────
+document.addEventListener('DOMContentLoaded', function () {
+    // Destinos
+    document.querySelectorAll('.destination-img').forEach(function (card) {
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', function (e) {
+            if (e.target.closest('a')) return;
+            window.location.href = 'destination.html';
+        });
+    });
+    // Blog
+    document.querySelectorAll('.blog-item').forEach(function (card) {
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', function (e) {
+            if (e.target.closest('a')) return;
+            window.location.href = 'blog.html';
+        });
+    });
+    // Guías/Agentes
+    document.querySelectorAll('.guide-item').forEach(function (card) {
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', function (e) {
+            if (e.target.closest('a')) return;
+            window.location.href = 'guides.html';
+        });
+    });
+});

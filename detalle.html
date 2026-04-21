@@ -780,9 +780,24 @@
         const params = new URLSearchParams(window.location.search);
         const id = params.get('id');
 
-        const paquete = (typeof PAQUETES !== 'undefined')
-            ? PAQUETES.find(p => p.id === id)
-            : null;
+        const paquete = (function() {
+            var p = (typeof PAQUETES !== 'undefined') ? PAQUETES.find(function(x){return x.id===id}) : null;
+            if (p) return p;
+            if (typeof PAQUETES_ASOMBROSOS !== 'undefined') {
+                var pa = PAQUETES_ASOMBROSOS.find(function(x){return x.id===id});
+                if (pa) return {
+                    id:pa.id, imagen:pa.imagen, nombre:pa.titulo, destino:pa.destino,
+                    duracion:pa.dias, precio:pa.precio,
+                    formaPrecio:pa.personas||'Por persona',
+                    segmentosPrecio:[{nombre:pa.personas||'Por persona',precio:pa.precio}],
+                    fechaInicio:'', fechaFin:'',
+                    itinerario:[], inclusiones:[], itinerarioVuelo:[], mostrarVuelo:false,
+                    leyendas: pa.descripcion ? [pa.descripcion] : [],
+                    whatsapp:'https://wa.me/5214777920736?text='+encodeURIComponent('Hola! Me interesa: '+(pa.titulo||'')+' - '+(pa.destino||'')+' ('+(pa.precio||')'))
+                };
+            }
+            return null;
+        })();
 
         if (!paquete) {
             document.getElementById('detalle-no-encontrado').style.display = 'block';
@@ -815,8 +830,12 @@
         document.getElementById('info-nombre').textContent = paquete.nombre;
 
         // Fechas
-        document.getElementById('info-fecha-inicio').textContent = fmtFecha(paquete.fechaInicio);
-        document.getElementById('info-fecha-fin').textContent = fmtFecha(paquete.fechaFin);
+        if (paquete.fechaInicio && paquete.fechaFin) {
+            document.getElementById('info-fecha-inicio').textContent = fmtFecha(paquete.fechaInicio);
+            document.getElementById('info-fecha-fin').textContent = fmtFecha(paquete.fechaFin);
+        } else {
+            document.getElementById('info-fecha-inicio').closest('.detalle-section').style.display = 'none';
+        }
 
         // Forma de precio + segmentos (columna principal)
         const tipoLabelMain = paquete.tipoPrecio === 'por-grupo'
@@ -837,6 +856,9 @@
 
         // Itinerario de viaje (tÃ­tulo + descripciÃ³n, sin nÃºmero de dÃ­a)
         const itinerarioEl = document.getElementById('info-itinerario');
+        if (!(paquete.itinerario || []).length) {
+            itinerarioEl.closest('.detalle-section').style.display = 'none';
+        }
         (paquete.itinerario || []).forEach(item => {
             itinerarioEl.innerHTML += `
                 <div class="itinerario-item">
@@ -849,6 +871,9 @@
 
         // Inclusiones
         const inclusEl = document.getElementById('info-inclusiones');
+        if (!(paquete.inclusiones || []).length) {
+            inclusEl.closest('.detalle-section').style.display = 'none';
+        }
         (paquete.inclusiones || []).forEach(inc => {
             inclusEl.innerHTML += `
                 <li>
@@ -884,7 +909,10 @@
 
         // Leyendas
         const leyendasEl = document.getElementById('info-leyendas');
-        paquete.leyendas.forEach(l => {
+        if (!paquete.leyendas || !paquete.leyendas.length) {
+            leyendasEl.closest('.detalle-section').style.display = 'none';
+        }
+        (paquete.leyendas || []).forEach(l => {
             leyendasEl.innerHTML += `
                 <li>
                     <i class="fas fa-info-circle"></i>
@@ -911,8 +939,13 @@
         document.getElementById('cta-duracion').textContent = paquete.duracion || '';
         document.getElementById('cta-whatsapp').href = paquete.whatsapp;
         document.getElementById('cta-destino').textContent = paquete.destino;
-        document.getElementById('cta-fecha-inicio').textContent = fmtFecha(paquete.fechaInicio);
-        document.getElementById('cta-fecha-fin').textContent = fmtFecha(paquete.fechaFin);
+        if (paquete.fechaInicio && paquete.fechaFin) {
+            document.getElementById('cta-fecha-inicio').textContent = fmtFecha(paquete.fechaInicio);
+            document.getElementById('cta-fecha-fin').textContent = fmtFecha(paquete.fechaFin);
+        } else {
+            document.getElementById('cta-fecha-inicio').textContent = 'Consultar';
+            document.getElementById('cta-fecha-fin').textContent = 'Consultar';
+        }
     })();
     </script>
 

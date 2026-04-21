@@ -77,7 +77,12 @@
         items.forEach(function (p, i) {
             var article = document.createElement('article');
             article.className = 'escape-card';
+            article.style.cursor = 'pointer';
             article.setAttribute('aria-label', 'Escapada: ' + escHtml(p.nombre));
+            article.addEventListener('click', function(e) {
+                if (e.target.closest('a')) return;
+                window.location.href = 'detalle.html?id=' + p.id;
+            });
             article.innerHTML =
                 '<div class="escape-card-image-wrapper">' +
                 '  <img src="' + escHtml(p.imagen) + '" alt="' + escHtml(p.nombre) + '" class="escape-card-image">' +
@@ -112,12 +117,12 @@
                     '  <div class="national-content">' +
                     '    <div class="national-info">' +
                     '      <h5 class="text-white text-uppercase mb-2">' + escHtml(item.titulo) + '</h5>' +
-                    '      <a href="' + escHtml(item.link) + '" class="btn-hover text-white">Ver todo el lugar <i class="fa fa-arrow-right ms-2"></i></a>' +
+                    '      <a href="' + ('https://wa.me/5214777920736?text=' + encodeURIComponent('Hola! Me interesa el tour: ' + (item.titulo || ''))) + '" target="_blank" rel="noopener" class="btn-hover text-white"><i class="fab fa-whatsapp me-1"></i> Cotizar <i class="fa fa-arrow-right ms-2"></i></a>' +
                     '    </div>' +
                     '  </div>' +
                     ofertaHtml +
                     '  <div class="national-plus-icon">' +
-                    '    <a href="' + escHtml(item.link) + '" class="my-auto"><i class="fas fa-link fa-2x text-white"></i></a>' +
+                    '    <a href="' + ('https://wa.me/5214777920736?text=' + encodeURIComponent('Hola! Me interesa el tour: ' + (item.titulo || ''))) + '" target="_blank" rel="noopener" class="my-auto"><i class="fab fa-whatsapp fa-2x text-white"></i></a>' +
                     '  </div>' +
                     '</div>';
                 nacEl.appendChild(col);
@@ -138,12 +143,12 @@
                     ofertaHtml +
                     '  <div class="international-info">' +
                     '    <h5 class="text-white text-uppercase mb-2">' + escHtml(item.titulo) + '</h5>' +
-                    '    <a href="' + escHtml(item.link) + '" class="btn-hover text-white me-4"><i class="fas fa-map-marker-alt me-1"></i> ' + escHtml(item.ciudades) + '</a>' +
-                    '    <a href="' + escHtml(item.link) + '" class="btn-hover text-white"><i class="fa fa-eye ms-2"></i> <span>' + escHtml(item.lugares) + '</span></a>' +
+                    '    <a href="' + escHtml(item.link || '#') + '" class="btn-hover text-white me-4"><i class="fas fa-map-marker-alt me-1"></i> ' + escHtml(item.ciudades) + '</a>' +
+                    '    <a href="' + ('https://wa.me/5214777920736?text=' + encodeURIComponent('Hola! Me interesa el tour internacional: ' + (item.titulo || '') + ' (' + (item.ciudades || '') + ')')) + '" target="_blank" rel="noopener" class="btn-hover text-white"><i class="fab fa-whatsapp me-1"></i> Cotizar</a>' +
                     '  </div>' +
                     '</div>' +
                     '<div class="international-plus-icon">' +
-                    '  <a href="' + escHtml(item.link) + '" class="my-auto"><i class="fas fa-link fa-2x text-white"></i></a>' +
+                    '  <a href="' + ('https://wa.me/5214777920736?text=' + encodeURIComponent('Hola! Me interesa el tour: ' + (item.titulo || ''))) + '" target="_blank" rel="noopener" class="my-auto"><i class="fab fa-whatsapp fa-2x text-white"></i></a>' +
                     '</div>';
                 intEl.appendChild(div);
             });
@@ -157,6 +162,11 @@
         items.forEach(function (p) {
             var div = document.createElement('div');
             div.className = 'packages-item';
+            div.style.cursor = 'pointer';
+            div.addEventListener('click', function(e) {
+                if (e.target.closest('a')) return;
+                window.open('https://wa.me/5214777920736?text=' + encodeURIComponent('Hola! Me interesa el paquete: ' + (p.titulo || '') + ' - ' + (p.destino || '') + ' (' + (p.precio || '') + ')'), '_blank');
+            });
             div.innerHTML =
                 '<div class="packages-img">' +
                 '  <img src="' + escHtml(p.imagen) + '" class="img-fluid w-100 rounded-top" alt="Imagen">' +
@@ -182,10 +192,10 @@
                 '  </div>' +
                 '  <div class="row bg-primary rounded-bottom mx-0">' +
                 '    <div class="col-6 text-start px-0">' +
-                '      <a href="' + escHtml(p.linkLeerMas) + '" class="btn-hover btn text-white py-2 px-4">Leer Más</a>' +
+                '      <a href="detalle.html?id=' + escHtml(p.id) + '" class="btn-hover btn text-white py-2 px-4">Leer Más</a>' +
                 '    </div>' +
                 '    <div class="col-6 text-end px-0">' +
-                '      <a href="' + escHtml(p.linkReservar) + '" class="btn-hover btn text-white py-2 px-4">Reservar Ahora</a>' +
+                '      <a href="' + ('https://wa.me/5214777920736?text=' + encodeURIComponent('Hola! Me interesa el paquete: ' + (p.titulo || '') + ' - ' + (p.destino || '') + ' (' + (p.precio || '') + ')')) + '" target="_blank" rel="noopener" class="btn-hover btn text-white py-2 px-4"><i class="fab fa-whatsapp me-1"></i> Cotizar</a>' +
                 '    </div>' +
                 '  </div>' +
                 '</div>';

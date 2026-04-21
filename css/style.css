@@ -4102,3 +4102,20 @@ html, body {
         min-height: 200px !important;
     }
 }
+
+
+/* ═══════════════════════════════════════════════════════
+   CLICKABLE CARDS — entire card is a link
+   ═══════════════════════════════════════════════════════ */
+.jovi-card-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+.jovi-card-link:hover {
+    text-decoration: none;
+    color: inherit;
+}
+.escape-card { cursor: pointer; }
+.packages-item { cursor: pointer; }
