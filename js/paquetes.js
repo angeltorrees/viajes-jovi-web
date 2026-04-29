@@ -788,3 +788,29 @@ var PAQUETES_ASOMBROSOS_DEFAULT = [
     }
     window.PAQUETES_ASOMBROSOS = PAQUETES_ASOMBROSOS_DEFAULT;
 })();
+
+
+// ── RESEÑAS DE VIAJEROS ───────────────────────────────────────────────────────
+var RESENAS_DEFAULT = [
+    { id:"r1", imagen:"img/gallery-1.jpg", autor:"María González", destino:"Cancún, México", estrellas:5, texto:"Las playas de Cancún superaron todas mis expectativas. El hotel fue increíble y la excursión a Isla Mujeres fue lo mejor del viaje.", fecha:"Jul 2025" },
+    { id:"r2", imagen:"img/gallery-4.jpg", autor:"Roberto Hernández", destino:"Europa Clásica", estrellas:5, texto:"El tour por Europa fue perfecto. París, Barcelona y Roma en un solo viaje. La organización de Jovi fue impecable de principio a fin.", fecha:"Oct 2025" },
+    { id:"r3", imagen:"img/gallery-6.jpg", autor:"Familia Ramírez", destino:"Orlando, Florida", estrellas:4, texto:"Mis hijos no paraban de sonreír en Disney. El paquete familiar incluyó todo y no tuvimos que preocuparnos por nada. ¡Volveremos!", fecha:"Dic 2025" },
+    { id:"r4", imagen:"img/gallery-10.jpg", autor:"Andrea López", destino:"Los Cabos, BCS", estrellas:5, texto:"Los Cabos fue el escape perfecto. El tour en lancha al Arco fue espectacular. El hotel boutique tenía una vista increíble al mar.", fecha:"Sep 2025" },
+    { id:"r5", imagen:"img/gallery-5.jpg", autor:"Carlos Mendoza", destino:"Huatulco, Oaxaca", estrellas:5, texto:"Huatulco es un paraíso escondido. Las bahías son cristalinas y la gastronomía oaxaqueña fue una experiencia única. 100% recomendado.", fecha:"Oct 2025" },
+    { id:"r6", imagen:"img/gallery-2.jpg", autor:"Pareja Torres-Vega", destino:"Riviera Maya", estrellas:5, texto:"El resort Todo Incluido en Riviera Maya fue un sueño. Tulum y los cenotes fueron mágicos. La mejor luna de miel que pudimos pedir.", fecha:"Ago 2025" }
+];
+
+(function () {
+    var stored = localStorage.getItem('jovi-resenas-admin');
+    if (stored) {
+        try {
+            var parsed = JSON.parse(stored);
+            if (Array.isArray(parsed) && parsed.length >= 1) {
+                window.RESENAS = parsed;
+                return;
+            }
+        } catch (e) {}
+        localStorage.removeItem('jovi-resenas-admin');
+    }
+    window.RESENAS = RESENAS_DEFAULT;
+})();

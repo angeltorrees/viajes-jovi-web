@@ -213,3 +213,41 @@
         renderEscape(paquetes.slice(5, 10));
     });
 })();
+
+
+// ── Render reseñas de viajeros ───────────────────────────────────────────────
+(function () {
+    function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+    function renderResenas(items) {
+        var container = document.querySelector('.jovi-reviews-grid');
+        if (!container || !items || !items.length) return;
+        container.innerHTML = '';
+        items.forEach(function (r) {
+            var stars = '';
+            for (var i = 1; i <= 5; i++) {
+                stars += '<i class="' + (i <= (r.estrellas || 5) ? 'fas' : 'far') + ' fa-star"></i>';
+            }
+            var card = document.createElement('div');
+            card.className = 'jovi-review-card jovi-reveal';
+            card.innerHTML =
+                '<img src="' + esc(r.imagen) + '" alt="' + esc(r.destino) + '" class="jovi-review-img" loading="lazy">' +
+                '<div class="jovi-review-body">' +
+                '  <div class="jovi-review-stars">' + stars + '</div>' +
+                '  <p class="jovi-review-text">"' + esc(r.texto) + '"</p>' +
+                '  <div class="jovi-review-footer">' +
+                '    <div>' +
+                '      <div class="jovi-review-author">' + esc(r.autor) + '</div>' +
+                '      <div class="jovi-review-dest"><i class="fas fa-map-marker-alt me-1"></i>' + esc(r.destino) + '</div>' +
+                '    </div>' +
+                '    <div class="jovi-review-date">' + esc(r.fecha) + '</div>' +
+                '  </div>' +
+                '</div>';
+            container.appendChild(card);
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        renderResenas(window.RESENAS || window.RESENAS_DEFAULT || []);
+    });
+})();

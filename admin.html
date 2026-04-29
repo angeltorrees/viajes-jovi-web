@@ -536,6 +536,9 @@
         <button class="tab-btn" data-tab="paquetes-asombrosos">
             <i class="fas fa-suitcase"></i> Paquetes Asombrosos (4)
         </button>
+        <button class="tab-btn" data-tab="resenas">
+            <i class="fas fa-comment-dots"></i> Reseñas
+        </button>
     </div>
 
     <div class="config-bar">
@@ -550,6 +553,7 @@
         <div class="tab-panel"        id="tab-escapadas"></div>
         <div class="tab-panel"        id="tab-explore"></div>
         <div class="tab-panel"        id="tab-paquetes-asombrosos"></div>
+        <div class="tab-panel"        id="tab-resenas"></div>
     </div>
 </div>
 
@@ -572,6 +576,7 @@
     var DATA_KEY    = 'jovi-paquetes-admin';
     var EXPLORE_KEY = 'jovi-explore-admin';
     var PA_KEY      = 'jovi-paquetes-asombrosos-admin';
+    var RESENAS_KEY  = 'jovi-resenas-admin';
     var CONFIG_KEY  = 'jovi-admin-config';
     // Hash SHA-256 de la contraseña (jovi2026)
     var PASS_HASH = '1d15f6b40d8340c10241704d6020e4f962de2aabea71c136ae7465dd2de87910';
@@ -657,12 +662,13 @@
             buildTab('tab-escapadas', window.PAQUETES.slice(5, 10), 5);
             buildTabExplore(window.EXPLORE_DATA || window.EXPLORE_DEFAULT);
             buildTabPA(window.PAQUETES_ASOMBROSOS || window.PAQUETES_ASOMBROSOS_DEFAULT);
+            buildTabResenas(window.RESENAS || window.RESENAS_DEFAULT || []);
         } catch (err) {
             console.error('[Admin] Error al construir panel, limpiando datos:', err);
             localStorage.removeItem(DATA_KEY);
             localStorage.removeItem(EXPLORE_KEY);
             localStorage.removeItem(PA_KEY);
-            panelReady = false;
+            localStorage.removeItem(RESENAS_KEY);            panelReady = false;
             location.reload();
         }
     }
@@ -886,6 +892,70 @@
         container.innerHTML = '';
         (items || []).forEach(function (item, i) {
             container.appendChild(buildPACard(item, i));
+        });
+    }
+
+    // ── RESEÑAS DE VIAJEROS ───────────────────────────────────────────────
+    function buildResenaCard(item, gi) {
+        var card = document.createElement('div');
+        card.className = 'pkg-card';
+        card.dataset.index = gi;
+
+        var header = document.createElement('div');
+        header.className = 'pkg-card-header';
+        header.innerHTML =
+            '<img class="pkg-thumb" src="' + x(item.imagen) + '" alt="">' +
+            '<div class="pkg-meta">' +
+            '  <h3 class="hdr-nombre">' + x(item.autor) + '</h3>' +
+            '  <small class="hdr-meta">' + x(item.destino || '') + ' · ' + x(item.fecha || '') + '</small>' +
+            '</div>' +
+            '<span class="pkg-id-badge">' + x((item.id || '').toUpperCase()) + '</span>' +
+            '<i class="fas fa-chevron-down pkg-toggle"></i>';
+
+        var body = document.createElement('div');
+        body.className = 'pkg-body';
+        var starsHtml = '';
+        for (var s = 1; s <= 5; s++) {
+            starsHtml += '<option value="' + s + '"' + ((item.estrellas || 5) == s ? ' selected' : '') + '>' + s + ' estrella' + (s > 1 ? 's' : '') + '</option>';
+        }
+        body.innerHTML =
+            '<div class="form-grid">' +
+            fg('autor', 'Nombre del viajero', item.autor || '', gi, false, true) +
+            fg('destino', 'Destino visitado', item.destino || '', gi) +
+            fg('fecha', 'Fecha del viaje', item.fecha || '', gi) +
+            '<div class="form-group">' +
+            '<label><span class="req-star">*</span> Calificación</label>' +
+            '<select data-gi="' + gi + '" data-field="estrellas">' + starsHtml + '</select>' +
+            '</div>' +
+            '</div>' +
+            '<div class="form-grid">' +
+            '<div class="form-group full">' +
+            '<label><span class="req-star">*</span> Reseña</label>' +
+            '<textarea data-gi="' + gi + '" data-field="texto" rows="3" placeholder="Texto de la reseña…">' + x(item.texto || '') + '</textarea>' +
+            '</div>' +
+            '</div>' +
+            '<div class="form-grid" style="margin-top:0.85rem">' +
+            '<div class="form-group full">' +
+            '<label>Imagen (ruta o URL)</label>' +
+            '<div class="img-row">' +
+            '<img class="img-preview" src="' + x(item.imagen) + '" alt="">' +
+            '<input type="text" data-gi="' + gi + '" data-field="imagen" value="' + x(item.imagen) + '" placeholder="img/gallery-1.jpg" style="flex:1">' +
+            '<label class="img-upload-btn" title="Cargar imagen"><i class="fas fa-folder-open"></i> Archivo<input type="file" accept="image/*" class="img-file-input" style="display:none"></label>' +
+            '</div></div>' +
+            '</div>';
+
+        header.addEventListener('click', function () { card.classList.toggle('is-open'); });
+        card.appendChild(header);
+        card.appendChild(body);
+        wireExploreBody(body, header);
+        return card;
+    }
+
+    function buildTabResenas(items) {
+        var container = document.getElementById('tab-resenas');
+        container.innerHTML = '';
+        (items || []).forEach(function (item, i) {
+            container.appendChild(buildResenaCard(item, i));
         });
     }
 
@@ -1350,6 +1420,25 @@
         return data;
     }
 
+    function collectResenas() {
+        var data = JSON.parse(JSON.stringify(window.RESENAS || window.RESENAS_DEFAULT || []));
+        document.querySelectorAll('#tab-resenas .pkg-card').forEach(function (card) {
+            var gi   = parseInt(card.dataset.index);
+            var body = card.querySelector('.pkg-body');
+            if (!body || isNaN(gi) || !data[gi]) return;
+            body.querySelectorAll('[data-field]').forEach(function (el) {
+                if (el.tagName === 'SELECT') {
+                    data[gi][el.dataset.field] = parseInt(el.value, 10);
+                } else if (el.tagName === 'TEXTAREA') {
+                    data[gi][el.dataset.field] = el.value;
+                } else {
+                    data[gi][el.dataset.field] = el.value;
+                }
+            });
+        });
+        return data;
+    }
+
     // ── COLLECT DATA ─────────────────────────────────────────────────────────
     function collectAll() {
         // Start from a deep copy of defaults so we preserve all fields
@@ -1512,6 +1601,10 @@
         localStorage.setItem(PA_KEY, JSON.stringify(paData));
         window.PAQUETES_ASOMBROSOS = paData;
 
+        var resenasData = collectResenas();
+        localStorage.setItem(RESENAS_KEY, JSON.stringify(resenasData));
+        window.RESENAS = resenasData;
+
         markSaved();
         showToast('¡Cambios guardados correctamente!', 'ok');
     }
@@ -1569,6 +1662,7 @@
         localStorage.removeItem(DATA_KEY);
         localStorage.removeItem(EXPLORE_KEY);
         localStorage.removeItem(PA_KEY);
+        localStorage.removeItem(RESENAS_KEY);
         window.PAQUETES = window.PAQUETES_DEFAULT;
         showToast('Valores restaurados — recargando…', 'ok');
         setTimeout(function () { location.reload(); }, 1000);
