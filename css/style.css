@@ -1923,22 +1923,6 @@ body {
     }
 }
 
-@media (max-width: 575.98px) {
-    .escape-card {
-        flex: 0 0 82vw !important;
-        max-width: 82vw !important;
-        height: 400px !important;
-    }
-    .escape-card-body {
-        padding: 0.75rem 1rem;
-    }
-    .escape-destination {
-        font-size: 1.1rem;
-    }
-    .escape-price {
-        font-size: 1rem;
-    }
-}
 /*** Escápate con Jovi End ***/
 
 
@@ -2756,9 +2740,25 @@ body {
 
 /* ── Escape cards: mobile fix definitivo ───────────────── */
 @media (max-width: 575.98px) {
+    .escape-section {
+        padding: 2rem 0 !important;
+    }
+    .escape-section .container {
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+    }
+    .escape-carousel-wrapper {
+        display: block !important;
+        position: relative;
+    }
+    .escape-carousel {
+        gap: 0.75rem !important;
+        padding: 0.5rem 1rem 1.25rem !important;
+    }
     .escape-card {
-        flex: 0 0 82vw !important;
-        max-width: 82vw !important;
+        flex: 0 0 78vw !important;
+        max-width: 78vw !important;
+        width: 78vw !important;
         height: 400px !important;
     }
     .escape-card-image-wrapper {
@@ -2767,23 +2767,44 @@ body {
         height: 100% !important;
     }
     .escape-card-body {
-        padding: 0.8rem 1rem;
+        padding: 0.8rem 1rem !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
     }
     .escape-destination {
-        font-size: 1.05rem;
-        white-space: normal;
+        font-size: 1.05rem !important;
+        white-space: normal !important;
         word-wrap: break-word;
     }
     .escape-duration {
-        font-size: 0.82rem;
+        font-size: 0.82rem !important;
     }
     .escape-price {
-        font-size: 1rem;
+        font-size: 1rem !important;
     }
     .escape-number {
-        font-size: 2.5rem;
-        bottom: 110px;
-        right: 10px;
+        font-size: 2.5rem !important;
+        bottom: 110px !important;
+        right: 10px !important;
+    }
+    .escape-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        width: 34px;
+        height: 34px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    .escape-arrow--prev {
+        left: 4px;
+    }
+    .escape-arrow--next {
+        right: 4px;
+    }
+    .escape-dots {
+        margin-top: 0.5rem !important;
     }
 }
 
