@@ -1732,6 +1732,86 @@
         return pkg.precio || '';
     }
 
+    // ── DUPLICATE PACKAGE ─────────────────────────────────────────────────────
+    // Adds a "Duplicate" button to each package card header on carousel/escapadas tabs
+    function addDuplicateButtons() {
+        document.querySelectorAll('#tab-carousel .pkg-card, #tab-escapadas .pkg-card').forEach(function (card) {
+            if (card.querySelector('.btn-duplicate')) return; // already added
+            var header = card.querySelector('.pkg-card-header');
+            if (!header) return;
+
+            var btn = document.createElement('button');
+            btn.className = 'btn-duplicate';
+            btn.title = 'Duplicar datos de este paquete al portapapeles';
+            btn.innerHTML = '<i class="fas fa-copy"></i>';
+            btn.style.cssText = 'background:rgba(255,107,0,0.1);border:none;color:var(--orange);border-radius:6px;padding:0.3rem 0.5rem;cursor:pointer;font-size:0.78rem;margin-right:0.3rem;transition:background 0.15s;';
+            btn.addEventListener('mouseenter', function () { btn.style.background = 'rgba(255,107,0,0.2)'; });
+            btn.addEventListener('mouseleave', function () { btn.style.background = 'rgba(255,107,0,0.1)'; });
+            btn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                var gi = parseInt(card.dataset.index);
+                var paquetes = window.PAQUETES || window.PAQUETES_DEFAULT;
+                if (!paquetes[gi]) return;
+                var copy = JSON.parse(JSON.stringify(paquetes[gi]));
+                copy.nombre = copy.nombre + ' (copia)';
+                copy.id = 'p' + (paquetes.length + 1);
+
+                try {
+                    navigator.clipboard.writeText(JSON.stringify(copy, null, 2));
+                    showToast('Datos del paquete copiados al portapapeles', 'ok');
+                } catch (err) {
+                    showToast('No se pudo copiar. Revisa los permisos del navegador.', 'err');
+                }
+            });
+
+            // Insert before the toggle icon
+            var toggle = header.querySelector('.pkg-toggle');
+            if (toggle) header.insertBefore(btn, toggle);
+            else header.appendChild(btn);
+        });
+    }
+
+    // ── PREVIEW LINK ──────────────────────────────────────────────────────────
+    // Adds a "Preview" link to each package card that opens detalle.html?id=XX
+    function addPreviewLinks() {
+        document.querySelectorAll('#tab-carousel .pkg-card, #tab-escapadas .pkg-card').forEach(function (card) {
+            if (card.querySelector('.btn-preview-link')) return;
+            var header = card.querySelector('.pkg-card-header');
+            if (!header) return;
+
+            var gi = parseInt(card.dataset.index);
+            var paquetes = window.PAQUETES || window.PAQUETES_DEFAULT;
+            if (!paquetes[gi]) return;
+
+            var link = document.createElement('a');
+            link.className = 'btn-preview-link';
+            link.href = 'detalle.html?id=' + paquetes[gi].id;
+            link.target = '_blank';
+            link.title = 'Ver vista previa';
+            link.innerHTML = '<i class="fas fa-eye"></i>';
+            link.style.cssText = 'background:rgba(37,211,102,0.1);border:none;color:#16a34a;border-radius:6px;padding:0.3rem 0.5rem;font-size:0.78rem;margin-right:0.3rem;text-decoration:none;transition:background 0.15s;display:inline-flex;align-items:center;';
+            link.addEventListener('mouseenter', function () { link.style.background = 'rgba(37,211,102,0.2)'; });
+            link.addEventListener('mouseleave', function () { link.style.background = 'rgba(37,211,102,0.1)'; });
+            link.addEventListener('click', function (e) { e.stopPropagation(); });
+
+            var toggle = header.querySelector('.pkg-toggle');
+            if (toggle) header.insertBefore(link, toggle);
+            else header.appendChild(link);
+        });
+    }
+
+    // Call after panel renders
+    var origShowPanel = showPanel;
+    // Use MutationObserver to detect when cards are rendered
+    var adminContent = document.querySelector('.admin-content');
+    if (adminContent) {
+        var obs = new MutationObserver(function () {
+            addDuplicateButtons();
+            addPreviewLinks();
+        });
+        obs.observe(adminContent, { childList: true, subtree: true });
+    }
+
 })();
 </script>
 </body>

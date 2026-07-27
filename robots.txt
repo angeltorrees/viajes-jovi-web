@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://viajesjovi.com/sitemap.xml
+
+# Bloquear admin
+Disallow: /admin.html
