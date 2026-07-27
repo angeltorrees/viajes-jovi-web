@@ -871,7 +871,7 @@ body {
 
 /* Dark mode */
 [data-theme="dark"] .mega-iframe-wrapper {
-    background: linear-gradient(135deg, #1e1e2e 0%, #252540 100%);
+    background: linear-gradient(135deg, #7d7a7a 0%, #8a8787 100%);
     border-color: rgba(255, 107, 0, 0.12);
     box-shadow: 0 4px 24px rgba(0,0,0,0.3);
 }
@@ -880,11 +880,11 @@ body {
     box-shadow: 0 8px 40px rgba(255, 107, 0, 0.1);
 }
 [data-theme="dark"] .mega-iframe-wrapper .mega-loading {
-    background: linear-gradient(135deg, #1e1e2e 0%, #252540 100%);
+    background: linear-gradient(135deg, #7d7a7a 0%, #8a8787 100%);
 }
 [data-theme="dark"] .mega-cta-bar {
-    background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
-    border: 1px solid rgba(255,255,255,0.05);
+    background: linear-gradient(135deg, #6b6868 0%, #7d7a7a 100%);
+    border: 1px solid rgba(255,255,255,0.1);
 }
 [data-theme="dark"] .mega-powered {
     color: #555;
@@ -2403,18 +2403,18 @@ body {
 
 /* Variables Dark Mode */
 [data-theme="dark"] {
-    --bs-body-bg:       #0e0e1a;
-    --bs-body-color:    #e0e0f0;
-    --bs-border-color:  rgba(255,255,255,0.1);
+    --bs-body-bg:       #969292;
+    --bs-body-color:    #ffffff;
+    --bs-border-color:  rgba(255,255,255,0.15);
 
-    --dm-bg:            #0e0e1a;
-    --dm-surface:       #17172b;
-    --dm-surface-2:     #1f1f38;
-    --dm-surface-3:     #27274a;
-    --dm-text:          #e0e0f0;
-    --dm-text-muted:    #a0a0c0;
-    --dm-border:        rgba(255,255,255,0.08);
-    --dm-card-shadow:   0 8px 32px rgba(0,0,0,0.5);
+    --dm-bg:            #969292;
+    --dm-surface:       #7d7a7a;
+    --dm-surface-2:     #8a8787;
+    --dm-surface-3:     #a39f9f;
+    --dm-text:          #ffffff;
+    --dm-text-muted:    #f0f0f0;
+    --dm-border:        rgba(255,255,255,0.12);
+    --dm-card-shadow:   0 8px 32px rgba(0,0,0,0.25);
 }
 
 /* Body y fondo base */
@@ -2651,7 +2651,7 @@ body {
 
 /* Footer */
 [data-theme="dark"] .footer {
-    background-color: #08080f !important;
+    background-color: #6b6868 !important;
 }
 [data-theme="dark"] .copyright {
     background-color: #050509 !important;
@@ -3395,7 +3395,7 @@ body {
     border-radius: 10px;
 }
 [data-theme="dark"] .jovi-skeleton {
-    background: linear-gradient(90deg, #1f1f38 25%, #27274a 50%, #1f1f38 75%);
+    background: linear-gradient(90deg, #7d7a7a 25%, #8a8787 50%, #7d7a7a 75%);
     background-size: 200% 100%;
 }
 @keyframes skeletonShimmer {
@@ -4846,5 +4846,5 @@ img {
 }
 .jovi-enh-toast--success { background: #059669; }
 .jovi-enh-toast--warning { background: #d97706; }
-.jovi-enh-toast--info { background: #1a1a2e; }
+.jovi-enh-toast--info { background: #6b6868; }
 .jovi-enh-toast--error { background: #dc2626; }
