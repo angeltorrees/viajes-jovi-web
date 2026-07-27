@@ -943,8 +943,7 @@
             ? paquete.segmentosPrecio
             : [{ nombre: paquete.formaPrecio || 'Por persona', precio: paquete.precio || '' }];
         segs.forEach((seg, i) => {
-            segEl.innerHTML += `<div class="precio-segmento${i === 0 ? ' seg-first' : ''}">
-                <span class="seg-nombre">${esc(seg.nombre)}</span>
+            segEl.innerHTML += `<div class="precio-segmento${i === 0 ? ' seg-first' : ''}" style="justify-content:center;">
                 <span class="seg-precio">${esc(seg.precio)}</span>
             </div>`;
         });
