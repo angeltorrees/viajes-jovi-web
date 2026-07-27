@@ -28,13 +28,7 @@ async function isAuthorized(request) {
 
 // ── API: POST /api/init ─────────────────────────────────────────────────────
 async function handleInit(db) {
-    await db.exec(`
-        CREATE TABLE IF NOT EXISTS collections (
-            key TEXT PRIMARY KEY,
-            data TEXT NOT NULL,
-            updated_at TEXT DEFAULT (datetime('now'))
-        );
-    `);
+    await db.exec("CREATE TABLE IF NOT EXISTS collections (key TEXT PRIMARY KEY, data TEXT NOT NULL, updated_at TEXT DEFAULT (datetime('now')));");
     return new Response(JSON.stringify({ ok: true, message: 'Database initialized' }), {
         headers: CORS_HEADERS
     });
@@ -117,7 +111,7 @@ export default {
         const path = url.pathname;
 
         // CORS preflight
-        if (request.method === 'OPTIONS') {
+        if (request.method === 'OPTIONS' && path.startsWith('/api/')) {
             return new Response(null, { status: 204, headers: CORS_HEADERS });
         }
 
@@ -136,7 +130,8 @@ export default {
             }
         }
 
-        // Everything else → serve static assets (handled by Cloudflare assets binding)
-        return env.ASSETS.fetch(request);
+        // Non-API routes: let Cloudflare assets handle them (return undefined/passthrough)
+        // With [assets] in wrangler.toml, unhandled requests automatically serve static files
+        return new Response('Not Found', { status: 404 });
     }
 };
