@@ -1818,12 +1818,21 @@
             link.className = 'btn-preview-link';
             link.href = 'detalle.html?id=' + paquetes[gi].id;
             link.target = '_blank';
-            link.title = 'Ver vista previa';
+            link.title = 'Guardar y ver vista previa';
             link.innerHTML = '<i class="fas fa-eye"></i>';
-            link.style.cssText = 'background:rgba(37,211,102,0.1);border:none;color:#16a34a;border-radius:6px;padding:0.3rem 0.5rem;font-size:0.78rem;margin-right:0.3rem;text-decoration:none;transition:background 0.15s;display:inline-flex;align-items:center;';
+            link.style.cssText = 'background:rgba(37,211,102,0.1);border:none;color:#16a34a;border-radius:6px;padding:0.3rem 0.5rem;font-size:0.78rem;margin-right:0.3rem;text-decoration:none;transition:background 0.15s;display:inline-flex;align-items:center;cursor:pointer;';
             link.addEventListener('mouseenter', function () { link.style.background = 'rgba(37,211,102,0.2)'; });
             link.addEventListener('mouseleave', function () { link.style.background = 'rgba(37,211,102,0.1)'; });
-            link.addEventListener('click', function (e) { e.stopPropagation(); });
+            link.addEventListener('click', function (e) {
+                e.stopPropagation();
+                e.preventDefault();
+                // Save only to localStorage (temporary) so preview shows current data
+                // without pushing to the cloud DB until user explicitly saves
+                var data = collectAll();
+                localStorage.setItem(DATA_KEY, JSON.stringify(data));
+                window.PAQUETES = data;
+                window.open(link.href, '_blank');
+            });
 
             var toggle = header.querySelector('.pkg-toggle');
             if (toggle) header.insertBefore(link, toggle);
@@ -1832,7 +1841,6 @@
     }
 
     // Call after panel renders
-    var origShowPanel = showPanel;
     // Use MutationObserver to detect when cards are rendered
     var adminContent = document.querySelector('.admin-content');
     if (adminContent) {
@@ -1841,6 +1849,11 @@
             addPreviewLinks();
         });
         obs.observe(adminContent, { childList: true, subtree: true });
+        // Also run immediately in case cards were already rendered (auto-login)
+        setTimeout(function () {
+            addDuplicateButtons();
+            addPreviewLinks();
+        }, 500);
     }
 
 })();
