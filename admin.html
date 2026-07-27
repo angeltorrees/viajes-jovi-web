@@ -563,6 +563,7 @@
 <!-- Toast -->
 <div class="jovi-toast" id="toast"></div>
 
+<script src="js/api.js"></script>
 <script src="js/paquetes.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
@@ -636,6 +637,11 @@
         if (hash === PASS_HASH) {
             localStorage.setItem(PASS_KEY, '1');
             document.getElementById('login-error').style.display = 'none';
+            // Set API auth token
+            if (typeof JoviAPI !== 'undefined') {
+                JoviAPI.setAuth(hash);
+                JoviAPI.initDB(); // Ensure tables exist
+            }
             showPanel();
         } else {
             document.getElementById('login-error').style.display = 'block';
@@ -1640,7 +1646,27 @@
         window.RESENAS = resenasData;
 
         markSaved();
-        showToast('¡Cambios guardados correctamente!', 'ok');
+        showToast('Guardando en la nube…', 'ok');
+
+        // ── Save to Cloudflare D1 (async, non-blocking) ──
+        if (typeof JoviAPI !== 'undefined') {
+            JoviAPI.saveAll([
+                { key: 'paquetes', data: data },
+                { key: 'explore', data: exploreData },
+                { key: 'paquetes-asombrosos', data: paData },
+                { key: 'resenas', data: resenasData }
+            ]).then(function (res) {
+                if (res.ok) {
+                    showToast('¡Guardado en la nube correctamente! ☁️', 'ok');
+                } else {
+                    showToast('Guardado local OK, pero fallo en la nube: ' + (res.error || 'Error desconocido'), 'err');
+                }
+            }).catch(function (err) {
+                showToast('Guardado local OK. Error de conexión con la nube.', 'err');
+            });
+        } else {
+            showToast('¡Cambios guardados localmente!', 'ok');
+        }
     }
 
     // ── UNSAVED STATE ─────────────────────────────────────────────────────────
@@ -1708,6 +1734,11 @@
 
     // ── AUTO-LOGIN (must be AFTER all listeners are registered) ───────────────
     if (localStorage.getItem(PASS_KEY)) {
+        // Set API auth for auto-login
+        if (typeof JoviAPI !== 'undefined') {
+            JoviAPI.setAuth(PASS_HASH);
+            JoviAPI.initDB();
+        }
         showPanel();
     }
 

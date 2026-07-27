@@ -814,3 +814,61 @@ var RESENAS_DEFAULT = [
     }
     window.RESENAS = RESENAS_DEFAULT;
 })();
+
+// ── CLOUD DATA LOADER (Cloudflare D1 via API) ────────────────────────────────
+// Attempts to load data from the remote API. If successful, overrides localStorage data.
+// Falls back silently to localStorage/defaults if API is unavailable.
+(function () {
+    'use strict';
+
+    // Only load if JoviAPI is available
+    if (typeof JoviAPI === 'undefined') return;
+
+    var loaded = false;
+
+    window.JOVI_DATA_READY = new Promise(function (resolve) {
+        JoviAPI.getAllData().then(function (collections) {
+            if (!collections) { resolve(false); return; }
+
+            if (collections.paquetes && collections.paquetes.data) {
+                var p = collections.paquetes.data;
+                if (Array.isArray(p) && p.length >= 10 && p[0] && p[0].id === 'p1') {
+                    window.PAQUETES = p;
+                    // Also sync to localStorage for offline use
+                    localStorage.setItem('jovi-paquetes-admin', JSON.stringify(p));
+                }
+            }
+
+            if (collections.explore && collections.explore.data) {
+                var e = collections.explore.data;
+                if (e && Array.isArray(e.nacionales)) {
+                    window.EXPLORE_DATA = e;
+                    localStorage.setItem('jovi-explore-admin', JSON.stringify(e));
+                }
+            }
+
+            if (collections['paquetes-asombrosos'] && collections['paquetes-asombrosos'].data) {
+                var pa = collections['paquetes-asombrosos'].data;
+                if (Array.isArray(pa) && pa.length >= 1) {
+                    window.PAQUETES_ASOMBROSOS = pa;
+                    localStorage.setItem('jovi-paquetes-asombrosos-admin', JSON.stringify(pa));
+                }
+            }
+
+            if (collections.resenas && collections.resenas.data) {
+                var r = collections.resenas.data;
+                if (Array.isArray(r) && r.length >= 1) {
+                    window.RESENAS = r;
+                    localStorage.setItem('jovi-resenas-admin', JSON.stringify(r));
+                }
+            }
+
+            loaded = true;
+            resolve(true);
+            console.info('[Viajes Jovi] Data loaded from cloud DB');
+        }).catch(function (err) {
+            console.warn('[Viajes Jovi] Cloud load failed, using local data:', err);
+            resolve(false);
+        });
+    });
+})();
