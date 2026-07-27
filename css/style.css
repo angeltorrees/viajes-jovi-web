@@ -1925,9 +1925,9 @@ body {
 
 @media (max-width: 575.98px) {
     .escape-card {
-        flex: 0 0 85vw;
-        max-width: 85vw;
-        height: 420px;
+        flex: 0 0 82vw !important;
+        max-width: 82vw !important;
+        height: 400px !important;
     }
     .escape-card-body {
         padding: 0.75rem 1rem;
@@ -2754,33 +2754,61 @@ body {
     border-width: clamp(12px, 3vw, 50px) !important;
 }
 
-/* ── Escape cards: altura flexible ──────────────────────── */
+/* ── Escape cards: mobile fix definitivo ───────────────── */
 @media (max-width: 575.98px) {
     .escape-card {
-        height: auto !important;
-        min-height: 380px;
+        flex: 0 0 82vw !important;
+        max-width: 82vw !important;
+        height: 400px !important;
     }
     .escape-card-image-wrapper {
         position: absolute;
         inset: 0;
         height: 100% !important;
     }
+    .escape-card-body {
+        padding: 0.8rem 1rem;
+    }
+    .escape-destination {
+        font-size: 1.05rem;
+        white-space: normal;
+        word-wrap: break-word;
+    }
+    .escape-duration {
+        font-size: 0.82rem;
+    }
+    .escape-price {
+        font-size: 1rem;
+    }
+    .escape-number {
+        font-size: 2.5rem;
+        bottom: 110px;
+        right: 10px;
+    }
 }
 
 /* ── Carousel hero: mejor ajuste en móvil ───────────────── */
 @media (max-width: 575.98px) {
     .carousel-header,
-    .carousel-header .carousel-inner .carousel-item img,
+    .carousel-header .carousel-inner,
+    .carousel-header .carousel-inner .carousel-item,
     .carousel-header .carousel-inner .carousel-item .carousel-caption {
-        height: 100svh !important;
-        max-height: 700px !important;
-        min-height: 380px !important;
+        height: 85svh !important;
+        max-height: 650px !important;
+        min-height: 500px !important;
+    }
+    .jovi-hero-slide {
+        height: 85svh !important;
+        max-height: 650px !important;
+        min-height: 500px !important;
     }
     .jovi-hero-content {
-        left: 20px !important;
-        right: 20px !important;
-        bottom: 80px !important;
         max-width: 100% !important;
+        padding: 0 1.25rem !important;
+    }
+    .jovi-hero-title {
+        font-size: 1.6rem !important;
+        margin-bottom: 0.75rem !important;
     }
     .jovi-hero-actions {
         flex-direction: column !important;
@@ -2793,8 +2821,15 @@ body {
     }
     .jovi-price-box {
         flex-direction: column !important;
-        align-items: flex-start !important;
+        align-items: center !important;
         gap: 0.4rem !important;
+        padding: 0.75rem 1rem !important;
+    }
+    .jovi-price-amount {
+        font-size: 1.5rem !important;
+    }
+    .jovi-price-text {
+        font-size: 0.75rem !important;
     }
 }
 
