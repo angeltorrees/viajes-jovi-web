@@ -1902,21 +1902,41 @@ body {
 @media (max-width: 991.98px) {
     .escape-carousel-wrapper {
         grid-template-columns: 1fr;
-        grid-template-rows: auto auto auto;
+        grid-template-rows: auto auto;
         justify-items: center;
+        position: relative;
     }
 
     .escape-arrow--prev,
     .escape-arrow--next {
-        order: 3;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        order: unset;
+    }
+    .escape-arrow--prev {
+        left: 0;
+    }
+    .escape-arrow--next {
+        right: 0;
     }
 }
 
 @media (max-width: 575.98px) {
     .escape-card {
-        flex: 0 0 250px;
-        max-width: 250px;
-        height: 460px;
+        flex: 0 0 85vw;
+        max-width: 85vw;
+        height: 420px;
+    }
+    .escape-card-body {
+        padding: 0.75rem 1rem;
+    }
+    .escape-destination {
+        font-size: 1.1rem;
+    }
+    .escape-price {
+        font-size: 1rem;
     }
 }
 /*** Escápate con Jovi End ***/
@@ -2738,10 +2758,12 @@ body {
 @media (max-width: 575.98px) {
     .escape-card {
         height: auto !important;
-        min-height: 420px;
+        min-height: 380px;
     }
     .escape-card-image-wrapper {
-        height: 220px !important;
+        position: absolute;
+        inset: 0;
+        height: 100% !important;
     }
 }
 
