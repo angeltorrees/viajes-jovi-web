@@ -245,3 +245,60 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+// ── Megatravel Iframe Lazy Loader ────────────────────────────────────────────
+// Loads iframes only when their tab is activated to improve page performance
+(function () {
+    'use strict';
+
+    function loadMegaIframe(wrapper) {
+        if (!wrapper || wrapper.querySelector('iframe')) return; // already loaded
+        var src = wrapper.getAttribute('data-src');
+        if (!src) return;
+
+        // Show loading spinner
+        wrapper.innerHTML = '<div class="mega-loading"><i class="fas fa-circle-notch"></i><p class="mt-2">Cargando paquetes…</p></div>';
+
+        var iframe = document.createElement('iframe');
+        iframe.src = src;
+        iframe.width = '100%';
+        iframe.height = '900';
+        iframe.frameBorder = '0';
+        iframe.setAttribute('allowtransparency', 'true');
+        iframe.setAttribute('loading', 'lazy');
+        iframe.title = 'Paquetes Megatravel';
+        iframe.style.borderRadius = '12px';
+        iframe.style.minHeight = '900px';
+
+        iframe.onload = function () {
+            var loading = wrapper.querySelector('.mega-loading');
+            if (loading) loading.remove();
+        };
+
+        wrapper.appendChild(iframe);
+    }
+
+    // Listen for Bootstrap tab show events
+    document.addEventListener('shown.bs.tab', function (e) {
+        var target = e.target.getAttribute('href');
+        if (!target) return;
+        var pane = document.querySelector(target);
+        if (!pane) return;
+        var wrapper = pane.querySelector('.mega-iframe-wrapper[data-src]');
+        if (wrapper) loadMegaIframe(wrapper);
+    });
+
+    // Also handle click-based tab activation for older Bootstrap or jQuery tabs
+    document.addEventListener('click', function (e) {
+        var tab = e.target.closest('[data-bs-toggle="pill"][href^="#mega-tab-"], [data-bs-toggle="pill"][href^="#mega-dest-"]');
+        if (!tab) return;
+        var target = tab.getAttribute('href');
+        var pane = document.querySelector(target);
+        if (!pane) return;
+        var wrapper = pane.querySelector('.mega-iframe-wrapper[data-src]');
+        if (wrapper) {
+            // Small delay to let the tab transition start
+            setTimeout(function () { loadMegaIframe(wrapper); }, 100);
+        }
+    });
+})();

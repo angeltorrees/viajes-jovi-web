@@ -603,9 +603,26 @@
 
     // ── TIPO PRECIO OPTIONS ───────────────────────────────────────────────────
     var TIPO_OPCIONES = [
-        { value: 'por-persona', label: 'Precio total por número de noches y por persona' },
-        { value: 'por-grupo',   label: 'Precio total por número de noches y por total de personas' }
+        { value: 'por-persona',        label: 'Por persona (noches incluidas)' },
+        { value: 'por-persona-doble',  label: 'Por persona en ocupación doble' },
+        { value: 'por-persona-triple', label: 'Por persona en ocupación triple' },
+        { value: 'por-pareja',         label: 'Por pareja (noches incluidas)' },
+        { value: 'por-grupo',          label: 'Por grupo / total de personas' },
+        { value: 'personalizado',      label: 'Personalizado (escribir texto libre)' }
     ];
+
+    // Mapa de tipoPrecio → texto que se muestra en el sitio público
+    var TIPO_PRECIO_DISPLAY = {
+        'por-persona':        'Por persona (noches incluidas)',
+        'por-persona-doble':  'Por persona en ocupación doble',
+        'por-persona-triple': 'Por persona en ocupación triple',
+        'por-pareja':         'Por pareja (noches incluidas)',
+        'por-grupo':          'Por grupo / total de personas'
+    };
+
+    function getTipoPrecioText(tipo) {
+        return TIPO_PRECIO_DISPLAY[tipo] || 'Por persona (noches incluidas)';
+    }
 
     // ── LOGIN ─────────────────────────────────────────────────────────────────
     document.getElementById('login-btn').addEventListener('click', doLogin);
@@ -1038,7 +1055,7 @@
 
         /* ── PRECIOS ── */
         h += '<div class="section-label"><i class="fas fa-tag"></i> Precios <span class="req-label">obligatorio</span></div>';
-        h += '<div class="section-hint"><i class="fas fa-info-circle"></i> Selecciona la forma de precio y agrega uno o más segmentos. Cada segmento tiene un <strong>nombre de personas</strong> (ej: 1 persona, 2-3 personas) y su <strong>precio</strong> correspondiente.</div>';
+        h += '<div class="section-hint"><i class="fas fa-info-circle"></i> Selecciona la forma de precio y agrega uno o más segmentos. Cada segmento tiene una <strong>etiqueta</strong> (texto que aparece junto al precio, ej: "Por persona", "2-3 personas", "Por pareja") y su <strong>precio</strong> correspondiente.</div>';
 
         /* Tipo precio */
         h += '<div class="tipo-precio-group">';
@@ -1050,6 +1067,8 @@
                 '>' + op.label + '</option>';
         });
         h += '</select>';
+        var isCustom = (pkg.tipoPrecio === 'personalizado');
+        h += '<input type="text" data-gi="' + gi + '" data-field="formaPrecioCustom" value="' + x(isCustom ? (pkg.formaPrecio || '') : '') + '" placeholder="Ej: Por pareja, Por 2 personas…" style="margin-top:0.5rem;' + (isCustom ? '' : 'display:none;') + '">';
         h += '</div>';
 
         /* Segmentos */
@@ -1158,7 +1177,7 @@
         return '<div class="list-item">' +
             '<div class="list-item-fields">' +
             '  <div class="seg-row">' +
-            '    <input type="text" data-subfield="nombre" value="' + x(seg ? seg.nombre : '') + '" placeholder="Número de personas (ej: 1 persona, 2-3 personas…)">' +
+            '    <input type="text" data-subfield="nombre" value="' + x(seg ? seg.nombre : '') + '" placeholder="Etiqueta (ej: Por persona, Por pareja, 2-3 personas…)">' +
             '    <input type="text" data-subfield="precio" value="' + x(seg ? seg.precio : '') + '" placeholder="Precio (ej: $9,999 MXN)">' +
             '  </div>' +
             '</div>' +
@@ -1260,6 +1279,16 @@
         var fpStart = body.querySelector('[data-field="fechaInicio"]');
         var fpEnd   = body.querySelector('[data-field="fechaFin"]');
         var chip    = document.getElementById('date-chip-' + gi);
+
+        // ── Toggle custom formaPrecio input visibility
+        var tipoSelect = body.querySelector('[data-field="tipoPrecio"]');
+        var customInput = body.querySelector('[data-field="formaPrecioCustom"]');
+        if (tipoSelect && customInput) {
+            tipoSelect.addEventListener('change', function () {
+                customInput.style.display = tipoSelect.value === 'personalizado' ? '' : 'none';
+                markUnsaved();
+            });
+        }
 
         function updateChip() {
             if (!chip) return;
@@ -1466,6 +1495,14 @@
             var tipoEl = body.querySelector('[data-field="tipoPrecio"]');
             if (tipoEl) pkg.tipoPrecio = tipoEl.value;
 
+            // formaPrecio — sync with tipoPrecio selection
+            if (pkg.tipoPrecio === 'personalizado') {
+                var customEl = body.querySelector('[data-field="formaPrecioCustom"]');
+                pkg.formaPrecio = customEl ? customEl.value.trim() : '';
+            } else {
+                pkg.formaPrecio = getTipoPrecioText(pkg.tipoPrecio);
+            }
+
             // segmentosPrecio
             pkg.segmentosPrecio = [];
             body.querySelectorAll('[data-list="segmentosPrecio"] .list-item').forEach(function (item) {
@@ -1475,10 +1512,7 @@
             });
             // Keep backward-compat precio field = first segment
             if (pkg.segmentosPrecio.length) {
-                pkg.precio      = pkg.segmentosPrecio[0].precio;
-                pkg.formaPrecio = pkg.tipoPrecio === 'por-grupo'
-                    ? 'Precio por grupo (noches incluidas)'
-                    : 'Por persona (noches incluidas)';
+                pkg.precio = pkg.segmentosPrecio[0].precio;
             }
 
             // inclusiones

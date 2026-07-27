@@ -776,6 +776,20 @@
             return d.innerHTML;
         }
 
+        const TIPO_PRECIO_MAP = {
+            'por-persona':        'Por persona (noches incluidas)',
+            'por-persona-doble':  'Por persona en ocupación doble',
+            'por-persona-triple': 'Por persona en ocupación triple',
+            'por-pareja':         'Por pareja (noches incluidas)',
+            'por-grupo':          'Por grupo / total de personas'
+        };
+
+        function getTipoPrecioLabel(p) {
+            if (p.tipoPrecio === 'personalizado') return p.formaPrecio || '';
+            if (TIPO_PRECIO_MAP[p.tipoPrecio]) return TIPO_PRECIO_MAP[p.tipoPrecio];
+            return p.formaPrecio || 'Por persona (noches incluidas)';
+        }
+
         // Leer ?id= de la URL
         const params = new URLSearchParams(window.location.search);
         const id = params.get('id');
@@ -838,9 +852,7 @@
         }
 
         // Forma de precio + segmentos (columna principal)
-        const tipoLabelMain = paquete.tipoPrecio === 'por-grupo'
-            ? 'Precio total por grupo (noches incluidas)'
-            : 'Precio por persona (noches incluidas)';
+        const tipoLabelMain = getTipoPrecioLabel(paquete);
         document.getElementById('info-tipo-precio').textContent = tipoLabelMain;
 
         const segsMainEl = document.getElementById('info-segmentos-precio');
@@ -921,9 +933,7 @@
         });
 
         // CTA lateral â€” precios con segmentos
-        const tipoLabel = paquete.tipoPrecio === 'por-grupo'
-            ? 'Precio total por grupo (noches incluidas)'
-            : 'Precio por persona (noches incluidas)';
+        const tipoLabel = getTipoPrecioLabel(paquete);
         document.getElementById('cta-tipo-precio').textContent = tipoLabel;
 
         const segEl = document.getElementById('cta-segmentos');

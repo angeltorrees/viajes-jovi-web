@@ -17,10 +17,18 @@
         return escHtml(p.precio || '');
     }
 
+    var TIPO_PRECIO_MAP = {
+        'por-persona':        'Por persona (noches incluidas)',
+        'por-persona-doble':  'Por persona en ocupación doble',
+        'por-persona-triple': 'Por persona en ocupación triple',
+        'por-pareja':         'Por pareja (noches incluidas)',
+        'por-grupo':          'Por grupo / total de personas'
+    };
+
     function getTipoPrecioLabel(p) {
-        if (p.tipoPrecio === 'por-grupo') return 'Precio por grupo (noches incluidas)';
-        if (p.tipoPrecio === 'por-persona') return 'Por persona (noches incluidas)';
-        return escHtml(p.formaPrecio || '');
+        if (p.tipoPrecio === 'personalizado') return escHtml(p.formaPrecio || '');
+        if (TIPO_PRECIO_MAP[p.tipoPrecio]) return TIPO_PRECIO_MAP[p.tipoPrecio];
+        return escHtml(p.formaPrecio || 'Por persona (noches incluidas)');
     }
 
     function renderCarousel(items) {
