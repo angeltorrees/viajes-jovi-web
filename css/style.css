@@ -3285,7 +3285,7 @@ body {
     align-items: center;
     gap: 0.6rem;
     flex-shrink: 0;
-    margin-left: 1.5rem;
+    margin-left: auto;
 }
 
 /* Theme toggle */
@@ -5415,4 +5415,27 @@ img {
     .jovi-quick-card p {
         font-size: 0.72rem;
     }
+}
+
+
+/* ── Footer antiguo: unificar tipografía con el moderno ── */
+.container-fluid.footer {
+    font-family: 'Barlow Condensed', system-ui, sans-serif !important;
+}
+.container-fluid.footer h4 {
+    font-family: 'Barlow Condensed', sans-serif !important;
+    font-weight: 700;
+    font-style: italic;
+    font-size: 1.1rem;
+    letter-spacing: 0.04em;
+}
+.container-fluid.footer .footer-item a {
+    font-family: 'Barlow Condensed', sans-serif !important;
+    font-weight: 500;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+}
+.container-fluid.footer .copyright a,
+.container-fluid.footer .copyright {
+    font-family: 'Barlow Condensed', sans-serif !important;
 }
