@@ -1646,7 +1646,7 @@ body {
 
 /*** Escápate con Jovi Start ***/
 .escape-section {
-    background: radial-gradient(circle at top left, #020617 0%, #020617 55%, #000000 100%);
+    background: #969292;
     font-family: 'Barlow Condensed', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
@@ -5274,4 +5274,86 @@ img {
 .service .service-content p {
     font-size: 0.88rem;
     line-height: 1.6;
+}
+
+
+/* ── Quick access cards (Explora más section) ─────────── */
+.jovi-quick-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2rem 1rem;
+    border-radius: 16px;
+    background: #fff;
+    border: 1.5px solid #e9ecef;
+    text-decoration: none;
+    color: var(--jovi-dark);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 100%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.jovi-quick-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 32px rgba(255, 107, 0, 0.15);
+    border-color: var(--bs-primary);
+    color: var(--jovi-dark);
+    text-decoration: none;
+}
+.jovi-quick-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(255,107,0,0.1) 0%, rgba(255,107,0,0.05) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+    color: var(--bs-primary);
+    transition: all 0.3s ease;
+}
+.jovi-quick-card:hover .jovi-quick-icon {
+    background: var(--bs-primary);
+    color: #fff;
+    transform: scale(1.1);
+}
+.jovi-quick-card h6 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
+}
+.jovi-quick-card p {
+    font-size: 0.8rem;
+    color: #6b7280;
+    margin: 0;
+    line-height: 1.4;
+}
+[data-theme="dark"] .jovi-quick-card {
+    background: var(--dm-surface);
+    border-color: var(--dm-border);
+    color: var(--dm-text);
+}
+[data-theme="dark"] .jovi-quick-card:hover {
+    border-color: var(--bs-primary);
+}
+[data-theme="dark"] .jovi-quick-card p {
+    color: var(--dm-text-muted);
+}
+@media (max-width: 575.98px) {
+    .jovi-quick-card {
+        padding: 1.25rem 0.75rem;
+    }
+    .jovi-quick-icon {
+        width: 48px;
+        height: 48px;
+        font-size: 1.2rem;
+    }
+    .jovi-quick-card h6 {
+        font-size: 0.95rem;
+    }
+    .jovi-quick-card p {
+        font-size: 0.72rem;
+    }
 }
