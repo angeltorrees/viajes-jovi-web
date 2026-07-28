@@ -3945,9 +3945,10 @@ html {
    MODERN FOOTER
    ═══════════════════════════════════════════════════════ */
 .jovi-footer-modern {
-    background: linear-gradient(180deg, #0f0f1e 0%, #1a1a2e 100%);
+    background: linear-gradient(180deg, #1a1a2e 0%, #0f0f1e 100%) !important;
     position: relative;
     overflow: hidden;
+    color: #fff;
 }
 .jovi-footer-modern::before {
     content: '';
@@ -5014,12 +5015,40 @@ p {
 
 /* ── 4-6. Espaciado uniforme entre secciones ──────────── */
 .container-fluid.py-5 > .container.py-5 {
-    padding-top: 3.5rem !important;
-    padding-bottom: 3.5rem !important;
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
 }
 section.py-5 > .container.py-5 {
-    padding-top: 3.5rem !important;
-    padding-bottom: 3.5rem !important;
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+}
+@media (max-width: 767.98px) {
+    .container-fluid.py-5 {
+        padding-top: 2rem !important;
+        padding-bottom: 2rem !important;
+    }
+    .container-fluid.py-5 > .container.py-5 {
+        padding-top: 1.5rem !important;
+        padding-bottom: 1.5rem !important;
+    }
+    section.py-5 {
+        padding-top: 2rem !important;
+        padding-bottom: 2rem !important;
+    }
+    section.py-5 > .container.py-5 {
+        padding-top: 1.5rem !important;
+        padding-bottom: 1.5rem !important;
+    }
+    .mx-auto.text-center.mb-5 {
+        margin-bottom: 1.5rem !important;
+    }
+    /* Reduce row gaps when stacked */
+    .row.g-5 {
+        --bs-gutter-y: 1.5rem;
+    }
+    .about .row.g-5 {
+        --bs-gutter-y: 1.25rem;
+    }
 }
 
 /* ── 7. Cards rediseñadas globales ────────────────────── */
