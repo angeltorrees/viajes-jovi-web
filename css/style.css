@@ -3016,16 +3016,47 @@ body {
 /* ── Detalle.html responsivo ────────────────────────────── */
 @media (max-width: 767.98px) {
     .detalle-hero {
-        height: 280px !important;
+        height: 250px !important;
     }
     .detalle-hero-content {
         padding: 1.5rem 1rem 1rem !important;
     }
     .detalle-titulo {
-        font-size: 1.6rem !important;
+        font-size: 1.5rem !important;
+    }
+    .detalle-badge {
+        font-size: 0.75rem !important;
+    }
+    #detalle-contenido {
+        padding-top: 1.5rem !important;
+        padding-bottom: 2rem !important;
+    }
+    #detalle-contenido .col-lg-8,
+    #detalle-contenido .col-lg-4 {
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
     }
     .detalle-cta {
         position: static !important;
+    }
+    .precio-box {
+        padding: 1.5rem !important;
+        border-radius: 14px !important;
+    }
+    .precio-tipo-label {
+        font-size: 0.85rem !important;
+    }
+    .precio-segmento.seg-first .seg-precio {
+        font-size: 1.8rem !important;
+    }
+    .detalle-section {
+        padding: 1.5rem 0 !important;
+    }
+    .detalle-section-title {
+        font-size: 1.2rem !important;
+    }
+    .detalle-section-title i {
+        font-size: 1rem !important;
     }
     .itinerario-item {
         flex-direction: column;
@@ -3041,16 +3072,44 @@ body {
         padding: 0 0.75rem;
     }
     .itinerario-dia-badge .dia-texto { font-size: 0.75rem; }
+    .itinerario-body {
+        padding: 0.75rem 1rem !important;
+    }
+    .itinerario-body h6 {
+        font-size: 0.95rem !important;
+    }
+    .itinerario-body p {
+        font-size: 0.85rem !important;
+    }
+    .inclusion-list li {
+        font-size: 0.9rem !important;
+        padding: 0.5rem 0 !important;
+    }
+    .leyenda-list li {
+        font-size: 0.8rem !important;
+    }
     .vuelo-ruta {
         flex-direction: column;
         gap: 0.25rem;
     }
     .vuelo-flecha { transform: rotate(90deg); }
+    .btn-whatsapp {
+        font-size: 1rem !important;
+        padding: 0.9rem !important;
+    }
+    .fecha-card {
+        padding: 0.9rem 1rem !important;
+    }
+    .fecha-card .fecha-valor {
+        font-size: 1rem !important;
+    }
 }
 
 @media (max-width: 575.98px) {
-    .detalle-hero { height: 240px !important; }
-    .precio-amount { font-size: 2.2rem !important; }
+    .detalle-hero { height: 220px !important; }
+    .detalle-titulo { font-size: 1.3rem !important; }
+    .precio-amount { font-size: 2rem !important; }
+    .precio-segmento.seg-first .seg-precio { font-size: 1.6rem !important; }
 }
 
 /* ═══════════════════════════════════════════════════════
