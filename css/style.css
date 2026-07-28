@@ -2825,32 +2825,49 @@ body {
     }
     .jovi-hero-content {
         max-width: 100% !important;
-        padding: 0 1.25rem !important;
+        padding: 0 1rem !important;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
     .jovi-hero-title {
-        font-size: 1.6rem !important;
-        margin-bottom: 0.75rem !important;
+        font-size: clamp(1.2rem, 5vw, 1.6rem) !important;
+        line-height: 1.2 !important;
+        margin-bottom: 0.6rem !important;
+        text-align: center;
+        padding: 0 0.5rem;
     }
     .jovi-hero-actions {
         flex-direction: column !important;
+        width: 100%;
     }
     .jovi-hero-actions .btn,
     .jovi-hero-actions a {
         width: 100% !important;
         text-align: center !important;
         margin: 0.25rem 0 !important;
+        padding: 0.65rem 1.5rem !important;
+        font-size: 0.85rem !important;
     }
     .jovi-price-box {
         flex-direction: column !important;
         align-items: center !important;
-        gap: 0.4rem !important;
-        padding: 0.75rem 1rem !important;
+        gap: 0.3rem !important;
+        padding: 0.6rem 1rem !important;
+        margin-bottom: 0.75rem !important;
     }
     .jovi-price-amount {
-        font-size: 1.5rem !important;
+        font-size: 1.4rem !important;
     }
     .jovi-price-text {
-        font-size: 0.75rem !important;
+        font-size: 0.72rem !important;
+    }
+    .jovi-price-label {
+        font-size: 0.7rem !important;
+    }
+    .jovi-price-badge {
+        font-size: 0.7rem !important;
+        padding: 0.2rem 0.6rem !important;
     }
 }
 
