@@ -905,18 +905,35 @@
         }
         var fileInput = body.querySelector('.img-file-input');
         if (fileInput) {
-            fileInput.addEventListener('change', function () {
+            fileInput.addEventListener('change', async function () {
                 var file = fileInput.files[0];
                 if (!file) return;
-                var reader = new FileReader();
-                reader.onload = function (ev) {
-                    var src = ev.target.result;
-                    if (imgInput) imgInput.value = src;
-                    if (thumb)   thumb.src = src;
-                    if (preview) preview.src = src;
-                    markUnsaved();
-                };
-                reader.readAsDataURL(file);
+                try {
+                    var formData = new FormData();
+                    formData.append('file', file);
+                    var res = await fetch('/api/upload', {
+                        method: 'POST',
+                        headers: { 'Authorization': 'Bearer ' + PASS_HASH },
+                        body: formData
+                    });
+                    var json = await res.json();
+                    if (json.ok && json.url) {
+                        if (imgInput) imgInput.value = json.url;
+                        if (thumb)   thumb.src = json.url;
+                        if (preview) preview.src = json.url;
+                        markUnsaved();
+                        showToast('Imagen subida ☁️', 'ok');
+                    } else { throw new Error(json.error); }
+                } catch (err) {
+                    var reader = new FileReader();
+                    reader.onload = function (ev) {
+                        if (imgInput) imgInput.value = ev.target.result;
+                        if (thumb)   thumb.src = ev.target.result;
+                        if (preview) preview.src = ev.target.result;
+                        markUnsaved();
+                    };
+                    reader.readAsDataURL(file);
+                }
                 fileInput.value = '';
             });
         }
@@ -1338,21 +1355,55 @@
             });
         }
 
-        // ── Image upload from file
+        // ── Image upload from file (uploads to R2)
         var fileInput = body.querySelector('.img-file-input');
         if (fileInput) {
-            fileInput.addEventListener('change', function () {
+            fileInput.addEventListener('change', async function () {
                 var file = fileInput.files[0];
                 if (!file) return;
-                var reader = new FileReader();
-                reader.onload = function (ev) {
-                    var src = ev.target.result;
-                    if (imgInput) { imgInput.value = src; }
-                    if (thumb)   thumb.src   = src;
-                    if (preview) preview.src = src;
-                    markUnsaved();
-                };
-                reader.readAsDataURL(file);
+
+                // Show uploading state
+                if (preview) preview.style.opacity = '0.5';
+                var origBtnText = fileInput.parentElement.innerHTML;
+                fileInput.parentElement.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Subiendo...';
+
+                try {
+                    var formData = new FormData();
+                    formData.append('file', file);
+
+                    var res = await fetch('/api/upload', {
+                        method: 'POST',
+                        headers: { 'Authorization': 'Bearer ' + PASS_HASH },
+                        body: formData
+                    });
+                    var json = await res.json();
+
+                    if (json.ok && json.url) {
+                        if (imgInput) imgInput.value = json.url;
+                        if (thumb)   thumb.src   = json.url;
+                        if (preview) { preview.src = json.url; preview.style.opacity = '1'; }
+                        markUnsaved();
+                        showToast('Imagen subida correctamente ☁️', 'ok');
+                    } else {
+                        throw new Error(json.error || 'Error al subir');
+                    }
+                } catch (err) {
+                    // Fallback to base64 if R2 fails
+                    console.warn('[Admin] R2 upload failed, using base64 fallback:', err);
+                    var reader = new FileReader();
+                    reader.onload = function (ev) {
+                        var src = ev.target.result;
+                        if (imgInput) imgInput.value = src;
+                        if (thumb)   thumb.src   = src;
+                        if (preview) { preview.src = src; preview.style.opacity = '1'; }
+                        markUnsaved();
+                        showToast('Imagen guardada localmente (fallback)', 'ok');
+                    };
+                    reader.readAsDataURL(file);
+                }
+
+                // Restore button
+                fileInput.parentElement.innerHTML = origBtnText;
                 fileInput.value = '';
             });
         }

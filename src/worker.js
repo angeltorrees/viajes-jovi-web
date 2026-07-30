@@ -130,6 +130,47 @@ export default {
             }
         }
 
+        // API: Image upload to R2
+        if (path === '/api/upload' && request.method === 'POST') {
+            try {
+                if (!(await isAuthorized(request))) {
+                    return new Response(JSON.stringify({ ok: false, error: 'Unauthorized' }), {
+                        status: 401, headers: CORS_HEADERS
+                    });
+                }
+
+                const formData = await request.formData();
+                const file = formData.get('file');
+                if (!file) {
+                    return new Response(JSON.stringify({ ok: false, error: 'No file provided' }), {
+                        status: 400, headers: CORS_HEADERS
+                    });
+                }
+
+                // Generate unique filename
+                const ext = file.name.split('.').pop().toLowerCase() || 'jpg';
+                const timestamp = Date.now();
+                const random = Math.random().toString(36).substring(2, 8);
+                const filename = `img-${timestamp}-${random}.${ext}`;
+
+                // Upload to R2
+                await env.IMAGES.put(filename, file.stream(), {
+                    httpMetadata: { contentType: file.type }
+                });
+
+                // Return public URL
+                const publicUrl = `https://pub-3e1076294d434ee7981fae24370f7f28.r2.dev/${filename}`;
+
+                return new Response(JSON.stringify({ ok: true, url: publicUrl, filename }), {
+                    headers: CORS_HEADERS
+                });
+            } catch (e) {
+                return new Response(JSON.stringify({ ok: false, error: e.message }), {
+                    status: 500, headers: CORS_HEADERS
+                });
+            }
+        }
+
         // Non-API routes: let Cloudflare assets handle them (return undefined/passthrough)
         // With [assets] in wrangler.toml, unhandled requests automatically serve static files
         return new Response('Not Found', { status: 404 });
