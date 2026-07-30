@@ -466,6 +466,90 @@
             .form-grid { grid-template-columns: 1fr; }
             .seg-row { flex-direction: column; }
         }
+
+        /* ── Admin mobile responsive ──────────────────────── */
+        @media (max-width: 768px) {
+            .admin-header {
+                height: 50px;
+                padding: 0 0.6rem;
+            }
+            .admin-brand img { height: 28px; }
+            .admin-brand { font-size: 0.95rem; gap: 0.4rem; }
+            .admin-tag { font-size: 0.55rem; padding: 0.12rem 0.4rem; }
+            .admin-actions { gap: 0.25rem; }
+            .admin-actions a { display: none; }
+            .btn-hdr { padding: 0.3rem 0.55rem; font-size: 0.7rem; }
+            .btn-hdr i { font-size: 0.75rem; }
+
+            .admin-tabs-bar {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                padding: 0 0.5rem;
+            }
+            .admin-tabs-bar::-webkit-scrollbar { display: none; }
+            .tab-btn {
+                padding: 0.6rem 0.8rem;
+                font-size: 0.75rem;
+                white-space: nowrap;
+                flex-shrink: 0;
+            }
+
+            .config-bar {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 0.5rem 0.8rem;
+                gap: 0.4rem;
+            }
+            .config-bar input[type="tel"] { width: 100%; }
+            .config-hint { font-size: 0.68rem; }
+
+            .admin-content { padding: 0.75rem; }
+
+            .pkg-card-header {
+                padding: 0.6rem 0.8rem;
+                gap: 0.5rem;
+            }
+            .pkg-thumb { width: 45px; height: 34px; }
+            .pkg-meta h3 { font-size: 0.82rem; }
+            .pkg-meta small { font-size: 0.68rem; }
+            .pkg-id-badge { font-size: 0.6rem; padding: 0.12rem 0.4rem; }
+
+            .pkg-body { padding: 0 0.8rem 1rem; }
+            .section-label { font-size: 0.68rem; margin: 1rem 0 0.4rem; }
+            .section-hint { font-size: 0.7rem; padding: 0.35rem 0.6rem; }
+
+            .form-group label { font-size: 0.65rem; }
+            .form-group input,
+            .form-group textarea,
+            .form-group select { font-size: 0.82rem; padding: 0.45rem 0.65rem; }
+
+            .tipo-precio-group select { font-size: 0.82rem; max-width: 100%; }
+
+            .list-item { padding: 0.45rem 0.5rem; }
+            .list-item-fields input,
+            .list-item-fields textarea { font-size: 0.8rem; padding: 0.35rem 0.55rem; }
+
+            .btn-add { font-size: 0.72rem; padding: 0.35rem 0.7rem; }
+            .btn-remove { padding: 0.25rem 0.4rem; font-size: 0.7rem; }
+
+            .save-bar { padding: 0.4rem 0.8rem; font-size: 0.75rem; }
+            .save-bar button { font-size: 0.72rem; padding: 0.25rem 0.6rem; }
+
+            .img-row { flex-direction: column; gap: 0.4rem; }
+            .img-preview { width: 100%; height: 80px; }
+
+            .toggle-row { padding: 0.5rem 0.75rem; }
+            .toggle-row-text { font-size: 0.78rem; }
+
+            .date-range-chip { font-size: 0.7rem; }
+
+            /* Duplicate & preview buttons */
+            .btn-duplicate, .btn-preview-link { 
+                padding: 0.2rem 0.4rem !important; 
+                font-size: 0.7rem !important; 
+            }
+        }
     </style>
 </head>
 <body>
