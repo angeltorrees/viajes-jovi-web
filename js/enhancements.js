@@ -33,7 +33,7 @@
                 + (asunto.trim() ? '📋 Asunto: ' + asunto.trim() + '\n' : '')
                 + (mensaje.trim() ? '💬 Mensaje: ' + mensaje.trim() : '');
 
-            window.open('https://wa.me/5214777920736?text=' + encodeURIComponent(msg), '_blank');
+            window.open('https://wa.me/5214777341974?text=' + encodeURIComponent(msg), '_blank');
             showToast('¡Mensaje preparado! Se abrirá WhatsApp para enviarlo.', 'success');
             contactForm.reset();
         });

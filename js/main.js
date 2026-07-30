@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function () {
 // ── WhatsApp Flotante ────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', function () {
     var wa = document.createElement('a');
-    wa.href = 'https://wa.me/5214777920736?text=Hola!%20Me%20interesa%20conocer%20sus%20paquetes%20de%20viaje';
+    wa.href = 'https://wa.me/5214777341974?text=Hola!%20Me%20interesa%20conocer%20sus%20paquetes%20de%20viaje';
     wa.target = '_blank';
     wa.rel = 'noopener';
     wa.className = 'jovi-whatsapp-float';

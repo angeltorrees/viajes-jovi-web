@@ -528,13 +528,10 @@
             <i class="fas fa-images"></i> Carrusel principal (5)
         </button>
         <button class="tab-btn" data-tab="escapadas">
-            <i class="fas fa-sun"></i> Escápate con Jovi (5)
-        </button>
-        <button class="tab-btn" data-tab="explore">
-            <i class="fas fa-globe-americas"></i> Explore Tour
+            <i class="fas fa-sun"></i> Top 5 Ofertas
         </button>
         <button class="tab-btn" data-tab="paquetes-asombrosos">
-            <i class="fas fa-suitcase"></i> Paquetes Asombrosos (4)
+            <i class="fas fa-suitcase"></i> Paquetes Imperdibles (4)
         </button>
         <button class="tab-btn" data-tab="resenas">
             <i class="fas fa-comment-dots"></i> Reseñas
@@ -544,14 +541,13 @@
     <div class="config-bar">
         <i class="fab fa-whatsapp" style="color:#16a34a;font-size:1.15rem"></i>
         <label for="wa-phone">Número de WhatsApp:</label>
-        <input type="tel" id="wa-phone" placeholder="ej: 5214777920736" maxlength="20">
+        <input type="tel" id="wa-phone" placeholder="ej: 5214777341974" maxlength="20">
         <span class="config-hint"><i class="fas fa-info-circle"></i> Solo dígitos, sin +. El link de cada paquete se genera automáticamente con el nombre del paquete.</span>
     </div>
 
     <div class="admin-content">
         <div class="tab-panel active" id="tab-carousel"></div>
         <div class="tab-panel"        id="tab-escapadas"></div>
-        <div class="tab-panel"        id="tab-explore"></div>
         <div class="tab-panel"        id="tab-paquetes-asombrosos"></div>
         <div class="tab-panel"        id="tab-resenas"></div>
     </div>
@@ -592,8 +588,8 @@
     function getWaPhone() {
         try {
             var cfg = JSON.parse(localStorage.getItem(CONFIG_KEY) || '{}');
-            return (cfg.waPhone || '5214777920736').replace(/\D/g, '');
-        } catch (e) { return '5214777920736'; }
+            return (cfg.waPhone || '5214777341974').replace(/\D/g, '');
+        } catch (e) { return '5214777341974'; }
     }
 
     function buildWaUrl(nombre, phone) {

@@ -20,7 +20,7 @@ var PAQUETES_DEFAULT = [
         formaPrecio: "Por persona",
         precio: "$9,999 MXN",
         duracion: "3 días · 2 noches",
-        whatsapp: "https://wa.me/5214777920736?text=Hola!%20Me%20interesa%20conocer%20mas%20del%20viaje%20Descubre%20el%20Caribe%20con%20Viajes%20Jovi",
+        whatsapp: "https://wa.me/5214777341974?text=Hola!%20Me%20interesa%20conocer%20mas%20del%20viaje%20Descubre%20el%20Caribe%20con%20Viajes%20Jovi",
         itinerario: [
             { dia: 1, titulo: "Llegada a Cancún", descripcion: "Recepción en el aeropuerto internacional de Cancún. Traslado al hotel. Check-in y tarde libre para disfrutar de la playa. Bienvenida con cena incluida." },
             { dia: 2, titulo: "Excursión Isla Mujeres", descripcion: "Desayuno en el hotel. Tour en catamarán a Isla Mujeres, snorkel en arrecife de coral, almuerzo a bordo. Por la tarde, regreso al hotel." },
@@ -80,7 +80,7 @@ var PAQUETES_DEFAULT = [
         formaPrecio: "Por persona",
         precio: "$18,499 MXN",
         duracion: "7 días · 6 noches",
-        whatsapp: "https://wa.me/5214777920736?text=Hola!%20Me%20interesa%20conocer%20mas%20del%20viaje%20Tours%20internacionales%20a%20tu%20medida",
+        whatsapp: "https://wa.me/5214777341974?text=Hola!%20Me%20interesa%20conocer%20mas%20del%20viaje%20Tours%20internacionales%20a%20tu%20medida",
         itinerario: [
             { dia: 1, titulo: "Llegada y bienvenida", descripcion: "Recepción en aeropuerto internacional. Traslado al hotel, check-in y cena de bienvenida con el grupo." },
             { dia: 2, titulo: "City Tour", descripcion: "Desayuno en el hotel. Recorrido panorámico por los principales atractivos de la ciudad con guía bilingüe." },
@@ -144,7 +144,7 @@ var PAQUETES_DEFAULT = [
         formaPrecio: "Por persona",
         precio: "$12,499 MXN",
         duracion: "4 días · 3 noches",
-        whatsapp: "https://wa.me/5214777920736?text=Hola!%20Me%20interesa%20conocer%20mas%20del%20viaje%20Tu%20pr%C3%B3xima%20gran%20escapada%20con%20Jovi",
+        whatsapp: "https://wa.me/5214777341974?text=Hola!%20Me%20interesa%20conocer%20mas%20del%20viaje%20Tu%20pr%C3%B3xima%20gran%20escapada%20con%20Jovi",
         itinerario: [
             { dia: 1, titulo: "Llegada", descripcion: "Bienvenida en el destino. Traslado y check-in. Tarde libre para conocer los alrededores. Cena incluida." },
             { dia: 2, titulo: "Aventura y naturaleza", descripcion: "Excursión a zonas naturales únicas del destino. Actividades al aire libre: senderismo, zip-line o kayak (según disponibilidad). Almuerzo en el camino." },
@@ -204,7 +204,7 @@ var PAQUETES_DEFAULT = [
         formaPrecio: "Por persona",
         precio: "$35,999 MXN",
         duracion: "10 días · 8 noches",
-        whatsapp: "https://wa.me/5214777920736?text=Hola!%20Me%20interesa%20conocer%20mas%20del%20viaje%20Europa%20cl%C3%A1sica%20a%20tu%20alcance",
+        whatsapp: "https://wa.me/5214777341974?text=Hola!%20Me%20interesa%20conocer%20mas%20del%20viaje%20Europa%20cl%C3%A1sica%20a%20tu%20alcance",
         itinerario: [
             { dia: 1, titulo: "Salida a París", descripcion: "Vuelo nocturno desde México. Llegada al día siguiente." },
             { dia: 2, titulo: "París — Llegada", descripcion: "Llegada al aeropuerto Charles de Gaulle. Traslado al hotel. Tarde libre. Cena de bienvenida." },
@@ -284,7 +284,7 @@ var PAQUETES_DEFAULT = [
         formaPrecio: "Por persona",
         precio: "$5,499 MXN",
         duracion: "2 días · 1 noche",
-        whatsapp: "https://wa.me/5214777920736?text=Hola!%20Me%20interesa%20conocer%20mas%20del%20viaje%20Escapadas%20de%20fin%20de%20semana",
+        whatsapp: "https://wa.me/5214777341974?text=Hola!%20Me%20interesa%20conocer%20mas%20del%20viaje%20Escapadas%20de%20fin%20de%20semana",
         itinerario: [
             { dia: 1, titulo: "Salida y llegada", descripcion: "Salida en autobús de lujo desde el punto de reunión. Llegada al destino, check-in en hotel. Tour rápido de orientación. Cena y noche libre." },
             { dia: 2, titulo: "Exploración y regreso", descripcion: "Desayuno en el hotel. Recorrido guiado por los principales atractivos del destino. Almuerzo típico incluido. Tarde libre. Regreso a la ciudad de origen en la tarde-noche." }
@@ -343,7 +343,7 @@ var PAQUETES_DEFAULT = [
         formaPrecio: "Por persona",
         precio: "$12,499 MXN",
         duracion: "4 días · 3 noches",
-        whatsapp: "https://wa.me/5214777920736?text=Hola!%20Me%20interesa%20la%20escapada%20Canc%C3%BAn%20en%20familia",
+        whatsapp: "https://wa.me/5214777341974?text=Hola!%20Me%20interesa%20la%20escapada%20Canc%C3%BAn%20en%20familia",
         itinerario: [
             { dia: 1, titulo: "Llegada y playa", descripcion: "Traslado del aeropuerto al hotel. Check-in y primer contacto con el Caribe. Tarde libre en la playa. Cena de bienvenida incluida." },
             { dia: 2, titulo: "Zona Hotelera y snorkel", descripcion: "Desayuno en el hotel. Recorrido por la Zona Hotelera. Tarde de snorkel en arrecife de coral con equipo incluido." },
@@ -404,7 +404,7 @@ var PAQUETES_DEFAULT = [
         formaPrecio: "Por persona",
         precio: "$15,900 MXN",
         duracion: "5 días · 4 noches",
-        whatsapp: "https://wa.me/5214777920736?text=Hola!%20Me%20interesa%20la%20escapada%20Riviera%20Maya%20Todo%20Incluido",
+        whatsapp: "https://wa.me/5214777341974?text=Hola!%20Me%20interesa%20la%20escapada%20Riviera%20Maya%20Todo%20Incluido",
         itinerario: [
             { dia: 1, titulo: "Llegada y bienvenida", descripcion: "Recepción en el aeropuerto de Cancún. Traslado al resort. Check-in y cóctel de bienvenida. Cena buffet en el resort." },
             { dia: 2, titulo: "Resort y playa", descripcion: "Día libre para disfrutar las instalaciones Todo Incluido: albercas, deportes acuáticos, entretenimiento nocturno." },
@@ -466,7 +466,7 @@ var PAQUETES_DEFAULT = [
         formaPrecio: "Por persona",
         precio: "$32,700 MXN",
         duracion: "6 días · 5 noches",
-        whatsapp: "https://wa.me/5214777920736?text=Hola!%20Me%20interesa%20la%20escapada%20Orlando%20%26%20Parques",
+        whatsapp: "https://wa.me/5214777341974?text=Hola!%20Me%20interesa%20la%20escapada%20Orlando%20%26%20Parques",
         itinerario: [
             { dia: 1, titulo: "Llegada a Orlando", descripcion: "Vuelo desde México a Orlando. Traslado al hotel. Check-in y tarde libre o visita a Disney Springs." },
             { dia: 2, titulo: "Magic Kingdom", descripcion: "Día completo en Magic Kingdom. Atracciones clásicas, desfile de personajes y fuegos artificiales nocturnos. Entrada incluida." },
@@ -530,7 +530,7 @@ var PAQUETES_DEFAULT = [
         formaPrecio: "Por persona",
         precio: "$8,990 MXN",
         duracion: "3 días · 2 noches",
-        whatsapp: "https://wa.me/5214777920736?text=Hola!%20Me%20interesa%20la%20escapada%20Los%20Cabos%20Relax",
+        whatsapp: "https://wa.me/5214777341974?text=Hola!%20Me%20interesa%20la%20escapada%20Los%20Cabos%20Relax",
         itinerario: [
             { dia: 1, titulo: "Llegada y descanso", descripcion: "Vuelo a Los Cabos. Traslado al hotel frente al mar. Check-in. Tarde libre en la playa. Cena incluida en el hotel." },
             { dia: 2, titulo: "El Arco y tour en lancha", descripcion: "Desayuno. Tour en lancha para ver El Arco de Cabo San Lucas, Playa del Amor y zona de lobos marinos. Tarde libre para spa o actividades opcionales." },
@@ -588,7 +588,7 @@ var PAQUETES_DEFAULT = [
         formaPrecio: "Por persona",
         precio: "$10,500 MXN",
         duracion: "4 días · 3 noches",
-        whatsapp: "https://wa.me/5214777920736?text=Hola!%20Me%20interesa%20la%20escapada%20Huatulco%20tradicional",
+        whatsapp: "https://wa.me/5214777341974?text=Hola!%20Me%20interesa%20la%20escapada%20Huatulco%20tradicional",
         itinerario: [
             { dia: 1, titulo: "Llegada a Huatulco", descripcion: "Llegada al aeropuerto de Huatulco. Traslado al hotel. Check-in y tarde libre para descubrir la bahía más cercana. Cena incluida." },
             { dia: 2, titulo: "Tour de las bahías", descripcion: "Desayuno. Recorrido en lancha por las 9 bahías de Huatulco. Snorkel y parada para nadar en aguas cristalinas. Almuerzo a bordo." },

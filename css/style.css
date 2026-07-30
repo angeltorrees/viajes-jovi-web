@@ -2820,35 +2820,44 @@ body {
     .carousel-header .carousel-inner .carousel-item .carousel-caption {
         height: 100svh !important;
         max-height: 750px !important;
-        min-height: 550px !important;
+        min-height: 600px !important;
     }
     .jovi-hero-slide {
         height: 100svh !important;
         max-height: 750px !important;
-        min-height: 550px !important;
+        min-height: 600px !important;
     }
     .carousel-header .carousel-inner .carousel-item .carousel-caption {
-        padding-top: 80px !important;
+        padding-top: 0 !important;
+        padding-bottom: 60px !important;
         display: flex !important;
-        align-items: center !important;
+        align-items: flex-end !important;
         justify-content: center !important;
     }
     .jovi-hero-content {
         max-width: 100% !important;
-        padding: 0 1.25rem !important;
+        padding: 0 3rem !important;
         display: flex;
         flex-direction: column;
         align-items: center;
         text-align: center;
+        gap: 0.5rem;
     }
     .jovi-hero-title {
         font-size: clamp(1.1rem, 5.5vw, 1.5rem) !important;
         line-height: 1.25 !important;
-        margin-bottom: 0.75rem !important;
+        margin-bottom: 0.5rem !important;
         text-align: center;
         word-wrap: break-word;
         overflow-wrap: break-word;
-        max-width: 90%;
+    }
+    .jovi-price-box {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 0.2rem !important;
+        padding: 0.6rem 1rem !important;
+        margin-bottom: 0.5rem !important;
+        max-width: 200px;
     }
     .jovi-hero-actions {
         flex-direction: column !important;
@@ -2860,16 +2869,8 @@ body {
         width: 100% !important;
         text-align: center !important;
         margin: 0.2rem 0 !important;
-        padding: 0.6rem 1.2rem !important;
-        font-size: 0.82rem !important;
-    }
-    .jovi-price-box {
-        flex-direction: column !important;
-        align-items: center !important;
-        gap: 0.25rem !important;
-        padding: 0.5rem 0.8rem !important;
-        margin-bottom: 0.6rem !important;
-        max-width: 200px;
+        padding: 0.55rem 1rem !important;
+        font-size: 0.8rem !important;
     }
     .jovi-price-amount {
         font-size: 1.3rem !important;
@@ -2884,10 +2885,29 @@ body {
         font-size: 0.65rem !important;
         padding: 0.15rem 0.5rem !important;
     }
-    /* Arrows visible and smaller */
+    /* Arrows: a los lados, centrados verticalmente, sin encimar botones */
     .carousel-header .carousel-control-prev,
     .carousel-header .carousel-control-next {
-        width: 40px;
+        width: 30px !important;
+        top: 50% !important;
+        bottom: auto !important;
+        height: 40px !important;
+        transform: translateY(-50%);
+        opacity: 0.8;
+    }
+    .carousel-header .carousel-control-prev {
+        left: 4px !important;
+        right: auto !important;
+    }
+    .carousel-header .carousel-control-next {
+        right: 4px !important;
+        left: auto !important;
+    }
+    .carousel-header .carousel-control-prev .carousel-control-prev-icon,
+    .carousel-header .carousel-control-next .carousel-control-next-icon {
+        padding: 12px 14px !important;
+        background-size: 55% 55% !important;
+        border-radius: 50% !important;
     }
 }
 
