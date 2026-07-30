@@ -631,7 +631,7 @@
         var val = document.getElementById('admin-pass').value;
         var hash = await sha256(val);
         if (hash === PASS_HASH) {
-            localStorage.setItem(PASS_KEY, '1');
+            try { localStorage.setItem(PASS_KEY, '1'); } catch(e) {}
             document.getElementById('login-error').style.display = 'none';
             // Set API auth token
             if (typeof JoviAPI !== 'undefined') {
@@ -679,16 +679,29 @@
         try {
             buildTab('tab-carousel', window.PAQUETES.slice(0, 5), 0);
             buildTab('tab-escapadas', window.PAQUETES.slice(5, 10), 5);
-            buildTabExplore(window.EXPLORE_DATA || window.EXPLORE_DEFAULT);
             buildTabPA(window.PAQUETES_ASOMBROSOS || window.PAQUETES_ASOMBROSOS_DEFAULT);
             buildTabResenas(window.RESENAS || window.RESENAS_DEFAULT || []);
         } catch (err) {
-            console.error('[Admin] Error al construir panel, limpiando datos:', err);
-            localStorage.removeItem(DATA_KEY);
-            localStorage.removeItem(EXPLORE_KEY);
-            localStorage.removeItem(PA_KEY);
-            localStorage.removeItem(RESENAS_KEY);            panelReady = false;
-            location.reload();
+            console.error('[Admin] Error al construir panel:', err);
+            // Only reload once to avoid infinite loop
+            var reloadKey = 'jovi-admin-reload-guard';
+            try {
+                if (!sessionStorage.getItem(reloadKey)) {
+                    sessionStorage.setItem(reloadKey, '1');
+                    localStorage.removeItem(DATA_KEY);
+                    localStorage.removeItem(EXPLORE_KEY);
+                    localStorage.removeItem(PA_KEY);
+                    localStorage.removeItem(RESENAS_KEY);
+                    panelReady = false;
+                    location.reload();
+                } else {
+                    sessionStorage.removeItem(reloadKey);
+                    alert('Error al cargar el panel. Por favor recarga la página manualmente.');
+                }
+            } catch (e) {
+                // Storage blocked entirely — just show error
+                alert('Error al cargar el panel. Verifica que las cookies y almacenamiento no estén bloqueados.');
+            }
         }
     }
 
@@ -1729,13 +1742,17 @@
     });
 
     // ── AUTO-LOGIN (must be AFTER all listeners are registered) ───────────────
-    if (localStorage.getItem(PASS_KEY)) {
-        // Set API auth for auto-login
-        if (typeof JoviAPI !== 'undefined') {
-            JoviAPI.setAuth(PASS_HASH);
-            JoviAPI.initDB();
+    try {
+        if (localStorage.getItem(PASS_KEY)) {
+            // Set API auth for auto-login
+            if (typeof JoviAPI !== 'undefined') {
+                JoviAPI.setAuth(PASS_HASH);
+                JoviAPI.initDB();
+            }
+            showPanel();
         }
-        showPanel();
+    } catch (e) {
+        console.warn('[Admin] localStorage blocked, showing login screen');
     }
 
     // ── TOAST ─────────────────────────────────────────────────────────────────
