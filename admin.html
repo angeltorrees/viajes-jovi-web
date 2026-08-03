@@ -699,7 +699,10 @@
 
     document.getElementById('btn-logout').addEventListener('click', function () {
         try { localStorage.removeItem(PASS_KEY); } catch(e) {}
-        window.location.href = '/.cdn-cgi/access/logout';
+        // Clear Access cookies and redirect to login page
+        document.cookie = 'CF_Authorization=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        document.cookie = 'CF_AppSession=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        window.location.href = '/admin.html';
     });
 
     // ── INIT PANEL ────────────────────────────────────────────────────────────
