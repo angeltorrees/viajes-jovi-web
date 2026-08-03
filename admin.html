@@ -698,9 +698,8 @@
     // No login/password needed — Cloudflare handles auth at network level
 
     document.getElementById('btn-logout').addEventListener('click', function () {
-        // Clear local session and redirect to home
         try { localStorage.removeItem(PASS_KEY); } catch(e) {}
-        window.location.href = '/index.html';
+        window.location.href = '/.cdn-cgi/access/logout';
     });
 
     // ── INIT PANEL ────────────────────────────────────────────────────────────

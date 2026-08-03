@@ -110,6 +110,11 @@ export default {
         const url = new URL(request.url);
         const path = url.pathname;
 
+        // Let Cloudflare internal routes pass through (Access logout, etc.)
+        if (path.startsWith('/.cdn-cgi/')) {
+            return fetch(request);
+        }
+
         // CORS preflight
         if (request.method === 'OPTIONS' && path.startsWith('/api/')) {
             return new Response(null, { status: 204, headers: CORS_HEADERS });
