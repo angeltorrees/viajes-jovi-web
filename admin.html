@@ -554,22 +554,11 @@
 </head>
 <body>
 
-<!-- ── LOGIN ────────────────────────────────────────────────────────────────── -->
-<div id="login-screen">
-    <div class="login-card">
-        <img src="img/logo.png" alt="Viajes Jovi">
-        <h1>Panel de Administración</h1>
-        <p>Ingresa tu contraseña para continuar</p>
-        <input type="password" id="admin-pass" placeholder="Contraseña" autocomplete="current-password">
-        <button class="btn-login" id="login-btn">
-            <i class="fas fa-sign-in-alt"></i> Entrar
-        </button>
-        <p class="login-error" id="login-error">Contraseña incorrecta. Intenta de nuevo.</p>
-    </div>
-</div>
+<!-- ── LOGIN REMOVIDO — Protegido por Cloudflare Access ──────────────────────── -->
+<div id="login-screen" style="display:none"></div>
 
 <!-- ── ADMIN PANEL ───────────────────────────────────────────────────────────── -->
-<div id="admin-panel">
+<div id="admin-panel" style="display:block">
 
     <header class="admin-header">
         <div class="admin-brand">
@@ -705,32 +694,12 @@
         return TIPO_PRECIO_DISPLAY[tipo] || 'Por persona (noches incluidas)';
     }
 
-    // ── LOGIN ─────────────────────────────────────────────────────────────────
-    document.getElementById('login-btn').addEventListener('click', doLogin);
-    document.getElementById('admin-pass').addEventListener('keydown', function (e) {
-        if (e.key === 'Enter') doLogin();
-    });
-
-    async function doLogin() {
-        var val = document.getElementById('admin-pass').value;
-        var hash = await sha256(val);
-        if (hash === PASS_HASH) {
-            try { localStorage.setItem(PASS_KEY, '1'); } catch(e) {}
-            document.getElementById('login-error').style.display = 'none';
-            // Set API auth token
-            if (typeof JoviAPI !== 'undefined') {
-                JoviAPI.setAuth(hash);
-                JoviAPI.initDB(); // Ensure tables exist
-            }
-            showPanel();
-        } else {
-            document.getElementById('login-error').style.display = 'block';
-        }
-    }
+    // ── LOGIN REMOVIDO — Protegido por Cloudflare Access ─────────────────────
+    // No login/password needed — Cloudflare handles auth at network level
 
     document.getElementById('btn-logout').addEventListener('click', function () {
-        localStorage.removeItem(PASS_KEY);
-        location.reload();
+        // Redirect to Cloudflare Access logout
+        window.location.href = '/.cdn-cgi/access/logout';
     });
 
     // ── INIT PANEL ────────────────────────────────────────────────────────────
@@ -738,7 +707,6 @@
     function showPanel() {
         if (panelReady) return;
         panelReady = true;
-        document.getElementById('login-screen').style.display = 'none';
         document.getElementById('admin-panel').style.display = 'block';
 
         // Load saved phone number
@@ -1876,19 +1844,12 @@
         if (unsaved) { e.preventDefault(); e.returnValue = ''; }
     });
 
-    // ── AUTO-LOGIN (must be AFTER all listeners are registered) ───────────────
-    try {
-        if (localStorage.getItem(PASS_KEY)) {
-            // Set API auth for auto-login
-            if (typeof JoviAPI !== 'undefined') {
-                JoviAPI.setAuth(PASS_HASH);
-                JoviAPI.initDB();
-            }
-            showPanel();
-        }
-    } catch (e) {
-        console.warn('[Admin] localStorage blocked, showing login screen');
+    // ── INIT — Show panel immediately (protected by Cloudflare Access) ────────
+    if (typeof JoviAPI !== 'undefined') {
+        JoviAPI.setAuth(PASS_HASH);
+        JoviAPI.initDB();
     }
+    showPanel();
 
     // ── TOAST ─────────────────────────────────────────────────────────────────
     var toastTimer;
