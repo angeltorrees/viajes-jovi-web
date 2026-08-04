@@ -9,3 +9,7 @@ directory = "./"
 binding = "DB"
 database_name = "viajes-jovi-db"
 database_id = "55a8bd92-e63a-4b83-b27a-353ca6562532"
+
+[[r2_buckets]]
+binding = "IMAGES"
+bucket_name = "viajes-jovi-images"
