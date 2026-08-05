@@ -879,6 +879,17 @@
             fileInput.addEventListener('change', async function () {
                 var file = fileInput.files[0];
                 if (!file) return;
+
+                var label = fileInput.parentElement;
+                var labelIcon = label.querySelector('i');
+                var labelTextNode = label.childNodes[label.childNodes.length - 1];
+
+                // Show uploading state
+                fileInput.disabled = true;
+                if (labelIcon) { labelIcon.className = 'fas fa-spinner fa-spin'; }
+                if (labelTextNode && labelTextNode.nodeType === 3) { labelTextNode.textContent = ' Subiendo...'; }
+                if (preview) preview.style.opacity = '0.5';
+
                 try {
                     var formData = new FormData();
                     formData.append('file', file);
@@ -905,6 +916,12 @@
                     };
                     reader.readAsDataURL(file);
                 }
+
+                // Restore button state
+                fileInput.disabled = false;
+                if (labelIcon) { labelIcon.className = 'fas fa-folder-open'; }
+                if (labelTextNode && labelTextNode.nodeType === 3) { labelTextNode.textContent = ' Archivo'; }
+                if (preview) preview.style.opacity = '1';
                 fileInput.value = '';
             });
         }
@@ -1333,10 +1350,15 @@
                 var file = fileInput.files[0];
                 if (!file) return;
 
-                // Show uploading state
+                var label = fileInput.parentElement;
+                var labelIcon = label.querySelector('i');
+                var labelTextNode = label.childNodes[label.childNodes.length - 1];
+
+                // Show uploading state (without destroying DOM)
                 if (preview) preview.style.opacity = '0.5';
-                var origBtnText = fileInput.parentElement.innerHTML;
-                fileInput.parentElement.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Subiendo...';
+                fileInput.disabled = true;
+                if (labelIcon) { labelIcon.className = 'fas fa-spinner fa-spin'; }
+                if (labelTextNode && labelTextNode.nodeType === 3) { labelTextNode.textContent = ' Subiendo...'; }
 
                 try {
                     var formData = new FormData();
@@ -1373,8 +1395,11 @@
                     reader.readAsDataURL(file);
                 }
 
-                // Restore button
-                fileInput.parentElement.innerHTML = origBtnText;
+                // Restore button state
+                fileInput.disabled = false;
+                if (labelIcon) { labelIcon.className = 'fas fa-folder-open'; }
+                if (labelTextNode && labelTextNode.nodeType === 3) { labelTextNode.textContent = ' Archivo'; }
+                if (preview) preview.style.opacity = '1';
                 fileInput.value = '';
             });
         }
